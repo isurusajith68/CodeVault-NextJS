@@ -76,24 +76,26 @@ const Stack = () => {
 
     if (response.status == 200) {
       toast.success(response.data.message)
+      fetchData()
+
     }
 
   }
 
 
   useEffect(() => {
-
-    const fetchData = async () => {
-      setIsLoading(true)
-      const post = await axios.get("/api/post");
-      if (post.status == 200) {
-        setPost(post.data.data)
-        setIsLoading(false)
-      }
-    }
     fetchData()
 
   }, [])
+
+  const fetchData = async () => {
+    setIsLoading(true)
+    const post = await axios.get("/api/post");
+    if (post.status == 200) {
+      setPost(post.data.data)
+      setIsLoading(false)
+    }
+  }
 
   return (
     <div className="flex w-full max-lg:flex-col md:space-x-10 mt-5 mb-3 gap-10">
