@@ -21,6 +21,7 @@ export const Allcategory = [
             "Flask",
             "Spring Boot",
             "Express.js",
+            "Next.js"
         ]
     },
     {

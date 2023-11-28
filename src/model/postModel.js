@@ -12,6 +12,9 @@ const postSchema = mongoose.Schema({
     value: {
         type: String,
     },
+    description: {
+        type: String,
+    },
     content: {
         type: String,
     },

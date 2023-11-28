@@ -34,7 +34,11 @@
   --secondary: rgb(212, 206, 206);
 }
 
-.HIGHT{
-  /* height: 100% ; */
+.IMG{
+
+  max-height:200px;
+  min-height: 200px;
+  min-width: 250px;
+  max-width: 100%;
  
 }

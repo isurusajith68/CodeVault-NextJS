@@ -37,6 +37,6 @@ export async function PUT(request, { params }) {
     const updatePost = await Post.findByIdAndUpdate(id, data)
 
 
-    return Response.json({ data: updatePost })
+    return Response.json({ message: "update successfully" })
 
 }
