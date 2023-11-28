@@ -5,6 +5,7 @@ import Loading from "../components/Loading";
 import { formatDistanceToNow } from 'date-fns';
 import Link from "next/link";
 import { Allcategory } from "@/util/category";
+import Image from "next/image";
 
 
 
