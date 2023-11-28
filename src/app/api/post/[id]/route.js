@@ -2,22 +2,26 @@ import connectDB from "../../../../util/db/db"
 import Post from "../../../../model/postModel"
 connectDB();
 
-export async function DELETE({ params }) {
+export async function DELETE(request, { params }) {
 
+    request
     const id = await params.id
+
+    console.log(id)
 
     const findPost = await Post.findById(id)
 
     if (!findPost) {
         return Response.json({ message: "can not find post" })
     }
-      await Post.findByIdAndDelete(id);
+    await Post.findByIdAndDelete(id);
 
     return Response.json({ message: "posts delete successfully" })
 }
 
-export async function GET( { params }) {
-
+export async function GET(request, { params }) {
+    
+    request
     const id = await params.id
 
     const findPost = await Post.findById(id)
@@ -34,7 +38,7 @@ export async function PUT(request, { params }) {
         return Response.json({ message: "can not find post" })
     }
 
-     await Post.findByIdAndUpdate(id, data)
+    await Post.findByIdAndUpdate(id, data)
 
 
     return Response.json({ message: "update successfully" })
