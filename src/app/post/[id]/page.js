@@ -68,8 +68,8 @@ const Post = () => {
     <div className="lg:flex mt-3">
       {
         clickLatest ? <div className="flex-initial lg:w-[75%]  px-5">
+          <img src={clickLatest?.image} className="lg:flex-initial w-full" />
           <div className="gap-5">
-            <img src={clickLatest?.image} className="lg:flex-initial w-full" />
             <div className="w-full p-2 lg:flex-initial flex-col">
               <h1 className="font-bold text-2xl text-center ">{clickLatest?.title}</h1>
               <hr className="mt-2" />

@@ -7,6 +7,7 @@ import Loading from "../components/Loading";
 import { formatDistanceToNow } from 'date-fns';
 import { create } from "domain";
 import Link from "next/link";
+import { Allcategory } from "@/util/category";
 
 
 const TimeAgo = ({ createdAt }) => {
@@ -18,8 +19,11 @@ const TimeAgo = ({ createdAt }) => {
 const page = () => {
   const [posts, setPost] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [category, setCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [categoryvalue, setCategoryValues] = useState([])
+  const [selectdCategoryValue, setSelectCategoryValue] = useState("");
 
-  
   useEffect(() => {
     fetchData()
   }, [])
@@ -35,22 +39,84 @@ const page = () => {
     }
   }
 
-  
+  useEffect(() => {
+    const categoryNames = Allcategory.map((categoryItem) => categoryItem.name);
+    setCategory(["Select Category....", ...categoryNames]);
+  }, []);
 
+  const fillterData = posts?.filter((item) => {
+    if (selectedCategory === "Select Category...." || selectedCategory === "") {
+      return true;
+    }
+
+    if (
+      selectedCategory === item.category &&
+      (selectdCategoryValue === "Select ...." || selectdCategoryValue === "")
+    ) {
+      return true;
+    }
+
+    if (selectedCategory === item.category && selectdCategoryValue === item.value) {
+      return true;
+    }
+
+    return false;
+  });
+  //category value change set empty value categoryvalues
+  useEffect(() => {
+    setSelectCategoryValue("")
+  }, [selectedCategory])
+
+
+  useEffect(() => {
+    const categoryvalue = Allcategory.filter((category) => {
+      if (selectedCategory === category.name) {
+        return true
+      }
+      return false
+    });
+    categoryvalue.map((value, key) => {
+      setCategoryValues(value.value)
+    })
+  }, [selectedCategory])
+
+  console.log(selectdCategoryValue)
   return (
     <div className="min-h-screen">
+      <div className="flex space-x-2">
+
+        <select value={selectedCategory} className="p-1 mt-2 flex w-[300px] justify-end rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setSelectedCategory(e.target.value)}>
+          {category.map((categoryItem, index) => (
+            <option key={index} value={categoryItem}>{categoryItem}</option>
+          ))}
+        </select>
+
+        {
+          selectedCategory ?
+            <div className="flex-1">
+              <div className="mt-2 ">
+                <select value={selectdCategoryValue} className="p-1 mt-2 flex w-[300px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setSelectCategoryValue(e.target.value)}>
+                  <option value="Select ....">Select ....</option>
+                  {categoryvalue.map((value, index) => (
+                    <option key={index} value={value}>{value}</option>
+                  ))}
+                </select>
+              </div>
+            </div> : ""
+        }
+      </div>
       {
         isLoading ? <div className=" w-full items-center text-center mt-10 justify-center">
           <Loading />
 
         </div> : <div className="mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center mt-10">
-          {posts?.map((item, index) => {
+          {fillterData?.map((item, index) => {
             const createdAt = item.createdAt
 
 
             return (
               <div key={index} className="max-w-sm  bg-white border border-gray-200 rounded-lg shadow ">
-                <a  href="#" className="container">
+                <a href="#" className="container">
                   <img className="IMG rounded-t-lg" src={item.image != "" ? item.image : "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"} alt="" />
                 </a>
                 <div className="p-5">

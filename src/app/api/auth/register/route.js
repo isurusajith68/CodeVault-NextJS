@@ -28,8 +28,8 @@ export async function POST(request) {
         });
 
         await newUser.save();
-        
-        return Response.json({ message: 'User registered successfully' });
+
+        return Response.json({ message: 'User registered successfully' }, { status: 201 });
     } catch (error) {
         console.error(error);
         return Response.json({ message: 'Server Error' }, {
