@@ -9,11 +9,7 @@ import Loading from "@/components/Loading"
 import Latest from "@/components/Latest"
 
 
-const TimeAgo = ({ createdAt }) => {
-  const distance = formatDistanceToNow(new Date(createdAt), { addSuffix: true });
 
-  return <span>{distance}</span>;
-};
 
 const Post = () => {
   const [post, setPost] = useState(null)
@@ -41,6 +37,12 @@ const Post = () => {
     }
 
   }
+
+  const TimeAgo = ({ createdAt }) => {
+    const distance = formatDistanceToNow(new Date(createdAt), { addSuffix: true });
+
+    return <span>{distance}</span>;
+  };
 
   const clickLatestPost = (e) => {
     setClickLatestPost(e)

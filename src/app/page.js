@@ -1,22 +1,14 @@
 "use client"
-import Image from "next/image"
-import logo from "../assets/stacklogo.png"
 import { useEffect, useState } from "react"
 import axios from "axios";
 import Loading from "../components/Loading";
 import { formatDistanceToNow } from 'date-fns';
-import { create } from "domain";
 import Link from "next/link";
 import { Allcategory } from "@/util/category";
 
 
-const TimeAgo = ({ createdAt }) => {
-  const distance = formatDistanceToNow(new Date(createdAt), { addSuffix: true });
 
-  return <span>{distance}</span>;
-};
-
-const page = () => {
+const Home = () => {
   const [posts, setPost] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [category, setCategory] = useState([]);
@@ -28,6 +20,12 @@ const page = () => {
     fetchData()
   }, [])
 
+
+  const TimeAgo = ({ createdAt }) => {
+    const distance = formatDistanceToNow(new Date(createdAt), { addSuffix: true });
+
+    return <span>{distance}</span>;
+  };
 
   const fetchData = async () => {
     setIsLoading(true)
@@ -75,7 +73,7 @@ const page = () => {
       }
       return false
     });
-    categoryvalue.map((value, key) => {
+    categoryvalue.map((value) => {
       setCategoryValues(value.value)
     })
   }, [selectedCategory])
@@ -150,4 +148,4 @@ const page = () => {
 
   )
 }
-export default page
+export default Home
