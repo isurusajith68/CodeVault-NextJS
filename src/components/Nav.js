@@ -6,13 +6,14 @@ import React, { useEffect, useRef, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Close } from "@mui/icons-material";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { useRouter } from "next/navigation";
+import { usePathname } from 'next/navigation'
 
 const Nav = () => {
     const [isClick, setIsClick] = useState(false);
     const [profileClick, setProfileClick] = useState(false);
     const [userdata, setUserData] = useState(null);
-    const router = useRouter()
+    const navigation = usePathname();
+
     const handleClick = () => {
         setIsClick(!isClick);
     };
@@ -42,23 +43,23 @@ const Nav = () => {
                     <Image alt="" src={stacklogo} width={50} height={50} />
                 </div>
                 <ul className="flex flex-1 items-center justify-center gap-16 max-md:hidden text-sm font-medium leading-6 text-gray-900">
-                    <li className="">
+                    <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>
                         <Link href="/" >
                             Home
                         </Link>
                     </li>
-                    <li className="">
+                    <li className={navigation === '/about' ? "text-red-700" : "text-gray-900"}>
                         <Link href="/about" >
                             About
                         </Link>
                     </li>
-                    <li className="">
+                    <li className={navigation === '/privacy' ? "text-red-700" : "text-gray-900"}>
                         <Link href="/privacy" >
                             Privacy
                         </Link>
                     </li>
                 </ul>
-                <div className="flex flex-1 items-center justify-end mr-20 gap-5 max-md:hidden">
+                <div className="flex flex-1 items-center justify-end mr-20  gap-5 max-md:hidden">
                     <div className="font-semibold text-red-600 text-sm">{userdata ? userdata.username : ""}</div>
                     <AccountCircleOutlinedIcon
 
@@ -68,20 +69,26 @@ const Nav = () => {
                     />
                     {
                         profileClick &&
-                        <div className="absolute border border-b-3 shadow-lg px-5 py-1 mt-24 bg-white">
-                            {userdata ? <div className="flex flex-col">
+                        <div className={!userdata ? "absolute border border-b-3 shadow-lg px-5 py-2 mt-24 bg-white " : "absolute border border-b-3 shadow-lg px-5 py-2 mt-32 bg-white "}>
+                            {userdata ? <ul className="flex flex-col gap-2">
 
-                                <a onClick={signOut} className="cursor-pointer">SignOut</a>
                                 {
                                     userdata.isAdmin == true &&
-                                    <Link href="/stack">Add post</Link>
+                                    <li className={navigation === '/stack' ? "text-red-700 cursor-pointer bg-blue-500 px-3 py-1 rounded-lg" : "text-gray-900 cursor-pointer bg-blue-500  px-3 py-1 rounded-lg"}>
+                                        <Link href="/stack" >
+                                            Add post
+                                        </Link>
+                                    </li>
                                 }
-                            </div> : <div className="flex flex-col">
-
-                                <Link href="/login" >Login</Link>
-
-
-                            </div>}
+                                <li onClick={signOut} className="cursor-pointer bg-red-500 text-white px-3 py-1 rounded-lg">
+                                    SignOut
+                                </li>
+                            </ul> :
+                                <div className="text-white cursor-pointer bg-blue-700  px-3 py-1 rounded-lg">
+                                    <Link href="/login" >
+                                        Login
+                                    </Link>
+                                </div>}
 
                         </div>
                     }
@@ -106,35 +113,55 @@ const Nav = () => {
             </div>
             <div>
                 {isClick && (
-                    <div className="w-full h-52 flex justify-center items-center bg-white shadow-lg  md:hidden " >
+                    <div className="w-full h-60 flex justify-center items-center bg-white shadow-lg  md:hidden " >
 
                         <ul className="flex gap-6 flex-col items-center text-sm font-medium leading-6 text-gray-900">
-                            <li className="">
+                            <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>
                                 <Link href="/" >
                                     Home
                                 </Link>
                             </li>
-                            <li className="">
+                            <li className={navigation === '/about' ? "text-red-700" : "text-gray-900"}>
                                 <Link href="/about" >
                                     About
                                 </Link>
                             </li>
-                            <li className="">
+                            <li className={navigation === '/privacy' ? "text-red-700" : "text-gray-900"}>
                                 <Link href="/privacy" >
                                     Privacy
                                 </Link>
                             </li>
-                            <li className="font-bold">
-                                <Link href="/login" >
-                                    Login
-                                </Link>
-                            </li>
+                            {userdata ?
+                                <div className="flex flex-col text-center gap-6">
+                                    <li onClick={signOut} className="cursor-pointer">
+                                        SignOut
+                                    </li>
+
+                                    {
+                                        userdata.isAdmin == true &&
+                                        <li className={navigation === '/stack' ? "text-red-700 " : "text-gray-900 "}>
+                                            <Link href="/stack" >
+                                                Add post
+                                            </Link>
+                                        </li>
+                                    }
+                                </div> :
+                                <div className="flex flex-col">
+
+                                    <li className={navigation === '/login' ? "text-red-700" : "text-gray-900"}>
+                                        <Link href="/login" >
+                                            Login
+                                        </Link>
+                                    </li>
+
+
+                                </div>}
 
                         </ul>
                     </div>
                 )}
             </div>
-        </nav>
+        </nav >
     );
 };
 
