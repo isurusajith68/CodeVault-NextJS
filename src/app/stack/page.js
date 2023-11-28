@@ -5,9 +5,10 @@ import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import axios from "axios";
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import PostList from "../../components/PostList"
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Stack = () => {
 
@@ -38,7 +39,7 @@ const Stack = () => {
           router.push("/")
         }
 
-    
+
         setUserData(user);
 
       } catch (error) {

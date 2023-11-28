@@ -18,7 +18,7 @@ const Latest = ({ data, clickLatestPost }) => {
                         <div className="flex">
 
                             <div className="flex-initial w-[25%] items-center justify-center">
-                                <Image width={10} height={10} src={item.image} className="object-fill w-16 h-16 rounded-lg" />
+                                <Image alt="" width={10} height={10} src={item.image} className="object-fill w-16 h-16 rounded-lg" />
                             </div>
                             <div className="flex-initial w-[75%]">
                                 <div className="text-center text-sm font-semibold">
