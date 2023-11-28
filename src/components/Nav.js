@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import stacklogo from "../assets/stacklogo.png";
+import stacklogo from "../assets/new_logo.png";
 import React, { useEffect, useRef, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Close } from "@mui/icons-material";
@@ -39,9 +39,9 @@ const Nav = () => {
     return (
         <nav className="">
             <div className="sticky left-0 top-0 z-auto w-full flex h-[60px] bg-white  justify-start  md:shadow-lg">
-                <div className="flex items-center flex-1 px-5 md:ml-20">
-                    <Image alt="" src={stacklogo} width={50} height={50} />
-                </div>
+                <Link href="/" className="flex items-center flex-1 px-5 md:ml-20">
+                    <Image alt="" src={stacklogo} width={150} height={50} />
+                </Link>
                 <ul className="flex flex-1 items-center justify-center gap-16 max-md:hidden text-sm font-medium leading-6 text-gray-900">
                     <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>
                         <Link href="/" >
@@ -60,12 +60,12 @@ const Nav = () => {
                     </li>
                 </ul>
                 <div className="flex flex-1 items-center justify-end mr-20  gap-5 max-md:hidden">
-                    <div className="font-semibold text-red-600 text-sm">{userdata ? userdata.username : ""}</div>
+                    <div className="font-semibold text-red-600 text-sm">{userdata ? <span className="text-sm text-black">Wellcome </span> : ""}{userdata ? userdata.username : ""}</div>
                     <AccountCircleOutlinedIcon
 
-                        fontSize="large"
+
                         onClick={handleProfileClick}
-                        className="text-blue-600 cursor-pointer transition-transform transform hover:scale-110 "
+                        className="text-gray-900 text-xl   cursor-pointer transition-transform transform hover:scale-110 "
                     />
                     {
                         profileClick &&

@@ -19,6 +19,9 @@ var userSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  author: {
+    type: String
+  }
 });
 
 //Cannot overwrite `User` model once compiled.

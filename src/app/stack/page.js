@@ -26,15 +26,29 @@ const Stack = () => {
   const router = useRouter()
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("userdata"))
-    setUserData(user)
-  }, [])
+    const fetchUserdata = async () => {
+      try {
+        const user = await JSON.parse(localStorage.getItem("userdata"));
 
-  if (userdata?.isAdmin === false) {
-    router.push("/")
-  }
+        if (!user) {
+          router.push("/")
+        }
 
-  //category
+        if (user.isAdmin === false) {
+          router.push("/")
+        }
+
+    
+        setUserData(user);
+
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchUserdata();
+  }, []);
+
+
   useEffect(() => {
     const categoryNames = Allcategory.map((categoryItem) => categoryItem.name);
     setCategory(["Select Category....", ...categoryNames]);
@@ -71,6 +85,7 @@ const Stack = () => {
     }
   };
 
+  console.log(userdata?.username)
   //upload
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -80,7 +95,8 @@ const Stack = () => {
       value: selectdCategoryValue,
       content,
       image: imageBase64,
-      description
+      description,
+      author: userdata?.username
     }
     if (id == null) {
       const response = await axios.post('/api/post', data);
