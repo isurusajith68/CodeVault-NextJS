@@ -10,7 +10,7 @@ export async function POST(request) {
     return Response.json({ message: "Post Create succefully" })
 }
 
-export async function GET(request) {
+export async function GET() {
 
     const posts = await Post.find()
 

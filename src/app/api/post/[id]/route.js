@@ -2,7 +2,7 @@ import connectDB from "../../../../util/db/db"
 import Post from "../../../../model/postModel"
 connectDB();
 
-export async function DELETE(request, { params }) {
+export async function DELETE({ params }) {
 
     const id = await params.id
 
@@ -16,7 +16,7 @@ export async function DELETE(request, { params }) {
     return Response.json({ message: "posts delete successfully" })
 }
 
-export async function GET(request, { params }) {
+export async function GET( { params }) {
 
     const id = await params.id
 
