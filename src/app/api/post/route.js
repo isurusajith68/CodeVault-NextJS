@@ -5,7 +5,8 @@ connectDB();
 export async function POST(request) {
 
     const body = await request.json();
-    const data = await Post.create(body)
+
+    await Post.create(body)
 
     return Response.json({ message: "Post Create succefully" })
 }

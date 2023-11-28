@@ -3,7 +3,7 @@ import MongoDb from "../../util/db/db"
 MongoDb();
 
 
-export async function GET() {
+export function GET() {
     return Response.json({ ms: "s" })
 }
 

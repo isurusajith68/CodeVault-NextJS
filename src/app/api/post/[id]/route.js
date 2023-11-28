@@ -11,7 +11,7 @@ export async function DELETE({ params }) {
     if (!findPost) {
         return Response.json({ message: "can not find post" })
     }
-    const data = await Post.findByIdAndDelete(id);
+      await Post.findByIdAndDelete(id);
 
     return Response.json({ message: "posts delete successfully" })
 }
@@ -34,7 +34,7 @@ export async function PUT(request, { params }) {
         return Response.json({ message: "can not find post" })
     }
 
-    const updatePost = await Post.findByIdAndUpdate(id, data)
+     await Post.findByIdAndUpdate(id, data)
 
 
     return Response.json({ message: "update successfully" })
