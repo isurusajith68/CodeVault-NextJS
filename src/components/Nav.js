@@ -2,28 +2,39 @@
 import Image from "next/image";
 import Link from "next/link";
 import stacklogo from "../assets/stacklogo.png";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Close } from "@mui/icons-material";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { useRouter } from "next/navigation";
 
 const Nav = () => {
     const [isClick, setIsClick] = useState(false);
     const [profileClick, setProfileClick] = useState(false);
-
+    const [userdata, setUserData] = useState(null);
+    const router = useRouter()
     const handleClick = () => {
         setIsClick(!isClick);
     };
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("userdata"))
+        setUserData(user)
+    }, [])
+
 
     const handleProfileClick = () => {
         setProfileClick(!profileClick)
         setTimeout(() => {
             setProfileClick(false)
-
         }, 4000);
     }
 
+    const signOut = () => {
+        localStorage.removeItem("userdata")
+        // router.push("/login")
+        setUserData(null)
 
+    }
     return (
         <nav className="">
             <div className="sticky left-0 top-0 z-auto w-full flex h-[60px] bg-white  justify-start  md:shadow-lg">
@@ -48,6 +59,7 @@ const Nav = () => {
                     </li>
                 </ul>
                 <div className="flex flex-1 items-center justify-end mr-20 gap-5 max-md:hidden">
+                    <div className="font-semibold text-red-600 text-sm">{userdata ? userdata.username : ""}</div>
                     <AccountCircleOutlinedIcon
 
                         fontSize="large"
@@ -56,12 +68,21 @@ const Nav = () => {
                     />
                     {
                         profileClick &&
-                        <div className="absolute border border-b-3 shadow-lg px-5 py-1 mt-28 bg-white">
-                            <div className="flex flex-col">
+                        <div className="absolute border border-b-3 shadow-lg px-5 py-1 mt-24 bg-white">
+                            {userdata ? <div className="flex flex-col">
+
+                                <a onClick={signOut} className="cursor-pointer">SignOut</a>
+                                {
+                                    userdata.isAdmin == true &&
+                                    <Link href="/stack">Add post</Link>
+                                }
+                            </div> : <div className="flex flex-col">
 
                                 <Link href="/login" >Login</Link>
-                                <Link href="/stack">Add post</Link>
-                            </div>
+
+
+                            </div>}
+
                         </div>
                     }
 
