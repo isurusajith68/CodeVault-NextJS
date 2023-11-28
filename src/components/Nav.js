@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import stacklogo from "../assets/new_logo.png";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Close } from "@mui/icons-material";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';

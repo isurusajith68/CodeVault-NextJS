@@ -257,7 +257,7 @@ const Stack = () => {
 
                 {imageBase64 && (
                   <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
-                    <img className="object-fill h-44" src={imageBase64} alt="Selected File" />
+                    <Image width={10} height={10} className="object-fill h-44" src={imageBase64} alt="Selected File" />
                     <input
                       id="dropzone-file"
                       type="file"
