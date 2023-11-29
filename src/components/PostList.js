@@ -41,7 +41,7 @@ const PostList = ({ data, fetchData, updatePost }) => {
             {data ?
                 data.map((item, index) => {
                     return (
-                        <div key={index} className=" flex bg-slate-200 border rounded-xl mt-3 cursor-pointer transition-transform transform hover:scale-105 h-40">
+                        <div key={index} className="overflow-hidden flex bg-slate-200 border rounded-xl mt-3 cursor-pointer transition-transform transform hover:scale-105 h-40">
                             <div className="flex flex-1 h-40 ">
                                 <div className="p-2 flex  h-40 items-center justify-center object-none overflow-hidden">
                                     <Image src={item.image ? item.image : logo} alt="" width={150} height={200} className="object-fill" />
@@ -50,7 +50,7 @@ const PostList = ({ data, fetchData, updatePost }) => {
                                     <h1 className="font-semibold text-lg">{item.title}</h1>
                                     <h1>{item.category}</h1>
                                     <h1>{item.value}</h1>
-                                   
+
                                     <h1>{item.author}</h1>
                                 </div>
                             </div>
