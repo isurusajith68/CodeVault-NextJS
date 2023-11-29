@@ -39,8 +39,10 @@ const Nav = () => {
     return (
         <nav className="">
             <div className="sticky left-0 top-0 z-auto w-full flex h-[60px] bg-white  justify-start  md:shadow-lg">
-                <Link href="/" className="flex items-center flex-1 px-5 md:ml-20">
-                    <Image alt="" src={stacklogo} width={150} height={50} />
+                <Link loading={"lazy"} href="/" className="flex items-center flex-1 px-5 md:ml-20 w-auto h-auto">
+                    <h1 className="font-serif font-bold text-lg text-blue-600">
+                        💢 CodeVault
+                    </h1>
                 </Link>
                 <ul className="flex flex-1 items-center justify-center gap-16 max-md:hidden text-sm font-medium leading-6 text-gray-900">
                     <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>
@@ -60,7 +62,9 @@ const Nav = () => {
                     </li>
                 </ul>
                 <div className="flex flex-1 items-center justify-end mr-20  gap-5 max-md:hidden">
-                    <div className="font-semibold text-red-600 text-sm">{userdata ? <span className="text-sm text-black">Wellcome </span> : ""}{userdata ? userdata.username : ""}</div>
+                    <div className="font-semibold text-red-600 text-sm">{userdata ? <span className="text-sm text-black">Wellcome </span> : ""}
+                        <br />
+                        {userdata ? userdata.username : ""}</div>
                     <AccountCircleOutlinedIcon
 
 

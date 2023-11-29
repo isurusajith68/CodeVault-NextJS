@@ -79,7 +79,7 @@ const Home = () => {
     })
   }, [selectedCategory])
 
-  console.log(selectdCategoryValue)
+
   return (
     <div className="min-h-screen">
       <div className="flex space-x-2">
@@ -115,8 +115,8 @@ const Home = () => {
 
             return (
               <div key={index} className="max-w-sm  bg-white border border-gray-200 rounded-lg shadow ">
-                <Link href={`/post/${item._id}`} className="container">
-                  <Image alt="" className="IMG rounded-t-lg" src={item.image != "" ? item.image : "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"} width={10} height={10} />
+                <Link href={`/post/${item._id}`} className="w-full">
+                  <Image alt="" width={384} height={150} className="IMG rounded-t-lg " src={item.image != "" ? item.image : "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"} />
                 </Link>
                 <div className="p-5">
                   <div className="flex justify-around">
