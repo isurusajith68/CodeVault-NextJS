@@ -15,20 +15,22 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <head>
+      <Head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Code Vault</title>
 
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZW3SBNYYSF"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments)}
+        <script
+          dangerouslySetInnerHTML={{
+            _html: ` window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
+          gtag('config', 'G-ZW3SBNYYSF');`
+          }}
 
-          gtag('config', 'G-ZW3SBNYYSF');
-        </script>
-      </head>
+        />
+      </Head>
       <body className="">
         {showHeaderLogin && showHeaderRegister && (
           <header>
