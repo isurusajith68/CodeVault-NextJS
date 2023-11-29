@@ -4,7 +4,7 @@ import './globals.css'
 import Footter from "../components/Footter"
 import { usePathname } from 'next/navigation'
 import { Toaster } from "react-hot-toast"
-import Head from "next/head"
+import { GoogleAnalyticsTracking } from "@/components/GoogleAnalyticsTracking "
 
 
 export default function RootLayout({ children }) {
@@ -15,22 +15,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <Head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Code Vault</title>
-
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZW3SBNYYSF"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            _html: ` window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-ZW3SBNYYSF');`
-          }}
-
-        />
-      </Head>
+      <GoogleAnalyticsTracking  />
       <body className="">
         {showHeaderLogin && showHeaderRegister && (
           <header>
