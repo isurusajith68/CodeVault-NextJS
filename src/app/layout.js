@@ -15,7 +15,9 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-
+      <head>
+        <meta name="google-site-verification" content="UPy462P0DpuVDRDP4ssOZrxL4V6swsQ63HLf-xKXnyM" />
+      </head>
       <body className="">
         {showHeaderLogin && showHeaderRegister && (
           <header>
