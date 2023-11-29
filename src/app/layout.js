@@ -16,7 +16,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta name="google-site-verification" content="UPy462P0DpuVDRDP4ssOZrxL4V6swsQ63HLf-xKXnyM" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Code Vault</title>
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZW3SBNYYSF"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)}
+          gtag('js', new Date());
+
+          gtag('config', 'G-ZW3SBNYYSF');
+        </script>
       </head>
       <body className="">
         {showHeaderLogin && showHeaderRegister && (
