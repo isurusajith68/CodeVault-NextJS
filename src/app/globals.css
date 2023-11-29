@@ -47,3 +47,7 @@
 html {
   font-family: var(--font-inter);
 }
+
+.ql-tooltip-editor{
+  display: none;
+}

@@ -44,7 +44,7 @@ const Nav = () => {
                         💢 CodeVault
                     </h1>
                 </Link>
-                <ul className="flex flex-1 items-center justify-center gap-16 max-md:hidden text-sm font-medium leading-6 text-gray-900">
+                <ul className="flex flex-1 items-center justify-center gap-16 max-md:hidden text-sm font-semibold leading-6 text-gray-900">
                     <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>
                         <Link href="/" >
                             Home
@@ -61,7 +61,7 @@ const Nav = () => {
                         </Link>
                     </li>
                 </ul>
-                <div className="flex flex-1 items-center justify-end mr-20  gap-5 max-md:hidden">
+                <div className="flex flex-1 items-center justify-end mr-20  gap-5 max-md:hidden ">
                     <div className="font-semibold text-red-600 text-sm">{userdata ? <span className="text-sm text-black">Wellcome </span> : ""}
                         <br />
                         {userdata ? userdata.username : ""}</div>
@@ -119,7 +119,7 @@ const Nav = () => {
                 {isClick && (
                     <div className="w-full h-60 flex justify-center items-center bg-white shadow-lg  md:hidden " >
 
-                        <ul className="flex gap-6 flex-col items-center text-sm font-medium leading-6 text-gray-900">
+                        <ul className="flex gap-6 flex-col items-center text-sm font-semibold leading-6 text-gray-900">
                             <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>
                                 <Link href="/" >
                                     Home
