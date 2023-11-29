@@ -84,7 +84,7 @@ const Home = () => {
     <div className="min-h-screen">
       <div className="flex space-x-2">
 
-        <select value={selectedCategory} className="p-1 mt-2 flex w-[300px] justify-end rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setSelectedCategory(e.target.value)}>
+        <select value={selectedCategory} className="p-1 mt-2 flex w-160 sm:w-[300px] justify-end rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setSelectedCategory(e.target.value)}>
           {category.map((categoryItem, index) => (
             <option key={index} value={categoryItem}>{categoryItem}</option>
           ))}
@@ -94,7 +94,7 @@ const Home = () => {
           selectedCategory ?
             <div className="flex-1">
               <div className="mt-2 ">
-                <select value={selectdCategoryValue} className="p-1 mt-2 flex w-[300px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setSelectCategoryValue(e.target.value)}>
+                <select value={selectdCategoryValue} className="p-1 mt-2 flex w-[160px] ms:w-[300px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setSelectCategoryValue(e.target.value)}>
                   <option value="Select ....">Select ....</option>
                   {categoryvalue.map((value, index) => (
                     <option key={index} value={value}>{value}</option>
@@ -114,7 +114,7 @@ const Home = () => {
 
 
             return (
-              <div key={index} className="max-w-sm  bg-white border border-gray-200 rounded-lg shadow ">
+              <div key={index} className="max-w-sm  bg-white border border-gray-300 rounded-lg shadow-lg ">
                 <Link href={`/post/${item._id}`} className="w-full">
                   <Image alt="" width={384} height={150} className="IMG rounded-t-lg " src={item.image != "" ? item.image : "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"} />
                 </Link>
@@ -133,10 +133,10 @@ const Home = () => {
                     </span>
                   </div>
                   <Link href={`/post/${item._id}`} className="">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 mt-2">{item.title}</h5>
+                    <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 mt-3 text-center ">{item.title}</h5>
                   </Link>
-                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{item.description}</p>
-                  <Link href={`/post/${item._id}`} id="toggle-btn" className="mt-2 text-blue-500 focus:outline-none">Read More</Link>
+                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-600">{item.description}</p>
+                  <Link href={`/post/${item._id}`} id="toggle-btn" className="mt-2 text-blue-500 focus:outline-none">Read More →</Link>
                 </div>
               </div>
             )
