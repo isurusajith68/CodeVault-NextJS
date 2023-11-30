@@ -35,6 +35,13 @@ export const authOptions = {
             },
         }),
     ],
+    session: {
+        strategy: "jwt",
+    },
+    secret: process.env.NEXTAUTH_SECRET,
+    pages: {
+        signIn: "/",
+    },
     callbacks: {
         async jwt({ token, user }) {
             if (user) token.role = user.isAdmin;

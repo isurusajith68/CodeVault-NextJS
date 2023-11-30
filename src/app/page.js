@@ -22,10 +22,10 @@ const Home = () => {
   const { data: session } = useSession();
 
   // useEffect(() => {
-    if (!session) {
-      router.push("/login");
-      console.log("first login")
-    }
+    // if (!session) {
+    //   router.push("/login");
+    //   console.log("first login")
+    // }
   // }, []);
 
   useEffect(() => {
