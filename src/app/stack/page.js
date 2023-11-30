@@ -29,17 +29,14 @@ const Stack = () => {
 
 
   const { data: session } = useSession();
-
+  console.log(session?.user?.role)
   useEffect(() => {
 
 
-    // if (!session)
-    //   return router.push("/login")
-
-    if (session?.user?.role === false)
-      return router.push("/")
-
-  }, [])
+    if (session?.user?.role === false) {
+      router.push("/")
+    }
+  }, [session])
 
 
   useEffect(() => {
