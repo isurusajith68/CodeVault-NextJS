@@ -21,12 +21,12 @@ const Home = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  useEffect(() => {
+  // useEffect(() => {
     if (!session) {
       router.push("/login");
       console.log("first login")
     }
-  }, []);
+  // }, []);
 
   useEffect(() => {
     fetchData()
