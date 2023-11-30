@@ -79,7 +79,7 @@ const Stack = () => {
   };
 
 
-  //upload
+  //uploa
   const handleSubmit = async (e) => {
     e.preventDefault()
     const data = {
