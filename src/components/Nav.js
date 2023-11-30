@@ -7,20 +7,25 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Close } from "@mui/icons-material";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { usePathname } from 'next/navigation'
+import { signOut, useSession } from "next-auth/react";
 
 const Nav = () => {
     const [isClick, setIsClick] = useState(false);
     const [profileClick, setProfileClick] = useState(false);
-    const [userdata, setUserData] = useState(null);
+    // const [userdata, setUserData] = useState(null);
     const navigation = usePathname();
 
+    const { data: session } = useSession();
+
+    
     const handleClick = () => {
         setIsClick(!isClick);
     };
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("userdata"))
-        setUserData(user)
-    }, [])
+
+    // useEffect(() => {
+    //     const user = JSON.parse(localStorage.getItem("userdata"))
+    //     setUserData(user)
+    // }, [])
 
 
     const handleProfileClick = () => {
@@ -30,12 +35,12 @@ const Nav = () => {
         }, 4000);
     }
 
-    const signOut = () => {
-        localStorage.removeItem("userdata")
-        // router.push("/login")
-        setUserData(null)
+    // const signOut = () => {
+    //     localStorage.removeItem("userdata")
+    //     // router.push("/login")
+    //     setUserData(null)
 
-    }
+    // }
     return (
         <nav className="">
             <div className="sticky left-0 top-0 z-auto w-full flex h-[60px] bg-white  justify-start  md:shadow-lg">
@@ -62,9 +67,9 @@ const Nav = () => {
                     </li>
                 </ul>
                 <div className="flex flex-1 items-center justify-end mr-20  gap-5 max-md:hidden ">
-                    <div className="font-semibold text-red-600 text-sm">{userdata ? <span className="text-sm text-black">Wellcome </span> : ""}
+                    <div className="font-semibold text-red-600 text-sm">{session ? <span className="text-sm text-black">Wellcome </span> : ""}
                         <br />
-                        {userdata ? userdata.username : ""}</div>
+                        {session?.user?.name}</div>
                     <AccountCircleOutlinedIcon
 
 
@@ -73,18 +78,18 @@ const Nav = () => {
                     />
                     {
                         profileClick &&
-                        <div className={!userdata ? "absolute border border-b-3 shadow-lg px-5 py-2 mt-24 bg-white " : "absolute border border-b-3 shadow-lg px-5 py-2 mt-32 bg-white "}>
-                            {userdata ? <ul className="flex flex-col gap-2">
+                        <div className={!session ? "absolute border border-b-3 shadow-lg px-5 py-2 mt-24 bg-white " : "absolute border border-b-3 shadow-lg px-5 py-2 mt-32 bg-white "}>
+                            {session ? <ul className="flex flex-col gap-2">
 
                                 {
-                                    userdata.isAdmin == true &&
+                                    session?.user?.role == true &&
                                     <li className={navigation === '/stack' ? "text-red-700 cursor-pointer bg-blue-500 px-3 py-1 rounded-lg" : "text-gray-900 cursor-pointer bg-blue-500  px-3 py-1 rounded-lg"}>
                                         <Link href="/stack" >
                                             Add post
                                         </Link>
                                     </li>
                                 }
-                                <li onClick={signOut} className="cursor-pointer bg-red-500 text-white px-3 py-1 rounded-lg">
+                                <li onClick={() => signOut()} className="cursor-pointer bg-red-500 text-white px-3 py-1 rounded-lg">
                                     SignOut
                                 </li>
                             </ul> :
@@ -135,14 +140,14 @@ const Nav = () => {
                                     Privacy
                                 </Link>
                             </li>
-                            {userdata ?
+                            {session ?
                                 <div className="flex flex-col text-center gap-6">
-                                    <li onClick={signOut} className="cursor-pointer">
+                                    <li onClick={() => signOut()} className="cursor-pointer">
                                         SignOut
                                     </li>
 
                                     {
-                                        userdata.isAdmin == true &&
+                                        session?.user?.role == true &&
                                         <li className={navigation === '/stack' ? "text-red-700 " : "text-gray-900 "}>
                                             <Link href="/stack" >
                                                 Add post

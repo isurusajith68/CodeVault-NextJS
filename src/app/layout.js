@@ -5,6 +5,7 @@ import Footter from "../components/Footter"
 import { usePathname } from 'next/navigation'
 import { Toaster } from "react-hot-toast"
 import { GoogleAnalyticsTracking } from "@/components/GoogleAnalyticsTracking "
+import { AuthProvider } from "./Provider"
 
 
 export default function RootLayout({ children }) {
@@ -15,27 +16,30 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <GoogleAnalyticsTracking  />
+      <GoogleAnalyticsTracking />
       <body className="">
-        {showHeaderLogin && showHeaderRegister && (
-          <header>
-            <Nav />
-          </header>
-        )}
+        <AuthProvider>
 
-        <div className="md:px-24 px-5 py-1 ">
-          <Toaster
-            position="top-center"
-            reverseOrder={false}
-          />
-          {children}
-        </div>
+          {showHeaderLogin && showHeaderRegister && (
+            <header>
+              <Nav />
+            </header>
+          )}
 
-        {showHeaderLogin && showHeaderRegister && (
-          <div>
-            <Footter />
+          <div className="md:px-24 px-5 py-1 ">
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
+            {children}
           </div>
-        )}
+
+          {showHeaderLogin && showHeaderRegister && (
+            <div>
+              <Footter />
+            </div>
+          )}
+        </AuthProvider>
 
 
       </body>

@@ -25,18 +25,17 @@ export async function POST(request) {
 
 
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-            expiresIn: '1h',
+        const token = jwt.sign({ userId: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, {
+            expiresIn: '1h',  
         });
 
-
-        cookies().set('Set-Cookie', `token=${token}; HttpOnly; Path=/; Max-Age=${60 * 60}`)
+        cookies().set('Set-Cookie', `token=${token}; HttpOnly; Path=/; Max-Age=${60 * 60}`);
         return Response.json({
             data: {
                 userId: user._id,
                 username: user.username,
                 email: user.email,
-                isAdmin: user.isAdmin,
+
             }, message: "Login successfully"
         }, {
             status: 200

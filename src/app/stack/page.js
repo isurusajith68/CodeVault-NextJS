@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import PostList from "../../components/PostList"
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const Stack = () => {
 
@@ -26,28 +27,19 @@ const Stack = () => {
   const [userdata, setUserData] = useState(null);
   const router = useRouter()
 
+
+  const { data: session } = useSession();
+
   useEffect(() => {
-    const fetchUserdata = async () => {
-      try {
-        const user = await JSON.parse(localStorage.getItem("userdata"));
-
-        if (!user) {
-          router.push("/")
-        }
-
-        if (user.isAdmin === false) {
-          router.push("/")
-        }
 
 
-        setUserData(user);
+    if (!session)
+      return router.push("/login")
 
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchUserdata();
-  }, []);
+    if (session?.user?.role === false)
+      return router.push("/")
+
+  }, [])
 
 
   useEffect(() => {
@@ -86,7 +78,7 @@ const Stack = () => {
     }
   };
 
-  console.log(userdata?.username)
+
   //upload
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -258,7 +250,7 @@ const Stack = () => {
 
                 {imageBase64 && (
                   <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
-                    <Image width={10} height={10} className="object-fill h-44" src={imageBase64} alt="Selected File" />
+                    <Image width={10} height={10} className=" w-48 h-48" src={imageBase64} alt="Selected File" />
                     <input
                       id="dropzone-file"
                       type="file"

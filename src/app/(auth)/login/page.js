@@ -1,21 +1,33 @@
 "use client"
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+// import { redirect } from "next/navigation";
+// import { getServerSession } from "next-auth";
+// import authOptions from "@/app/api/auth/[...nextauth]/route";
+
 
 const Login = () => {
 
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-
   const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      router.push("/");
+    }
+  }, [session, router]);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("")
 
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
 
 
 
@@ -24,29 +36,60 @@ const Login = () => {
 
     if (handleValidation()) {
 
+      // try {
+      // const response = await fetch('/api/auth/login', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(formData),
+      // });
+
+      // const data = await response.json();
+
+      // if (response.status === 401) {
+      //   return toast.error(data.message);
+      // }
+
+      // if (response.status === 200) {
+      //   toast.success(data.message);
+      //   localStorage.setItem("userdata", JSON.stringify(data.data))
+      //   router.push('/')
+      // }
+
+      // const res = await signIn("credentials", { email, password, redirect: false });
+
+      // if (res.error) {
+      //   toast.error("data.message", res.error.message);
+      // }
+
+      // router.replace("/")
+
+
+      // } catch (error) {
+      //   toast.error(error);
+      // }
+
+
+
       try {
-        const response = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
+        const res = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
         });
 
-        const data = await response.json();
-
-        if (response.status === 401) {
-          return toast.error(data.message);
+        if (res.error) {
+          setError("Invalid Credentials");
+          toast.error(error)
+          return;
         }
-
-        if (response.status === 200) {
-          toast.success(data.message);
-          localStorage.setItem("userdata", JSON.stringify(data.data))
-          router.push('/')
-        }
+        toast.success("Login successful")
+        router.replace("");
       } catch (error) {
-        toast.error(error);
+        console.log(error);
       }
+
     }
   };
 
@@ -58,12 +101,12 @@ const Login = () => {
   }
 
   const handleValidation = () => {
-    const { password, email } = formData;
+
     if (email === "") {
       toast.error("Email is requied");
       return false;
     }
-    if (!validateEmail(formData.email)) {
+    if (!validateEmail(email)) {
       toast.error('Please enter a valid email address');
       return;
     }
@@ -89,7 +132,7 @@ const Login = () => {
           <div>
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
             <div className="mt-2">
-              <input id="email" name="email" type="email" onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              <input id="email" name="email" type="email" onChange={(e) => setEmail(e.target.value)} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
 
@@ -99,7 +142,7 @@ const Login = () => {
 
             </div>
             <div className="mt-2">
-              <input id="password" name="password" type="password" onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              <input id="password" name="password" type="password" onChange={(e) => setPassword(e.target.value)} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
 

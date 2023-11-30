@@ -6,7 +6,8 @@ import { formatDistanceToNow } from 'date-fns';
 import Link from "next/link";
 import { Allcategory } from "@/util/category";
 import Image from "next/image";
-
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 
 const Home = () => {
@@ -16,6 +17,15 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categoryvalue, setCategoryValues] = useState([])
   const [selectdCategoryValue, setSelectCategoryValue] = useState("");
+
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (!session) {
+      router.push("/login");
+    }
+  }, [session, router]);
 
   useEffect(() => {
     fetchData()
