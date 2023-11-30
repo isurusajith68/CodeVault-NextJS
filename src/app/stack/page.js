@@ -31,8 +31,7 @@ const Stack = () => {
   const { data: session } = useSession();
   console.log(session?.user?.role)
   useEffect(() => {
-
-
+    
     if (session?.user?.role === false) {
       router.push("/")
     }
