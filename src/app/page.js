@@ -23,10 +23,10 @@ const Home = () => {
 
   useEffect(() => {
     if (!session) {
-      // router.push("/login");
+      router.push("/login");
       console.log("first login")
     }
-  }, [session, router]);
+  }, []);
 
   useEffect(() => {
     fetchData()
