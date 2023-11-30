@@ -30,16 +30,16 @@ const Stack = () => {
 
   const { data: session } = useSession();
 
-  useEffect(() => {
+  // useEffect(() => {
 
 
-    if (!session)
-      return router.push("/login")
+  //   if (!session)
+  //     return router.push("/login")
 
-    if (session?.user?.role === false)
-      return router.push("/")
+  //   if (session?.user?.role === false)
+  //     return router.push("/")
 
-  }, [])
+  // }, [])
 
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const Stack = () => {
       content,
       image: imageBase64,
       description,
-      author: userdata?.username
+      author: session?.user?.name
     }
     if (id == null) {
       const response = await axios.post('/api/post', data);
