@@ -11,43 +11,42 @@ import { useSession } from "next-auth/react";
 
 
 const Home = () => {
-  const [posts, setPost] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [posts, setPosts] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [category, setCategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [categoryvalue, setCategoryValues] = useState([])
+  const [categoryvalue, setCategoryValues] = useState([]);
   const [selectdCategoryValue, setSelectCategoryValue] = useState("");
 
   const router = useRouter();
   const { data: session } = useSession();
 
-  // useEffect(() => {
-  //   if (!session) {
-  //     router.push("/login");
-  //     console.log("first login")
-  //   }
-  // }, [session]);
+  useEffect(() => {
+    if (!session) {
+      router.push("/login");
+      console.log("first login");
+    }
+  }, [session, router]);
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get("/api/post");
+        if (response.status === 200) {
+          setPosts(response.data.data);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setIsLoading(false);
+      }
+    };
 
-
-  const TimeAgo = ({ createdAt }) => {
-    const distance = formatDistanceToNow(new Date(createdAt), { addSuffix: true });
-
-    return <span>{distance}</span>;
-  };
-
-  const fetchData = async () => {
-    setIsLoading(true)
-    const post = await axios.get("/api/post");
-    if (post.status == 200) {
-      setPost(post.data.data)
-      setIsLoading(false)
-
+    if (!posts) {
+      fetchData();
     }
-  }
+  }, [posts]);
 
   useEffect(() => {
     const categoryNames = Allcategory.map((categoryItem) => categoryItem.name);
@@ -72,23 +71,17 @@ const Home = () => {
 
     return false;
   });
-  //category value change set empty value categoryvalues
+  
   useEffect(() => {
-    setSelectCategoryValue("")
-  }, [selectedCategory])
-
+    setSelectCategoryValue("");
+  }, [selectedCategory]);
 
   useEffect(() => {
-    const categoryvalue = Allcategory.filter((category) => {
-      if (selectedCategory === category.name) {
-        return true
-      }
-      return false
-    });
-    categoryvalue.map((value) => {
-      setCategoryValues(value.value)
-    })
-  }, [selectedCategory])
+    const categoryValue = Allcategory.find((category) => selectedCategory === category.name);
+    if (categoryValue) {
+      setCategoryValues(categoryValue.value);
+    }
+  }, [selectedCategory]);
 
 
   return (
