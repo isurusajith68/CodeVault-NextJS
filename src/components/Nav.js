@@ -17,11 +17,15 @@ const Nav = () => {
     const [initials, setInitials] = useState('');
     const [randomColor, setRandomColor] = useState('');
 
+
+
     const { data: session } = useSession();
 
-    
+
+    localStorage.setItem(name, session?.user?.name)
+    const fullNameElement = localStorage.getItem(name);
     useEffect(() => {
-        const fullNameElement = session?.user?.name;
+
         const fullName = fullNameElement ? fullNameElement : '';
 
         const calculatedInitials = fullName.split(' ').map(name => name[0]).join('').toUpperCase();
@@ -95,20 +99,19 @@ const Nav = () => {
                     </li>
                 </ul>
                 <div className="flex flex-1 items-center justify-end mr-20  gap-5 max-md:hidden ">
-                    <div className="font-semibold text-red-600 text-sm">{session ? <span className="text-sm text-black">Wellcome </span> : ""}
+                    <div className="font-semibold text-red-600 text-sm">{fullNameElement ? <span className="text-sm text-black">Wellcome </span> : ""}
                         <br />
 
-                        {session?.user?.name}</div>
+                        {fullNameElement}</div>
                     {
-                        session?.user?.name ? <div id="profileImage" onClick={handleProfileClick} className="border-2 border-gray-200 cursor-pointer  font-serif w-7 h-7 rounded-full   text-white items-center justify-center flex text-opacity-90 " style={{ backgroundColor: "blue" }}>
+
+                        <div id="profileImage" onClick={handleProfileClick} className="border-2 border-gray-200 cursor-pointer  font-serif w-7 h-7 rounded-full   text-white items-center justify-center flex text-opacity-90 " style={{ backgroundColor: "blue" }}>
                             {initials}
-                        </div> : <AccountCircleOutlinedIcon
-                            onClick={handleProfileClick}
-                            className="text-gray-900 text-xl   cursor-pointer transition-transform transform hover:scale-110 "
-                        />
+                        </div>
+
+
+
                     }
-
-
                     {
                         profileClick &&
                         <div className={!session ? "absolute border border-b-3 shadow-lg px-5 py-2 mt-36 bg-white " : "absolute border border-b-3 shadow-lg px-5 py-2 mt-36 bg-white "}>

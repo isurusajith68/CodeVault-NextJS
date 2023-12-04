@@ -84,6 +84,8 @@ const Login = () => {
           toast.error(error)
           return;
         }
+        console.log(res)
+       
         toast.success("Login successful")
         router.replace("");
       } catch (error) {
@@ -120,6 +122,7 @@ const Login = () => {
     }
     return true;
   };
+
 
   return (
     <div className="flex min-h-full flex-col px-6 py-12 lg:px-8 mb-10 mt-28">
