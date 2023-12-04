@@ -14,8 +14,32 @@ const Nav = () => {
     const [profileClick, setProfileClick] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const navigation = usePathname();
+    const [initials, setInitials] = useState('');
+    const [randomColor, setRandomColor] = useState('');
 
     const { data: session } = useSession();
+
+    
+    useEffect(() => {
+        const fullNameElement = session?.user?.name;
+        const fullName = fullNameElement ? fullNameElement : '';
+
+        const calculatedInitials = fullName.split(' ').map(name => name[0]).join('').toUpperCase();
+        const generatedColor = getRandomColor();
+
+        setInitials(calculatedInitials);
+        setRandomColor(generatedColor);
+    }, [session]);
+
+    const getRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
+
 
 
     const handleClick = () => {
@@ -47,7 +71,7 @@ const Nav = () => {
 
     return (
         <nav className="">
-            <div className={scrolled ? `fixed left-0 top-0  z-50 w-full flex h-[60px] bg-white  justify-start  ${isClick ? "md:shadow-lg" :"shadow-lg"}` : "fixed left-0 top-0  z-50 w-full flex h-[60px] bg-white  justify-startx"}>
+            <div className={scrolled ? `fixed left-0 top-0  z-50 w-full flex h-[60px] bg-white  justify-start  ${isClick ? "md:shadow-lg" : "shadow-lg"}` : "fixed left-0 top-0  z-50 w-full flex h-[60px] bg-white  justify-startx"}>
                 <Link loading={"lazy"} href="/" className="flex items-center flex-1 px-5 md:ml-20 w-auto h-auto">
                     <h1 className="font-serif font-bold text-lg text-blue-600">
                         💢 CodeVault
@@ -73,16 +97,21 @@ const Nav = () => {
                 <div className="flex flex-1 items-center justify-end mr-20  gap-5 max-md:hidden ">
                     <div className="font-semibold text-red-600 text-sm">{session ? <span className="text-sm text-black">Wellcome </span> : ""}
                         <br />
+
                         {session?.user?.name}</div>
-                    <AccountCircleOutlinedIcon
+                    {
+                        session?.user?.name ? <div id="profileImage" onClick={handleProfileClick} className="border-2 border-gray-200 cursor-pointer  font-serif w-7 h-7 rounded-full   text-white items-center justify-center flex text-opacity-90 " style={{ backgroundColor: "blue" }}>
+                            {initials}
+                        </div> : <AccountCircleOutlinedIcon
+                            onClick={handleProfileClick}
+                            className="text-gray-900 text-xl   cursor-pointer transition-transform transform hover:scale-110 "
+                        />
+                    }
 
 
-                        onClick={handleProfileClick}
-                        className="text-gray-900 text-xl   cursor-pointer transition-transform transform hover:scale-110 "
-                    />
                     {
                         profileClick &&
-                        <div className={!session ? "absolute border border-b-3 shadow-lg px-5 py-2 mt-24 bg-white " : "absolute border border-b-3 shadow-lg px-5 py-2 mt-32 bg-white "}>
+                        <div className={!session ? "absolute border border-b-3 shadow-lg px-5 py-2 mt-36 bg-white " : "absolute border border-b-3 shadow-lg px-5 py-2 mt-36 bg-white "}>
                             {session ? <ul className="flex flex-col gap-2">
 
                                 {
