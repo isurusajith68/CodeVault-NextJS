@@ -18,18 +18,11 @@ const Home = () => {
   const [categoryvalue, setCategoryValues] = useState([]);
   const [selectdCategoryValue, setSelectCategoryValue] = useState("");
 
-
   const { status } = useSession();
-  console.log(status)
-
-  // if (status === "loading") {
-  //   return <p>Loading...</p>
-  // }
 
   if (status === "unauthenticated") {
-    return redirect("/login")
+    redirect("/login")
   }
-
 
   useEffect(() => {
     const fetchData = async () => {
