@@ -22,7 +22,7 @@ const Home = () => {
   const { data: session } = useSession();
 
   useEffect(() => {
-    if (session.user.name === null) {
+    if (session?.user?.name === null) {
       redirect("/login");
     }
   }, [session]);
