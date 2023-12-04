@@ -6,7 +6,7 @@ import { formatDistanceToNow } from 'date-fns';
 import Link from "next/link";
 import { Allcategory } from "@/util/category";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 
@@ -18,15 +18,15 @@ const Home = () => {
   const [categoryvalue, setCategoryValues] = useState([]);
   const [selectdCategoryValue, setSelectCategoryValue] = useState("");
 
-  const router = useRouter();
+
   const { data: session } = useSession();
 
   useEffect(() => {
-    if (!session) {
-      router.push("/login");
-      console.log("first login");
-    }
-  }, [session, router]);
+  if (!session) {
+    redirect("/login");
+   
+  }
+  }, [session]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,7 +71,7 @@ const Home = () => {
 
     return false;
   });
-  
+
   useEffect(() => {
     setSelectCategoryValue("");
   }, [selectedCategory]);
@@ -83,6 +83,11 @@ const Home = () => {
     }
   }, [selectedCategory]);
 
+  const TimeAgo = ({ createdAt }) => {
+    const distance = formatDistanceToNow(new Date(createdAt), { addSuffix: true });
+
+    return <span>{distance}</span>;
+  };
 
   return (
     <div className="min-h-screen">
