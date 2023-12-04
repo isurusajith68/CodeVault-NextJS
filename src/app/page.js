@@ -22,11 +22,10 @@ const Home = () => {
   const { data: session } = useSession();
 
   useEffect(() => {
-  if (!session) {
-    redirect("/login");
-   
-  }
-  }, []);
+    if (session.user.name === null) {
+      redirect("/login");
+    }
+  }, [session]);
 
   useEffect(() => {
     const fetchData = async () => {
