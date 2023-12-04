@@ -6,7 +6,9 @@ import { useEffect, useState } from "react"
 import { formatDistanceToNow } from 'date-fns';
 import ReactQuill from "react-quill"
 import Loading from "@/components/Loading"
-import Latest from "@/components/Latest"
+import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
+
 import { BiLogoFacebook, BiLogoLinkedin, BiLogoTwitter } from "react-icons/bi";
 
 
@@ -20,6 +22,16 @@ const Post = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [clickLatest, setClickLatestPost] = useState(null)
 
+  const { status } = useSession();
+  console.log(status)
+
+  // if (status === "loading") {
+  //   return <p>Loading...</p>
+  // }
+
+  if (status === "unauthenticated") {
+    return redirect("/login")
+  }
   useEffect(() => {
     fetchPost()
   }, [])
