@@ -14,35 +14,11 @@ const Nav = () => {
     const [profileClick, setProfileClick] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const navigation = usePathname();
-    const [initials, setInitials] = useState('');
-    const [randomColor, setRandomColor] = useState('');
-
-
+  
 
     const { data: session } = useSession();
 
 
-    localStorage.setItem(name, session?.user?.name)
-    const fullNameElement = localStorage.getItem(name);
-    useEffect(() => {
-
-        const fullName = fullNameElement ? fullNameElement : '';
-
-        const calculatedInitials = fullName.split(' ').map(name => name[0]).join('').toUpperCase();
-        const generatedColor = getRandomColor();
-
-        setInitials(calculatedInitials);
-        setRandomColor(generatedColor);
-    }, [session]);
-
-    const getRandomColor = () => {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    };
 
 
 
@@ -99,19 +75,15 @@ const Nav = () => {
                     </li>
                 </ul>
                 <div className="flex flex-1 items-center justify-end mr-20  gap-5 max-md:hidden ">
-                    <div className="font-semibold text-red-600 text-sm">{fullNameElement ? <span className="text-sm text-black">Wellcome </span> : ""}
+                    <div className="font-semibold text-red-600 text-sm">{session ? <span className="text-sm text-black">Wellcome </span> : ""}
                         <br />
 
-                        {fullNameElement}</div>
-                    {
-
-                        <div id="profileImage" onClick={handleProfileClick} className="border-2 border-gray-200 cursor-pointer  font-serif w-7 h-7 rounded-full   text-white items-center justify-center flex text-opacity-90 " style={{ backgroundColor: "blue" }}>
-                            {initials}
-                        </div>
+                        {session?.user?.name}</div>
 
 
+                    <AccountCircleOutlinedIcon onClick={handleProfileClick} />
 
-                    }
+
                     {
                         profileClick &&
                         <div className={!session ? "absolute border border-b-3 shadow-lg px-5 py-2 mt-36 bg-white " : "absolute border border-b-3 shadow-lg px-5 py-2 mt-36 bg-white "}>
