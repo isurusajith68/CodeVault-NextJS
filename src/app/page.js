@@ -26,7 +26,7 @@ const Home = () => {
     redirect("/login");
    
   }
-  }, [session]);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {

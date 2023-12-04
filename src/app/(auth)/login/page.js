@@ -14,7 +14,7 @@ const Login = () => {
   const { data: session } = useSession();
 
   useEffect(() => {
-    if (!session) {
+    if (session) {
       router.push("/");
     }
   }, [session, router]);
