@@ -42,7 +42,7 @@ const Home = () => {
     if (!posts) {
       fetchData();
     }
-  }, [posts]);
+  }, []);
 
   useEffect(() => {
     const categoryNames = Allcategory.map((categoryItem) => categoryItem.name);

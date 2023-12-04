@@ -12,21 +12,15 @@ import { signOut, useSession } from "next-auth/react";
 const Nav = () => {
     const [isClick, setIsClick] = useState(false);
     const [profileClick, setProfileClick] = useState(false);
-    // const [userdata, setUserData] = useState(null);
+    const [scrolled, setScrolled] = useState(false);
     const navigation = usePathname();
 
     const { data: session } = useSession();
 
-    
+
     const handleClick = () => {
         setIsClick(!isClick);
     };
-
-    // useEffect(() => {
-    //     const user = JSON.parse(localStorage.getItem("userdata"))
-    //     setUserData(user)
-    // }, [])
-
 
     const handleProfileClick = () => {
         setProfileClick(!profileClick)
@@ -35,15 +29,25 @@ const Nav = () => {
         }, 4000);
     }
 
-    // const signOut = () => {
-    //     localStorage.removeItem("userdata")
-    //     // router.push("/login")
-    //     setUserData(null)
+    useEffect(() => {
+        const handleScroll = () => {
+            const isScrolled = window.scrollY > 10;
+            if (isScrolled !== scrolled) {
+                setScrolled(isScrolled);
+            }
+        };
 
-    // }
+        window.addEventListener('scroll', handleScroll);
+
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [scrolled]);
+
     return (
         <nav className="">
-            <div className="sticky left-0 top-0 z-auto w-full flex h-[60px] bg-white  justify-start  md:shadow-lg">
+            <div className={scrolled ? `fixed left-0 top-0  z-50 w-full flex h-[60px] bg-white  justify-start  ${isClick ? "md:shadow-lg" :"shadow-lg"}` : "fixed left-0 top-0  z-50 w-full flex h-[60px] bg-white  justify-startx"}>
                 <Link loading={"lazy"} href="/" className="flex items-center flex-1 px-5 md:ml-20 w-auto h-auto">
                     <h1 className="font-serif font-bold text-lg text-blue-600">
                         💢 CodeVault
@@ -122,7 +126,7 @@ const Nav = () => {
             </div>
             <div>
                 {isClick && (
-                    <div className="w-full h-60 flex justify-center items-center bg-white shadow-lg  md:hidden " >
+                    <div className="fixed w-full top-10 z-50 h-60 flex justify-center items-center bg-white shadow-lg  md:hidden " >
 
                         <ul className="flex gap-6 flex-col items-center text-sm font-semibold leading-6 text-gray-900">
                             <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>

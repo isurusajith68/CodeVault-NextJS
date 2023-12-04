@@ -9,6 +9,7 @@ import Loading from "@/components/Loading"
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { BiLogoFacebook, BiLogoLinkedin, BiLogoTwitter } from "react-icons/bi";
+import FacebookShareButton from "@/components/FacebookShareButton"
 
 
 const Post = () => {
@@ -55,6 +56,12 @@ const Post = () => {
     return <span>{distance}</span>;
   };
 
+
+
+  const shareUrl = 'https://your-website.com';
+  const shareQuote = 'Check out this amazing content!';
+
+
   return (
     <div className="flex w-full items-center justify-center" >
       {isLoading ?
@@ -70,7 +77,7 @@ const Post = () => {
             </div>
             <div className="blog_img">
               <Image
-                src={post?.image}
+                src={!post ? "" : post?.image}
                 alt=""
                 width={0} height={10}
               />
@@ -84,7 +91,8 @@ const Post = () => {
                 </div>
               </div>
               <div className="author_divide">
-                <BiLogoTwitter className="icon" />
+                {/* <FacebookShareButton /> */}
+                <BiLogoTwitter className="icon" url={shareUrl} quote={shareQuote} />
                 <BiLogoLinkedin className="icon" />
                 <BiLogoFacebook className="icon" />
               </div>

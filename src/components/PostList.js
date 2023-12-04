@@ -35,6 +35,7 @@ const PostList = ({ data, fetchData, updatePost }) => {
         updatePost(item)
     }
 
+
     return (
         <div>
             <h1 className="font-semibold text-xl mb-8 text-center">CodeVault List</h1>
