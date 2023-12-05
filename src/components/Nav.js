@@ -18,10 +18,6 @@ const Nav = () => {
 
     const { data: session } = useSession();
 
-
-
-
-
     const handleClick = () => {
         setIsClick(!isClick);
     };
