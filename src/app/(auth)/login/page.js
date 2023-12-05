@@ -85,7 +85,7 @@ const Login = () => {
           return;
         }
         console.log(res)
-       
+
         toast.success("Login successful")
         router.replace("");
       } catch (error) {

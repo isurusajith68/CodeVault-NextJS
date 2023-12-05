@@ -26,7 +26,8 @@ export const authOptions = {
                     if (!passwordsMatch) {
                         return null;
                     }
-                    // user.isAdmin = checkIfUserIsAdmin(user.email);
+
+
 
                     return user
                 } catch (error) {
@@ -43,6 +44,7 @@ export const authOptions = {
         signIn: "/",
     },
     callbacks: {
+
         async jwt({ token, user }) {
             if (user) token.id = user._id;
             if (user) token.role = user.isAdmin;

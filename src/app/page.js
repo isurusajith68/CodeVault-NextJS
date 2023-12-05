@@ -21,13 +21,13 @@ const Home = () => {
 
   const { data: session, status } = useSession();
 
-
   if (status === "unauthenticated") {
     redirect("/login")
   }
 
   const fetchData = async () => {
     setIsLoading(true);
+
     try {
       const response = await axios.get("/api/post");
       if (response.status === 200) {
@@ -40,28 +40,32 @@ const Home = () => {
     }
   };
 
-  const handleLikeClick = async (postId, userId) => {
-    try {
+  const handleLikeClick = async (postId) => {
+    if (session) {
+      const userId = session?.user?.id
+      try {
 
-      const response = await fetch('/api/post/like', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ postId, userId }),
-      });
+        const response = await fetch('/api/post/like', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ postId, userId }),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (data.success) {
-        console.log('Product liked successfully');
-        fetchData()
-      } else {
-        console.error('Failed to like product:', data.message);
+        if (data.success) {
+          console.log('Product liked successfully');
+          fetchData()
+        } else {
+          console.error('Failed to like product:', data.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
       }
-    } catch (error) {
-      console.error('Error:', error);
     }
+
   };
 
   useEffect(() => {
@@ -179,13 +183,13 @@ const Home = () => {
                             <BiSolidLike
                               color="red"
                               className=""
-                              onClick={() => handleLikeClick(item._id, session?.user?.id)}
+                              onClick={() => handleLikeClick(item._id)}
                             />
                           ) : (
                             <BiLike
                               color="red"
                               className=""
-                              onClick={() => handleLikeClick(item._id, session?.user?.id)}
+                              onClick={() => handleLikeClick(item._id)}
                             />
                           )}
 
