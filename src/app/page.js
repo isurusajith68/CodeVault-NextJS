@@ -176,8 +176,8 @@ const Home = () => {
                       {item.likedBy.length >= 0 && (
                         <div className="cursor-pointer">
                           {item.likedBy.includes(session?.user?.id) ? (
-                            <BiSolidLike
-                              color="red"
+                            <BiLike
+                              color="blue"
                               className=""
                               onClick={() => handleLikeClick(item._id, session?.user?.id)}
                             />
