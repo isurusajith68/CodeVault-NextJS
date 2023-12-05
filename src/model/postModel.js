@@ -24,10 +24,12 @@ const postSchema = mongoose.Schema({
     author: {
         type: String,
     },
+    likes: { type: Number, default: 0 },
+    likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 
 }, {
     timestamps: true
 })
 
-const Post = mongoose.models.Posts || mongoose.model('Posts', postSchema)
+const Post = mongoose.models.Post || mongoose.model('Post', postSchema)
 export default Post;

@@ -8,7 +8,8 @@ import { Allcategory } from "@/util/category";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
-
+import { BiSolidLike } from "react-icons/bi";
+import { BiLike } from "react-icons/bi";
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
@@ -18,27 +19,53 @@ const Home = () => {
   const [categoryvalue, setCategoryValues] = useState([]);
   const [selectdCategoryValue, setSelectCategoryValue] = useState("");
 
-  const { status } = useSession();
+  const { data: session, status } = useSession();
+
+  console.log(posts)
 
   if (status === "unauthenticated") {
     redirect("/login")
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get("/api/post");
-        if (response.status === 200) {
-          setPosts(response.data.data);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get("/api/post");
+      if (response.status === 200) {
+        setPosts(response.data.data);
         setIsLoading(false);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setIsLoading(false);
+    }
+  };
 
+  const handleLikeClick = async (postId, userId) => {
+    try {
+
+      const response = await fetch('/api/post/like', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ postId, userId }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        console.log('Product liked successfully');
+        fetchData()
+      } else {
+        console.error('Failed to like product:', data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
     if (!posts) {
       fetchData();
     }
@@ -85,6 +112,9 @@ const Home = () => {
     return <span>{distance}</span>;
   };
 
+
+
+
   return (
     <div className="min-h-screen">
       <div className="flex space-x-2">
@@ -110,7 +140,7 @@ const Home = () => {
         }
       </div>
       {
-        isLoading ? <div className=" w-full items-center text-center mt-10 justify-center">
+        !posts ? <div className=" w-full items-center text-center mt-10 justify-center">
           <Loading />
 
         </div> : <div className="mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center mt-10">
@@ -141,8 +171,39 @@ const Home = () => {
                     <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 mt-3 text-center ">{item.title}</h5>
                   </Link>
                   <p className="mb-3 font-normal text-justify text-gray-700 dark:text-gray-600">{item.description}</p>
-                    <div>Add Like</div>
-                  <Link href={`/post/${item._id}`} id="toggle-btn" className="mt-2 text-blue-500 focus:outline-none">Read More →</Link>
+                  <div className="flex items-center gap-2 mb-3 ">
+
+                    <div>
+                      {item.likedBy.length >= 0 && (
+                        <div>
+                          {item.likedBy.includes(session?.user?.id) ? (
+                            <BiSolidLike
+                              color="red"
+                              className=""
+                              onClick={() => handleLikeClick(item._id, session?.user?.id)}
+                            />
+                          ) : (
+                            <BiLike
+                              color="red"
+                              className=""
+                              onClick={() => handleLikeClick(item._id, session?.user?.id)}
+                            />
+                          )}
+
+                        </div>
+                      )}
+                    </div>
+
+
+                    <div>
+                      <span>
+                        <span>{item.likedBy.length}</span>
+                      </span>
+                    </div>
+                  </div>
+
+
+                  <Link href={`/post/${item._id}`} id="toggle-btn" className="mt-10 text-blue-500 focus:outline-none">Read More →</Link>
                 </div>
               </div>
             )
@@ -151,7 +212,7 @@ const Home = () => {
         </div>
       }
 
-    </div>
+    </div >
 
   )
 }
