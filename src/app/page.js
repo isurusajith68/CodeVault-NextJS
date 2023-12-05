@@ -21,7 +21,6 @@ const Home = () => {
 
   const { data: session, status } = useSession();
 
-  console.log(posts)
 
   if (status === "unauthenticated") {
     redirect("/login")
@@ -175,7 +174,7 @@ const Home = () => {
 
                     <div>
                       {item.likedBy.length >= 0 && (
-                        <div>
+                        <div className="cursor-pointer">
                           {item.likedBy.includes(session?.user?.id) ? (
                             <BiSolidLike
                               color="red"

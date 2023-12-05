@@ -3,7 +3,7 @@ import Post from "@/model/postModel";
 export async function POST(request) {
 
     const { postId, userId } = await request.json();
-    console.log(postId)
+   
     try {
 
         const post = await Post.findById(postId);
