@@ -53,7 +53,7 @@ const Nav = () => {
                         💢 CodeVault
                     </h1>
                 </Link>
-                <ul className="flex flex-1 items-center justify-center gap-16 max-md:hidden text-sm font-semibold leading-6 text-gray-900">
+                <ul className="flex uppercase flex-1 items-center justify-center gap-16 max-md:hidden text-sm font-semibold leading-6 text-gray-900">
                     <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>
                         <Link href="/" >
                             Home
@@ -128,7 +128,7 @@ const Nav = () => {
                 {isClick && (
                     <div className="fixed w-full top-10 z-50 h-60 flex justify-center items-center bg-white shadow-lg  md:hidden " >
 
-                        <ul className="flex gap-6 flex-col items-center text-sm font-semibold leading-6 text-gray-900">
+                        <ul className="uppercase flex gap-6 flex-col items-center text-sm font-semibold leading-6 text-gray-900">
                             <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>
                                 <Link href="/" >
                                     Home

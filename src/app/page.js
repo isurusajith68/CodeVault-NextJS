@@ -171,9 +171,9 @@ const Home = () => {
                     </span>
                   </div>
                   <Link href={`/post/${item._id}`} className="">
-                    <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 mt-3 text-center ">{item.title}</h5>
+                    <h5 className="mb-2 text-xl font-semibold tracking-tight text-gray-900 mt-3 text-center capitalize">{item.title}</h5>
                   </Link>
-                  <p className="mb-3 font-normal text-justify text-gray-700 dark:text-gray-600">{item.description}</p>
+                  <p className="mb-3 font-normal text-justify text-gray-700 dark:text-gray-600">{item.description.length > 70 ? `${item.description.substring(0, 70)} .....` : item.description}</p>
                   <div className="flex items-center gap-2 mb-3 ">
 
                     <div>
