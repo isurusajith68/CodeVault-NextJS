@@ -78,71 +78,10 @@ const Post = () => {
     }
     return color;
   };
+  
 
   return (
-    <div className="flex w-full items-center justify-center" >
-      {isLoading ?
-        <div className="flex px-5">
-          <Loading />
-        </div>
-        :
-        <div className="blog_conteiner">
-          <div className="blog_sub">
-
-            <div className="blog_title_section">
-              <h3 className="blog_sm_title"> {post?.category} /  {post?.value} </h3>
-              <h2 className="blog_title">{post?.title}</h2>
-            </div>
-            <div className="blog_img">
-              <Image
-                src={!post ? "" : post?.image}
-                alt=""
-                width={0} height={10}
-              />
-            </div>
-            <div className="author_section ">
-              <div className="author_divide">
-
-                <div className="author_details flex gap-2 justify-center items-center">
-                  <div id="profileImage" className="font-serif w-6 h-6 rounded-full   text-white items-center justify-center flex text-opacity-90 " style={{ backgroundColor: randomColor }}>
-                    {initials}
-                  </div>
-                  <div>
-                    <h3 id="fullName">{post?.author}</h3>
-                    <h4> <TimeAgo createdAt={createdAt} /></h4>
-                  </div>
-                </div>
-              </div>
-              <div className="author_divide ">
-
-                <BiLogoTwitter className="icon hover:bg-cyan-500" url={shareUrl} quote={shareQuote} />
-                <BiLogoLinkedin className="icon hover:bg-cyan-500" />
-                <BiLogoFacebook className="icon hover:bg-cyan-500 " />
-              </div>
-            </div>
-            <div className="para_section ">
-
-              <p>
-                {post?.description}
-              </p>
-            </div>
-            <div className="p-5 mt-4 bg-black">
-              {
-                post &&
-                <ReactQuill
-                  value={post?.content}
-                  readOnly={true}
-                  className="text-white"
-                  theme={"bubble"}
-
-                />
-              }
-            </div>
-          </div>
-        </div>
-      }
-
-    </div>
+   <></>
   )
 }
 export default Post
