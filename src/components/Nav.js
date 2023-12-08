@@ -139,7 +139,7 @@ const Nav = () => {
             </div>
             <div>
                 {isClick && (
-                    <div className={scrolled ? `fixed w-full  z-50 h-60 flex justify-center items-center bg-white shadow-lg  md:hidden ` : "fixed w-full z-50 h-60 flex justify-center items-center bg-white shadow-lg  md:hidden"} >
+                    <div className={scrolled ? `fixed w-full mt-28  z-50 h-60 flex justify-center items-center bg-white shadow-lg  md:hidden ` : "fixed mt-28 w-full z-50 h-60 flex justify-center items-center bg-white shadow-lg  md:hidden"} >
 
                         <ul className="uppercase flex gap-6 flex-col items-center text-sm font-semibold leading-6 text-gray-900 ">
                             <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>

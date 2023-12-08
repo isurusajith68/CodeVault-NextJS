@@ -3,31 +3,41 @@ import axios from "axios"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
-import { formatDistanceToNow } from 'date-fns';
 import ReactQuill from "react-quill"
 import Loading from "@/components/Loading"
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { BiLogoFacebook, BiLogoLinkedin, BiLogoTwitter } from "react-icons/bi";
-import FacebookShareButton from "@/components/FacebookShareButton"
 import React from 'react';
-import ProfileImage from '../../../components/ProfileImage';
-
+import moment from "moment"
 
 
 const Post = () => {
   const [post, setPost] = useState(null)
-  const [createdAt, setcreatedAt] = useState(null)
+  const [featuredPost, setFeaturedPost] = useState(null)
   const { id } = useParams()
   const [isLoading, setIsLoading] = useState(false)
-  const [initials, setInitials] = useState('');
-  const [randomColor, setRandomColor] = useState('');
-
   const { status } = useSession();
-
+  const [isClickFeaturedPost, setIsClickFeaturedPost] = useState(false)
+  const [clickFeaturedPost, setClickFeaturedPost] = useState(null)
   if (status === "unauthenticated") {
     redirect("/login")
   }
+
+
+  useEffect(() => {
+
+    const fetchPostFeatured = async () => {
+      try {
+        const post = await axios.get(`/api/post`)
+        const slicePost = post.data.data.slice(1, 4)
+        setFeaturedPost(slicePost)
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+    fetchPostFeatured();
+  }, [])
 
 
   useEffect(() => {
@@ -36,15 +46,8 @@ const Post = () => {
         setIsLoading(true)
         const post = await axios.get(`/api/post/${id}`)
         setPost(post.data.data)
-        setcreatedAt(post.data.data.createdAt)
-        setIsLoading(false)
 
-        const fullNameElement = post.data.data.author
-        const fullName = fullNameElement ? fullNameElement : '';
-        const calculatedInitials = fullName.split(' ').map(name => name[0]).join('').toUpperCase();
-        const generatedColor = getRandomColor();
-        setRandomColor(generatedColor);
-        setInitials(calculatedInitials);
+        setIsLoading(false)
 
       } catch (error) {
         console.log(error)
@@ -56,32 +59,135 @@ const Post = () => {
       fetchPost();
     }
 
-  }, [])
+  }, [post])
 
 
-  const TimeAgo = ({ createdAt }) => {
-    const distance = formatDistanceToNow(new Date(createdAt), { addSuffix: true });
-
-    return <span>{distance}</span>;
-  };
-
-
-
-  const shareUrl = 'https://your-website.com';
-  const shareQuote = 'Check out this amazing content!';
-
-  const getRandomColor = () => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
-  
+  const clickLatestPost = (e) => {
+    setIsClickFeaturedPost(true)
+    setClickFeaturedPost(e)
+  }
 
   return (
-   <></>
+    <div className="mt-[130px]  xl:px-32 ">
+
+
+      <div className="bg-slate-100 lg:flex ">
+        <div className="flex-auto lg:w-[70%] lg:p-5 ">
+          {
+            isClickFeaturedPost ? <div className="w-full  bg-white p-5  drop-shadow-lg">
+              <h1 className="text-2xl capitalize font-semibold text-slate-600">{clickFeaturedPost?.title}</h1>
+              <h1 className="text-gray-600 text-sm mt-2">Post by
+                <span className="text-red-500 ml-2 italic">
+                  {clickFeaturedPost?.author}
+                </span>
+                <span className="ml-2">
+                  {moment(clickFeaturedPost?.createdAt).format("Do MMMM, YYYY")}
+                </span>
+                <span className="text-red-500 ml-2 italic">
+                  4  comments
+                </span>
+              </h1>
+              <div className="mt-2 w-full">
+                <Image height={100} width={100} className="w-full" loading="lazy" src={clickFeaturedPost?.image} alt="featured-image" />
+              </div>
+              <p className="mt-2 text-slate-500 text-base p-1">
+                {clickFeaturedPost?.description}
+              </p>
+
+
+              <div className="p-5 mt-2 bg-black">
+                {
+                  clickFeaturedPost &&
+                  <ReactQuill
+                    value={clickFeaturedPost?.content}
+                    readOnly={true}
+                    className="text-white"
+                    theme={"bubble"}
+
+                  />
+                }
+
+              </div>
+            </div>
+              :
+              <>
+                {!isLoading ?
+                  <div className="w-full  bg-white p-5  drop-shadow-lg">
+                    <h1 className="text-2xl capitalize font-semibold text-slate-600">{post?.title}</h1>
+                    <h1 className="text-gray-600 text-sm mt-2">Post by
+                      <span className="text-red-500 ml-2 italic">
+                        {post?.author}
+                      </span>
+                      <span className="ml-2">
+                        {moment(post?.createdAt).format("Do MMMM, YYYY")}
+                      </span>
+                      <span className="text-red-500 ml-2 italic">
+                        4  comments
+                      </span>
+                    </h1>
+                    <div className="mt-2 w-full">
+                      <Image height={100} width={100} className="w-full" loading="lazy" src={post?.image} />
+                    </div>
+                    <p className="mt-2 text-slate-500 text-base p-1">
+                      {post?.description}
+                    </p>
+
+
+                    <div className="p-5 mt-2 bg-black">
+                      {
+                        post &&
+                        <ReactQuill
+                          value={post?.content}
+                          readOnly={true}
+                          className="text-white"
+                          theme={"bubble"}
+
+                        />
+                      }
+
+                    </div>
+                  </div> : <Loading />
+                }
+              </>
+          }
+
+        </div>
+        <div className="sticky  flex-auto  w-[30%] p-5 max-lg:hidden">
+          <div className="bg-white text-center font-bold p-5 border-b mb-2 drop-shadow-lg">
+            Featured Post
+          </div>
+          {
+            featuredPost ? featuredPost.map((item, index) => {
+              return (
+                <div onClick={() => clickLatestPost(item)} key={index} className="bg-white cursor-pointer p-5 drop-shadow-lg mt-3">
+
+                  <h1 className="text-gray-600 text-sm  mb-2 mt-2">
+                    <span className="ml-2 text-sm">
+                      {moment(item?.createdAt).format("Do MMMM, YYYY")}
+                    </span>
+
+                  </h1>
+                  <h1 className="text-base capitalize text-center text-slate-900">{item?.title}</h1>
+                  <div className="bg-white mt-2">
+                    <Image height={100} width={100} className="w-full" loading="lazy" src={item?.image} alt="featured-image" />
+                    <p className="mt-2 text-slate-500 text-base p-1 text-justify">
+                      {item?.description}
+                    </p>
+                  </div>
+
+                </div>
+
+              )
+            }) : <Loading />
+          }
+
+
+
+        </div>
+
+      </div >
+
+    </div >
   )
 }
 export default Post

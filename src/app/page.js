@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { BiSolidLike } from "react-icons/bi";
 import { BiLike } from "react-icons/bi";
-import Featured from "@/components/Featured";
+
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
@@ -120,26 +120,26 @@ const Home = () => {
 
 
   return (
-    <div className="min-h-screen">
-      {/* <Featured /> */}
+    <div className=" mt-[130px]">
+
       <div className="w-full bg-white rounded-full mt-3">
         <div className="flex text-center justify-center ">
           <h1 className="text-lg font-semibold text-slate-500">Latest Post</h1>
         </div>
       </div>
-      <div className="flex space-x-2">
+      <div className="sm:flex sm:space-x-2">
 
-        <select value={selectedCategory} className="p-1 mt-2 flex w-160 sm:w-[300px] justify-end rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setSelectedCategory(e.target.value)}>
+        <select value={selectedCategory} className="p-2 mt-3 border-none sm:flex w-160 sm:w-[300px] justify-end rounded-md  py-1.5 shadow-sm h-10 text-slate-500  placeholder:text-slate-500   focus:outline-none" onChange={(e) => setSelectedCategory(e.target.value)}>
           {category.map((categoryItem, index) => (
-            <option key={index} value={categoryItem}>{categoryItem}</option>
+            <option className="" key={index} value={categoryItem}>{categoryItem}</option>
           ))}
         </select>
 
         {
           selectedCategory ?
-            <div className="flex-1">
+            <div className="sm:flex-1">
               <div className="mt-2 ">
-                <select value={selectdCategoryValue} className="p-1 mt-2 flex w-[160px] ms:w-[300px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setSelectCategoryValue(e.target.value)}>
+                <select value={selectdCategoryValue} className="p-2 mt-3 border-none sm:flex w-160 sm:w-[300px] justify-end rounded-md  py-1.5 shadow-sm h-10 text-slate-500  placeholder:text-slate-500   focus:outline-none" onChange={(e) => setSelectCategoryValue(e.target.value)}>
                   <option value="Select ....">Select ....</option>
                   {categoryvalue.map((value, index) => (
                     <option key={index} value={value}>{value}</option>

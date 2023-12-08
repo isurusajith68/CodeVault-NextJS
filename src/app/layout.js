@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
             </header>
           )}
 
-          <div className="md:px-32 px-10 py-1  bg-slate-100 mt-[120px]">
+          <div className="md:px-32 px-10 py-1 min-h-screen bg-slate-100 ">
             <Toaster
               position="top-center"
               reverseOrder={false}
