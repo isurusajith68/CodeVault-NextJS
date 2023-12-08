@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Toaster } from "react-hot-toast"
 import { GoogleAnalyticsTracking } from "@/components/GoogleAnalyticsTracking "
 import { AuthProvider } from "./Provider"
+import Header from "@/components/Header"
 
 
 export default function RootLayout({ children }) {
@@ -21,12 +22,12 @@ export default function RootLayout({ children }) {
         <AuthProvider>
 
           {showHeaderLogin && showHeaderRegister && (
-            <header>
+            <header className="">
               <Nav />
             </header>
           )}
 
-          <div className="md:px-24 px-5 py-1 min-h-screen mt-16">
+          <div className="md:px-32 px-10 py-1  bg-slate-100">
             <Toaster
               position="top-center"
               reverseOrder={false}
