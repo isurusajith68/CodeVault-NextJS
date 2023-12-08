@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Avatar from 'avatar-initials';
-
+import Image from 'next/image'
 const ProfileImage = ({ initials, size }) => {
     const avatar = new Avatar({ name: initials, size });
 
