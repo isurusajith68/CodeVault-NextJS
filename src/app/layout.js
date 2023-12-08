@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast"
 import { GoogleAnalyticsTracking } from "@/components/GoogleAnalyticsTracking "
 import { AuthProvider } from "./Provider"
 import Header from "@/components/Header"
+import ScrollBtn from "@/components/ScrollBtn"
 
 
 export default function RootLayout({ children }) {
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
               reverseOrder={false}
             />
             {children}
+            <ScrollBtn />
           </div>
 
           {showHeaderLogin && showHeaderRegister && (
