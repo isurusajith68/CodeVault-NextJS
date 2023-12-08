@@ -122,7 +122,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* <Featured /> */}
-      <div className="w-full bg-white rounded-full">
+      <div className="w-full bg-white rounded-full mt-3">
         <div className="flex text-center justify-center ">
           <h1 className="text-lg font-semibold text-slate-500">Latest Post</h1>
         </div>
