@@ -48,7 +48,7 @@ const Nav = () => {
     return (
         <nav className="bg-white">
             <div className="fixed w-full top-0 left-0 z-50">
-                <div className="w-full z-50 h-[64px] flex items-center justify-center bg-white border-b border-gray-200">
+                <div className="max-md:hidden w-full z-50 h-[64px] flex items-center justify-center bg-white border-b border-gray-200">
                     <Link loading={"lazy"} href="/" className="flex items-center justify-center   md:ml-20 w-auto h-auto">
                         <h1 className="font-serif font-bold text-2xl  text-slate-500">
                             Code Vault™️
@@ -56,8 +56,12 @@ const Nav = () => {
                     </Link>
                 </div>
                 <div className={scrolled ? `w-full flex h-[60px] bg-white  justify-start  ${isClick ? "md:shadow-lg" : "shadow-lg"}` : ` w-full flex h-[60px] bg-white  justify-start  ${isClick ? "md:shadow-lg" : ""}`}>
-                    <div className="flex-auto w-[10%]">
-
+                    <div className="flex-auto w-[10%] ">
+                        <Link loading={"lazy"} href="/" className=" md:hidden ">
+                            <h1 className="flex items-center  h-[60px] px-3 justify-start  font-serif font-bold text-xl  text-slate-500">
+                                Code Vault™️
+                            </h1>
+                        </Link>
                     </div>
                     <ul className="flex-auto w-[75%] flex items-center justify-start gap-16 max-md:hidden text-sm font-semibold leading-6 text-gray-400">
                         <li className={navigation === '/' ? "text-red-500" : "text-slate-500"}>
@@ -139,7 +143,7 @@ const Nav = () => {
             </div>
             <div>
                 {isClick && (
-                    <div className={scrolled ? `fixed w-full mt-28  z-50 h-60 flex justify-center items-center bg-white shadow-lg  md:hidden ` : "fixed mt-28 w-full z-50 h-60 flex justify-center items-center bg-white shadow-lg  md:hidden"} >
+                    <div className={scrolled ? `fixed w-full mt-[60px]  z-50 h-60 flex justify-center items-center bg-white shadow-lg  md:hidden ` : "fixed  mt-[60px] w-full z-50 h-60 flex justify-center items-center bg-white shadow-lg  md:hidden"} >
 
                         <ul className="uppercase flex gap-6 flex-col items-center text-sm font-semibold leading-6 text-gray-900 ">
                             <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>

@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 import React from 'react';
 import moment from "moment"
+import CommentSection from "@/components/CommentSection"
 
 
 const Post = () => {
@@ -150,7 +151,7 @@ const Post = () => {
                 }
               </>
           }
-
+          <CommentSection />
         </div>
         <div className="sticky  flex-auto  w-[30%] p-5 max-lg:hidden">
           <div className="bg-white text-center font-bold p-5 border-b mb-2 drop-shadow-lg">
