@@ -129,7 +129,7 @@ const Home = () => {
       </div>
       <div className="sm:flex sm:space-x-2">
 
-        <select value={selectedCategory} className="p-2 mt-3 border-none sm:flex w-160 sm:w-[300px] justify-end rounded-md  py-1.5 shadow-sm h-10 text-slate-500  placeholder:text-slate-500   focus:outline-none" onChange={(e) => setSelectedCategory(e.target.value)}>
+        <select value={selectedCategory} className="p-2 mt-3 border-none flex bg-white w-160 w-[300px] justify-end rounded-md  py-1.5 shadow-sm h-10 text-slate-500  placeholder:text-slate-500   focus:outline-none" onChange={(e) => setSelectedCategory(e.target.value)}>
           {category.map((categoryItem, index) => (
             <option className="" key={index} value={categoryItem}>{categoryItem}</option>
           ))}
@@ -137,16 +137,15 @@ const Home = () => {
 
         {
           selectedCategory ?
-            <div className="sm:flex-1">
-              <div className="mt-2 ">
-                <select value={selectdCategoryValue} className="p-2 mt-3 border-none sm:flex w-160 sm:w-[300px] justify-end rounded-md  py-1.5 shadow-sm h-10 text-slate-500  placeholder:text-slate-500   focus:outline-none" onChange={(e) => setSelectCategoryValue(e.target.value)}>
-                  <option value="Select ....">Select ....</option>
-                  {categoryvalue.map((value, index) => (
-                    <option key={index} value={value}>{value}</option>
-                  ))}
-                </select>
-              </div>
-            </div> : ""
+
+            <select value={selectdCategoryValue} className=" mt-3 border-none flex bg-white w-160 w-[300px] justify-end rounded-md  py-1.5 shadow-sm h-10 text-slate-500  placeholder:text-slate-500   focus:outline-none" onChange={(e) => setSelectCategoryValue(e.target.value)}>
+              <option value="Select ....">Select ....</option>
+              {categoryvalue.map((value, index) => (
+                <option key={index} value={value}>{value}</option>
+              ))}
+            </select>
+
+            : ""
         }
       </div>
       {
