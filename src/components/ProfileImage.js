@@ -2,31 +2,25 @@ import React, { useState, useEffect, lazy } from 'react';
 import axios from 'axios';
 import Image from "next/image"
 const ProfileImageGenerator = () => {
-    const [avatars, setAvatars] = useState();
-    const api = `https://api.multiavatar.com/4645646`;
+    // const [avatars, setAvatars] = useState();
+    // const api = `https://api.multiavatar.com/4645646`;
 
-    useEffect(() => {
-        fetchAvatars()
-    }, []);
+    // useEffect(() => {
+    //     fetchAvatars()
+    // }, []);
 
-    const fetchAvatars = async () => {
-        const image = await axios.get(
-            `${api}/${Math.round(Math.random() * 1000)}`
-        );
-        const buffer = new Buffer(image.data);
-        setAvatars(buffer.toString("base64"));
-    }
+    // const fetchAvatars = async () => {
+    //     const image = await axios.get(
+    //         `${api}/${Math.round(Math.random() * 1000)}`
+    //     );
+    //     const buffer = new Buffer(image.data);
+    //     setAvatars(buffer.toString("base64"));
+    // }
 
     return (
         <div>
             {
-                avatars ? <Image
-                    width={60}
-                    height={60}
-                    loader={lazy}
-                    src={`data:image/svg+xml;base64,${avatars}`}
-                    alt="avatar"
-                /> : <Image
+                 <Image
                     width={60}
                     height={60}
                     loader={lazy}
