@@ -8,7 +8,7 @@ import { set } from "date-fns/esm/fp";
 const CommentSection = () => {
 
     const [comment, setComment] = useState('')
-    const [comments, setComments] = useState([])
+    const [comments, setComments] = useState(null)
 
     const { data: session } = useSession();
 
@@ -31,7 +31,6 @@ const CommentSection = () => {
 
         const response = await axios.post('/api/post/comment', data)
 
-        console.log(response)
         if (response.status === 200) {
             toast.success("Comment Added")
             loadComments()
@@ -42,7 +41,10 @@ const CommentSection = () => {
     }
 
     useEffect(() => {
-        loadComments()
+        if (session) {
+
+            loadComments()
+        }
     }, [postId])
 
 
@@ -54,8 +56,8 @@ const CommentSection = () => {
                 toast.error("Error")
             })
     }
-    console.log(comments)
 
+    console.log(comments)
     return (
         <div className="mt-2">
             <div className="bg-white p-2 shadow-lg">
@@ -69,7 +71,7 @@ const CommentSection = () => {
                     </div>
                 </form>
                 {
-                    comments.map((comment, index) => {
+                    comments ? comments.map((comment, index) => {
                         return (
                             <div key={index} className=" bg-white flex p-2  mt-2 gap-2">
                                 <div className="flex w-[20%] justify-center items-center ">
@@ -91,7 +93,7 @@ const CommentSection = () => {
                             </div>
                         )
 
-                    })
+                    }) : "no comments"
                 }
 
             </div>
