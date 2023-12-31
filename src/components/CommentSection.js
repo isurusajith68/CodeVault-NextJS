@@ -41,10 +41,9 @@ const CommentSection = () => {
     }
 
     useEffect(() => {
-        if (session) {
 
-            loadComments()
-        }
+        loadComments()
+
     }, [postId])
 
 
