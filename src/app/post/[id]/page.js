@@ -2,7 +2,7 @@
 import axios from "axios"
 import Image from "next/image"
 import { useParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { use, useEffect, useState } from "react"
 import ReactQuill from "react-quill"
 import Loading from "@/components/Loading"
 import { redirect } from "next/navigation";
@@ -10,12 +10,15 @@ import { useSession } from "next-auth/react";
 import React from 'react';
 import moment from "moment"
 import CommentSection from "@/components/CommentSection"
+import { is } from "date-fns/locale"
 
 
 const Post = () => {
   const [post, setPost] = useState(null)
+  const [postIdPa, setPostId] = useState(null)
   const [featuredPost, setFeaturedPost] = useState(null)
   const { id } = useParams()
+ 
   const [isLoading, setIsLoading] = useState(false)
   const { status } = useSession();
   const [isClickFeaturedPost, setIsClickFeaturedPost] = useState(false)
@@ -23,6 +26,9 @@ const Post = () => {
   if (status === "unauthenticated") {
     redirect("/login")
   }
+
+  const [commentsLength, setCommentsLength] = useState(0)
+  const [clickedPostId, setClickedPostId] = useState(null)
 
 
   useEffect(() => {
@@ -47,7 +53,7 @@ const Post = () => {
         setIsLoading(true)
         const post = await axios.get(`/api/post/${id}`)
         setPost(post.data.data)
-
+        setPostId(post.data.data._id)
         setIsLoading(false)
 
       } catch (error) {
@@ -66,7 +72,15 @@ const Post = () => {
   const clickLatestPost = (e) => {
     setIsClickFeaturedPost(true)
     setClickFeaturedPost(e)
+
+    //push post id to url
+    window.history.pushState({}, "", `/post/${e._id}`)
+    setClickedPostId(e._id)
+    setPostId(e._id)
   }
+
+
+
 
   return (
     <div className="mt-[130px]  xl:px-32 ">
@@ -85,7 +99,7 @@ const Post = () => {
                   {moment(clickFeaturedPost?.createdAt).format("Do MMMM, YYYY")}
                 </span>
                 <span className="text-red-500 ml-2 italic">
-                  4  comments
+                  {commentsLength}  comments
                 </span>
               </h1>
               <div className="mt-2 w-full">
@@ -123,7 +137,8 @@ const Post = () => {
                         {moment(post?.createdAt).format("Do MMMM, YYYY")}
                       </span>
                       <span className="text-red-500 ml-2 italic">
-                        4  comments
+                        {commentsLength}  comments
+
                       </span>
                     </h1>
                     <div className="mt-2 w-full">
@@ -151,7 +166,7 @@ const Post = () => {
                 }
               </>
           }
-          <CommentSection />
+          <CommentSection commentsLength={setCommentsLength} postId={postIdPa} />
         </div>
         <div className="sticky  flex-auto  w-[30%] p-5 max-lg:hidden">
           <div className="bg-white text-center font-bold p-5 border-b mb-2 drop-shadow-lg">

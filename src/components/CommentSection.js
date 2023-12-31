@@ -1,19 +1,15 @@
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import ProfileImageGenerator from "./ProfileImage"
 import { useSession } from "next-auth/react"
-import { useParams } from "next/navigation"
 import axios from "axios";
 import toast from "react-hot-toast";
-import { set } from "date-fns/esm/fp";
-const CommentSection = () => {
+
+const CommentSection = ({ commentsLength, postId }) => {
 
     const [comment, setComment] = useState('')
     const [comments, setComments] = useState(null)
 
     const { data: session } = useSession();
-
-    const postId = useParams().id
-
 
     const handelSubmit = async (e) => {
         e.preventDefault()
@@ -33,31 +29,43 @@ const CommentSection = () => {
 
         if (response.status === 200) {
             toast.success("Comment Added")
-            loadComments()
+            loadComments(postId)
             setComment('')
         }
 
 
     }
 
+
     useEffect(() => {
-        if (postId){
-            loadComments()
-        }   
+        if (postId) {
+            loadComments(postId);
+            setComments(null)
 
-    }, [postId])
+        }
+    }, [postId]);
 
 
-    const loadComments = () => {
-        fetch(`/api/post/${postId}/comments`)
-            .then(res => res.json()).then(data => {
-                setComments(data)
-            }).catch(error => {
-                toast.error("Error")
-            })
-    }
+    useEffect(() => {
+        if (comments) {
+            commentsLength(comments.length)
+        }
+    }, [comments])
 
-    console.log(comments)
+    const loadComments = async (postId) => {
+        try {
+            const response = await axios.get(`/api/post/${postId}/comments`);
+
+            setComments(response.data);
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
+
+
     return (
         <div className="mt-2">
             <div className="bg-white p-2 shadow-lg">
@@ -71,7 +79,7 @@ const CommentSection = () => {
                     </div>
                 </form>
                 {
-                    comments ? comments.map((comment, index) => {
+                    comments?.length > 0 ? comments.map((comment, index) => {
                         return (
                             <div key={index} className=" bg-white flex p-2  mt-2 gap-2">
                                 <div className="flex w-[20%] justify-center items-center ">
