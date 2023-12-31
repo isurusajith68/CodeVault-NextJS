@@ -3,7 +3,6 @@ import Post from "@/model/postModel";
 export async function GET(request, { params }) {
 
     try {
-        request
         const id = await params.id
 
 
@@ -15,7 +14,7 @@ export async function GET(request, { params }) {
 
     } catch (error) {
         console.error(error);
-        return Response.json({ message: 'Internal Server Error' });
+        return Response.json({ message: 'Internal Server  comment ' });
     }
 
 
