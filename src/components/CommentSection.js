@@ -8,6 +8,9 @@ const CommentSection = ({ commentsLength, postId }) => {
 
     const [comment, setComment] = useState('')
     const [comments, setComments] = useState(null)
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [deleteOpenId, setDeleteOpenId] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const { data: session } = useSession();
 
@@ -63,6 +66,26 @@ const CommentSection = ({ commentsLength, postId }) => {
         }
     };
 
+    const deleteComment = async (commentId) => {
+        setDeleteModalOpen(true);
+        setDeleteOpenId(commentId)
+    }
+
+    const handleConfirmDelete = async () => {
+        setIsLoading(true)
+        const response = await axios.delete(`/api/post/${deleteOpenId}/comments`)
+        if (response.status == 200) {
+            toast.success("Comment Deleted")
+            setIsLoading(false);
+            setDeleteOpenId("");
+            loadComments(postId)
+        }
+        setDeleteModalOpen(false);
+    };
+
+    const handleCancelDelete = () => {
+        setDeleteModalOpen(false);
+    };
 
 
 
@@ -85,16 +108,27 @@ const CommentSection = ({ commentsLength, postId }) => {
                                 <div className="flex w-[20%] justify-center items-center ">
                                     <ProfileImageGenerator />
                                 </div>
-                                <div className="flex-auto w-[80%]">
-                                    <div className="text-slate-500 font-semibold mt-1">
-                                        {comment.author}
-                                    </div>
-                                    <div className="text-slate-500 italic font-semibold mt-1 text-sm">
-                                        {comment.createdAt}
-                                    </div>
-                                    <div className="text-slate-500 text-justify text-sm mt-1">
+                                <div className="flex justify-between flex-auto w-[80%]">
+                                    <div>
+                                        <div className="text-slate-500 font-semibold mt-1">
+                                            {comment.author}
+                                        </div>
+                                        <div className="text-slate-500 italic font-semibold mt-1 text-sm">
+                                            {comment.createdAt}
+                                        </div>
+                                        <div className="text-slate-500 text-justify text-sm mt-1">
 
-                                        {comment.comment}
+                                            {comment.comment}
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center justify-center ">
+                                        {
+                                            // this is wrong way don't do this in production (use id instead of name)
+                                            comment.author === session.user.name ? <span className="bg-red-600 py-1 px-2 rounded-lg text-white cursor-pointer" onClick={() => deleteComment(comment._id
+                                            )}>
+                                                Delete
+                                            </span> : ""
+                                        }
                                     </div>
                                 </div>
 
@@ -103,7 +137,43 @@ const CommentSection = ({ commentsLength, postId }) => {
 
                     }) : "no comments"
                 }
+                {isDeleteModalOpen && (
+                    <div className="fixed inset-0 flex items-center justify-center">
+                        <div className="absolute bg-gray-800 opacity-75 inset-0"></div>
+                        {
+                            isLoading ?
+                                <div className="h-full w-full flex items-center justify-center">
+                                    <div
+                                        data-te-loading-management-init
+                                        data-te-parent-selector="#loading-basic-example">
+                                        <div
+                                            data-te-loading-icon-ref
+                                            className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                                            role="status"></div>
 
+                                    </div>
+                                </div> : <div className="relative bg-white p-6 rounded-lg">
+                                    <p className="text-gray-700 mb-4">Are you sure you want to delete?</p>
+
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={handleCancelDelete}
+                                            className="flex-1 text-gray-600 hover:text-gray-800"
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            onClick={handleConfirmDelete}
+                                            className="flex-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-3 rounded"
+                                        >
+                                            Confirm Delete
+                                        </button>
+                                    </div>
+                                </div>
+                        }
+
+                    </div>
+                )}
             </div>
 
         </div>

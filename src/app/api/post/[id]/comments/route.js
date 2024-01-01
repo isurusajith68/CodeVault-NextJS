@@ -1,3 +1,4 @@
+import Comment from "@/model/Comment";
 import Post from "@/model/postModel";
 
 export async function GET(request, { params }) {
@@ -7,15 +8,36 @@ export async function GET(request, { params }) {
         const post = await Post.findById(id).populate('comments');
 
         if (!post) {
-            console.log('Post not found:', id);
             return Response.json({ message: 'Post not found' }, { status: 404 });
         }
 
-        console.log('Comments fetched successfully:', post.comments);
         return Response.json(post.comments);
 
     } catch (error) {
-        console.error('Error fetching comments:', error);
         return Response.json({ message: 'Internal Server Error' }, { status: 500 });
     }
+}
+
+
+//delete comment
+export async function DELETE(request, { params }) {
+
+    const commentId = await params.id;
+
+    try {
+
+        const comment = Comment.findById(commentId);
+        if (!comment) {
+            return Response.json({ message: 'Comment not found' }, { status: 404 });
+        }
+
+        await Comment.findByIdAndDelete(commentId);
+
+        return Response.json({ message: 'Comment deleted successfully' }, { status: 200 });
+
+    } catch (error) {
+
+        return Response.json({ message: 'Internal Server Error' }, { status: 500 });
+    }
+
 }
