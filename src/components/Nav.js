@@ -48,13 +48,13 @@ const Nav = () => {
     return (
         <nav className="bg-white">
             <div className="fixed w-full top-0 left-0 z-50">
-                <div className="max-md:hidden w-full z-50 h-[64px] flex items-center justify-center bg-white border-b border-gray-200">
+                {/* <div className="max-md:hidden w-full z-50 h-[64px] flex items-center justify-center bg-white border-b border-gray-200">
                     <Link loading={"lazy"} href="/" className="flex items-center justify-center   md:ml-20 w-auto h-auto">
                         <h1 className="font-serif font-bold text-2xl  text-slate-500">
                             Code Vault™️
                         </h1>
                     </Link>
-                </div>
+                </div> */}
                 <div className={scrolled ? `w-full flex h-[60px] bg-white  justify-start  ${isClick ? "md:shadow-lg" : "shadow-lg"}` : ` w-full flex h-[60px] bg-white  justify-start  ${isClick ? "md:shadow-lg" : ""}`}>
                     <div className="flex-auto w-[10%] ">
                         <Link loading={"lazy"} href="/" className=" md:hidden ">

@@ -83,7 +83,7 @@ const Post = () => {
 
 
   return (
-    <div className="mt-[130px]  xl:px-32 ">
+    <div className="mt-[80px]  xl:px-32 ">
 
 
       <div className="bg-slate-100 lg:flex ">

@@ -99,6 +99,7 @@ const Register = () => {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit} noValidate autoComplete="off">
+          
           <div>
             <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Username</label>
             <div className="mt-2">

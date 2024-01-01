@@ -120,7 +120,7 @@ const Home = () => {
 
 
   return (
-    <div className=" mt-[130px]">
+    <div className=" mt-[80px]">
 
       <div className="w-full bg-white rounded-full mt-3">
         <div className="flex text-center justify-center ">
