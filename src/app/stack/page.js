@@ -156,7 +156,7 @@ const Stack = () => {
   }
 
   return (
-    <div className="mt-[130px]">{
+    <div className="mt-[80px]">{
 
       userdata?.isAdmin === false ? "" : <div className="flex w-full max-lg:flex-col md:space-x-10 mt-5 mb-3 gap-10">
         <div className="flex-1">
