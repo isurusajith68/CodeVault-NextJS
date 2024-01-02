@@ -8,7 +8,7 @@ import { Close } from "@mui/icons-material";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { usePathname } from 'next/navigation'
 import { signOut, useSession } from "next-auth/react";
-
+import  stackLogo  from "../assets/Screenshot 2024-01-02 013148.jpg";
 const Nav = () => {
     const [isClick, setIsClick] = useState(false);
     const [profileClick, setProfileClick] = useState(false);
@@ -56,43 +56,45 @@ const Nav = () => {
                     </Link>
                 </div> */}
                 <div className={scrolled ? `w-full flex h-[60px] bg-white  justify-start  ${isClick ? "md:shadow-lg" : "shadow-lg"}` : ` w-full flex h-[60px] bg-white  justify-start  ${isClick ? "md:shadow-lg" : ""}`}>
-                    <div className="flex-auto w-[10%] ">
-                        <Link loading={"lazy"} href="/" className=" md:hidden ">
-                            <h1 className="flex items-center  h-[60px] px-3 justify-start  font-serif font-bold text-xl  text-slate-500">
+
+                    <div className="flex flex-auto w-[25%] items-center justify-center   gap-5 max-md:hidden ">
+                        <Link loading={"lazy"} href="/" className="  ">
+                            {/* <h1 className="flex items-center  h-[60px] px-3 justify-start  font-serif font-bold text-xl  text-slate-500">
                                 Code Vault™️
-                            </h1>
+                            </h1> */}
+                            <Image src={stackLogo} width={100} height={90} alt="stack-logo"  />
                         </Link>
                     </div>
-                    <ul className="flex-auto w-[75%] flex items-center justify-start gap-16 max-md:hidden text-sm font-semibold leading-6 text-gray-400">
-                        <li className={navigation === '/' ? "text-red-500" : "text-slate-500"}>
+                    <ul className="flex-auto w-[55%] flex items-center justify-center gap-16 max-md:hidden text-sm font-semibold leading-6 text-gray-400">
+                        <li className={navigation === '/' || navigation.startsWith('/post/') ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black" }>
                             <Link href="/" >
                                 Home
                             </Link>
                         </li>
-                        <li className={navigation === '/about' ? "text-red-500" : "text-slate-500"}>
+                        <li className={navigation === '/about' ?  "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
                             <Link href="/about" >
                                 About
                             </Link>
                         </li>
-                        <li className={navigation === '/privacy' ? "text-red-500" : "text-slate-500"}>
+                        <li className={navigation === '/privacy' ?  "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
                             <Link href="/privacy" >
                                 Privacy
                             </Link>
                         </li>
-                        <li className={navigation === '/privacy' ? "text-red-500" : "text-slate-500"}>
+                        <li className={navigation === '/terms' ?  "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
                             <Link href="/terms" >
                                 Terms & Conditions
                             </Link>
                         </li>
                     </ul>
                     <div className="flex flex-auto w-[25%] items-center justify-center   gap-5 max-md:hidden ">
-                        <div className="font-semibold text-red-500 text-sm">{session ? <span className="text-sm text-slate-500">Hello </span> : ""}
+                        <div className="font-semibold text-red-500 text-sm">{session ? <span className="text-sm text-black">Hello </span> : ""}
 
 
                             {session?.user?.name}</div>
 
 
-                        <AccountCircleOutlinedIcon onClick={handleProfileClick} className="text-slate-500" />
+                        <AccountCircleOutlinedIcon onClick={handleProfileClick} className="text-black" />
 
 
                         {
