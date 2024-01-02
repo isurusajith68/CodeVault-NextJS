@@ -7,7 +7,7 @@ import { Close } from "@mui/icons-material";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { usePathname } from 'next/navigation'
 import { signOut, useSession } from "next-auth/react";
-import  stackLogo  from "../assets/Screenshot 2024-01-02 013148.jpg";
+import  stackLogo  from "../../public/assets/logo.jpg"
 const Nav = () => {
     const [isClick, setIsClick] = useState(false);
     const [profileClick, setProfileClick] = useState(false);
