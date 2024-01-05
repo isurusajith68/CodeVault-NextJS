@@ -6,11 +6,10 @@ import { formatDistanceToNow } from 'date-fns';
 import Link from "next/link";
 import { Allcategory } from "@/util/category";
 import Image from "next/image";
-  import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useSession } from "next-auth/react";
 import { BiSolidLike } from "react-icons/bi";
 import { BiLike } from "react-icons/bi";
-
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
@@ -120,7 +119,10 @@ const Home = () => {
   };
 
 
+  const handleIncrementViews = async (id) => {
+    const response = await axios.post(`/api/post/incrementViews/${id}`);
 
+  }
 
   return (
     <div className=" mt-[80px]">
@@ -161,7 +163,7 @@ const Home = () => {
 
 
             return (
-              <div key={index} className="max-w-sm  bg-white border border-gray-300 rounded-lg shadow-lg ">
+              <div onClick={() => handleIncrementViews(item._id)} key={index} className="max-w-sm  bg-white border border-gray-300 rounded-lg shadow-lg ">
                 <Link href={`/post/${item._id}`} className="w-full">
                   <Image alt="" width={384} height={150} className="IMG rounded-t-lg " src={item.image != "" ? item.image : "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"} />
                 </Link>
@@ -171,11 +173,12 @@ const Home = () => {
                     <Link href={`/post/${item._id}`} className="">
                       <h5 className="mb-2 text-xl font-semibold tracking-tight text-slate-500 mt-1 text-center capitalize">{item.title}</h5>
                     </Link>
-                    <div className="flex justify-between text-slate-500">
+                    <div className="flex justify-between items-center text-slate-500">
                       <TimeAgo createdAt={item?.createdAt} />
                       <div className="flex">
-                        Post by <h1 className="ml-2 text-red-400 ">{item?.author}</h1>
+                        post by <h1 className="ml-2 text-red-400 ">{item?.author}</h1>
                       </div>
+                     
                     </div>
                   </div>
 

@@ -2,15 +2,14 @@
 import axios from "axios"
 import Image from "next/image"
 import { useParams } from "next/navigation"
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import ReactQuill from "react-quill"
 import Loading from "@/components/Loading"
-import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 import React from 'react';
 import moment from "moment"
 import CommentSection from "@/components/CommentSection"
-import { is } from "date-fns/locale"
+
 
 
 const Post = () => {
@@ -18,12 +17,12 @@ const Post = () => {
   const [postIdPa, setPostId] = useState(null)
   const [featuredPost, setFeaturedPost] = useState(null)
   const { id } = useParams()
- 
+
   const [isLoading, setIsLoading] = useState(false)
   const { status } = useSession();
   const [isClickFeaturedPost, setIsClickFeaturedPost] = useState(false)
   const [clickFeaturedPost, setClickFeaturedPost] = useState(null)
-  
+
 
   const [commentsLength, setCommentsLength] = useState(0)
   const [clickedPostId, setClickedPostId] = useState(null)
@@ -70,13 +69,17 @@ const Post = () => {
   const clickLatestPost = (e) => {
     setIsClickFeaturedPost(true)
     setClickFeaturedPost(e)
-
+    handleIncrementViews(e._id)
     //push post id to url
     window.history.pushState({}, "", `/post/${e._id}`)
     setClickedPostId(e._id)
     setPostId(e._id)
   }
 
+  const handleIncrementViews = async (id) => {
+    const response = await axios.post(`/api/post/incrementViews/${id}`);
+
+  }
 
 
 
@@ -89,17 +92,32 @@ const Post = () => {
           {
             isClickFeaturedPost ? <div className="w-full  bg-white p-5  drop-shadow-lg">
               <h1 className="text-2xl capitalize font-semibold text-slate-600">{clickFeaturedPost?.title}</h1>
-              <h1 className="text-gray-600 text-sm mt-2">Post by
-                <span className="text-red-500 ml-2 italic">
-                  {clickFeaturedPost?.author}
-                </span>
-                <span className="ml-2">
+              <div className="flex w-full justify-start gap-4 items-center h-5 text-gray-600 text-sm mt-2">
+                <h1 className="text-gray-600 text-sm ">Post by
+                  <span className="text-red-500 ml-2 italic">
+                    {clickFeaturedPost?.author}
+                  </span>
+                </h1>
+                <span className=" italic">
                   {moment(clickFeaturedPost?.createdAt).format("Do MMMM, YYYY")}
                 </span>
-                <span className="text-red-500 ml-2 italic">
-                  {commentsLength}  comments
+                <span className=" italic">
+                  comments
+                  <span className="text-red-500  ml-1">
+                    {commentsLength}
+                  </span>
                 </span>
-              </h1>
+
+                <span className=" italic">
+                  views
+                  <span className="text-red-500  ml-1">
+                    {clickFeaturedPost?.views}
+                  </span>
+
+
+
+                </span>
+              </div>
               <div className="mt-2 w-full">
                 <Image height={100} width={100} className="w-full" loading="lazy" src={clickFeaturedPost?.image} alt="featured-image" />
               </div>
@@ -127,18 +145,33 @@ const Post = () => {
                 {!isLoading ?
                   <div className="w-full  bg-white p-5  drop-shadow-lg">
                     <h1 className="text-2xl capitalize font-semibold text-slate-600">{post?.title}</h1>
-                    <h1 className="text-gray-600 text-sm mt-2">Post by
-                      <span className="text-red-500 ml-2 italic">
-                        {post?.author}
-                      </span>
-                      <span className="ml-2">
+                    <div className="flex w-full justify-start gap-4 items-center h-5 text-gray-600 text-sm mt-2">
+                      <h1 className="text-gray-600 text-sm ">Post by
+                        <span className="text-red-500 ml-2 italic">
+                          {post?.author}
+                        </span>
+                      </h1>
+                      <span className=" italic">
                         {moment(post?.createdAt).format("Do MMMM, YYYY")}
                       </span>
-                      <span className="text-red-500 ml-2 italic">
-                        {commentsLength}  comments
+                      <span className=" italic">
+                        comments
+                        <span className="text-red-500  ml-1">
+                          {commentsLength}
+                        </span>
+                      </span>
+
+                      <span className=" italic">
+                        views
+                        <span className="text-red-500  ml-1">
+                          {post?.views}
+                        </span>
+
+
 
                       </span>
-                    </h1>
+                    </div>
+
                     <div className="mt-2 w-full">
                       <Image height={100} width={100} className="w-full" loading="lazy" src={post?.image} />
                     </div>
