@@ -130,9 +130,9 @@ const Nav = () => {
                         }
 
                     </div>
-                    <div className="flex flex-1 items-center justify-start  md:hidden px-5 ">
+                    <Link href="/" className="flex flex-1 items-center justify-start  md:hidden px-5 ">
                         <Image src={stackLogo} width={100} height={90} alt="stack-logo" />
-                    </div>
+                    </Link>
                     <div className="flex flex-1 items-center justify-end  md:hidden px-5 " >
                         {isClick ? (
                             <Close

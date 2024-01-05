@@ -145,7 +145,7 @@ const Post = () => {
                 {!isLoading ?
                   <div className="w-full  bg-white p-5  drop-shadow-lg">
                     <h1 className="text-2xl capitalize font-semibold text-slate-600">{post?.title}</h1>
-                    <div className="flex w-full justify-start gap-4 items-center h-5 text-gray-600 text-sm mt-2">
+                    <div className="flex w-full justify-start gap-4 items-center md:h-5 h-10 text-gray-600 text-sm mt-2">
                       <h1 className="text-gray-600 text-sm ">Post by
                         <span className="text-red-500 ml-2 italic">
                           {post?.author}
