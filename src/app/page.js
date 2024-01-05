@@ -6,7 +6,7 @@ import { formatDistanceToNow } from 'date-fns';
 import Link from "next/link";
 import { Allcategory } from "@/util/category";
 import Image from "next/image";
-import toast from "react-hot-toast";
+  import {  toast } from 'react-toastify';
 import { useSession } from "next-auth/react";
 import { BiSolidLike } from "react-icons/bi";
 import { BiLike } from "react-icons/bi";

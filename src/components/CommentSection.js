@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import ProfileImageGenerator from "./ProfileImage"
 import { useSession } from "next-auth/react"
 import axios from "axios";
-import toast from "react-hot-toast";
+  import {  toast } from 'react-toastify';
 
 const CommentSection = ({ commentsLength, postId }) => {
 
@@ -81,7 +81,7 @@ const CommentSection = ({ commentsLength, postId }) => {
         setIsLoading(true)
         const response = await axios.delete(`/api/post/${deleteOpenId}/comments`)
         if (response.status == 200) {
-            toast.success("Comment Deleted")
+            toast.warning("Comment Deleted")
             setIsLoading(false);
             setDeleteOpenId("");
             loadComments(postId)

@@ -4,6 +4,8 @@ import Loading from "../components/Loading"
 import { Delete, Edit } from "@mui/icons-material";
 import React, { useState } from 'react'
 import axios from "axios"
+import { toast } from 'react-toastify';
+
 const PostList = ({ data, fetchData, updatePost }) => {
 
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -22,6 +24,7 @@ const PostList = ({ data, fetchData, updatePost }) => {
             setIsLoading(false);
             setDeleteOpenId("");
             fetchData()
+            toast.warning("Post Deleted Successfully")
         }
         setDeleteModalOpen(false);
     };

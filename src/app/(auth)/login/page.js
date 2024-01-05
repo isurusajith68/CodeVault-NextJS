@@ -2,7 +2,7 @@
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+  import {  toast } from 'react-toastify';
 import Link from "next/link";
 // import { redirect } from "next/navigation";
 // import { getServerSession } from "next-auth";

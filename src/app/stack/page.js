@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import axios from "axios";
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 import PostList from "../../components/PostList"
 import { redirect, useRouter } from "next/navigation";
 import Image from "next/image";
