@@ -48,6 +48,17 @@ const Home = () => {
       const userId = session?.user?.id
       try {
 
+        posts.map((item) => {
+          if (item._id === postId) {
+            if (item.likedBy.includes(userId)) {
+              item.likedBy = item.likedBy.filter((id) => id !== userId);
+            } else {
+              item.likedBy.push(userId);
+            }
+          }
+        })
+        setPosts([...posts]);
+
         const response = await fetch('/api/post/like', {
           method: 'POST',
           headers: {
@@ -59,16 +70,7 @@ const Home = () => {
         const data = await response.json();
 
         if (data.success) {
-          posts.map((item) => {
-            if (item._id === postId) {
-              if (item.likedBy.includes(userId)) {
-                item.likedBy = item.likedBy.filter((id) => id !== userId);
-              } else {
-                item.likedBy.push(userId);
-              }
-            }
-          })
-          setPosts([...posts]);
+          fetchData();
         } else {
           console.error('Failed to like product:', data.message);
         }
