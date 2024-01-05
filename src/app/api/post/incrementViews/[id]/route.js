@@ -2,7 +2,7 @@ import Post from "@/model/postModel";
 
 export async function POST(request, { params }) {
     const postId  = await params.id
-    console.log(postId)
+  
     try {
         const post = await Post.findById(postId).maxTimeMS(5000);
 
