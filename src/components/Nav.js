@@ -7,7 +7,7 @@ import { Close } from "@mui/icons-material";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { usePathname } from 'next/navigation'
 import { signOut, useSession } from "next-auth/react";
-import  stackLogo  from "../../public/assets/logo.jpg"
+import stackLogo from "../../public/assets/logo.jpg"
 const Nav = () => {
     const [isClick, setIsClick] = useState(false);
     const [profileClick, setProfileClick] = useState(false);
@@ -61,26 +61,26 @@ const Nav = () => {
                             {/* <h1 className="flex items-center  h-[60px] px-3 justify-start  font-serif font-bold text-xl  text-slate-500">
                                 Code Vault™️
                             </h1> */}
-                            <Image src={stackLogo} width={100} height={90} alt="stack-logo"  />
+                            <Image src={stackLogo} width={100} height={90} alt="stack-logo" />
                         </Link>
                     </div>
                     <ul className="flex-auto w-[55%] flex items-center justify-center gap-16 max-md:hidden text-sm font-semibold leading-6 text-gray-400">
-                        <li className={navigation === '/' || navigation.startsWith('/post/') ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black" }>
+                        <li className={navigation === '/' || navigation.startsWith('/post/') ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
                             <Link href="/" >
                                 Home
                             </Link>
                         </li>
-                        <li className={navigation === '/about' ?  "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
+                        <li className={navigation === '/about' ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
                             <Link href="/about" >
                                 About
                             </Link>
                         </li>
-                        <li className={navigation === '/privacy' ?  "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
+                        <li className={navigation === '/privacy' ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
                             <Link href="/privacy" >
                                 Privacy
                             </Link>
                         </li>
-                        <li className={navigation === '/terms' ?  "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
+                        <li className={navigation === '/terms' ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
                             <Link href="/terms" >
                                 Terms & Conditions
                             </Link>
@@ -122,6 +122,9 @@ const Nav = () => {
                             </div>
                         }
 
+                    </div>
+                    <div className="flex flex-1 items-center justify-start  md:hidden px-5 ">
+                        <Image src={stackLogo} width={100} height={90} alt="stack-logo" />
                     </div>
                     <div className="flex flex-1 items-center justify-end  md:hidden px-5 " >
                         {isClick ? (

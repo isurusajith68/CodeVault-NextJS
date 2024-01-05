@@ -3,6 +3,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Link from "next/link";
 // import { redirect } from "next/navigation";
 // import { getServerSession } from "next-auth";
 // import authOptions from "@/app/api/auth/[...nextauth]/route";
@@ -35,43 +36,6 @@ const Login = () => {
     e.preventDefault();
 
     if (handleValidation()) {
-
-      // try {
-      // const response = await fetch('/api/auth/login', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(formData),
-      // });
-
-      // const data = await response.json();
-
-      // if (response.status === 401) {
-      //   return toast.error(data.message);
-      // }
-
-      // if (response.status === 200) {
-      //   toast.success(data.message);
-      //   localStorage.setItem("userdata", JSON.stringify(data.data))
-      //   router.push('/')
-      // }
-
-      // const res = await signIn("credentials", { email, password, redirect: false });
-
-      // if (res.error) {
-      //   toast.error("data.message", res.error.message);
-      // }
-
-      // router.replace("/")
-
-
-      // } catch (error) {
-      //   toast.error(error);
-      // }
-
-
-
       try {
         const res = await signIn("credentials", {
           email,
@@ -135,7 +99,7 @@ const Login = () => {
           <div>
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
             <div className="mt-2">
-              <input id="email" name="email" type="email" onChange={(e) => setEmail(e.target.value)} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              <input id="email" name="email" type="email" onChange={(e) => setEmail(e.target.value)} className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  placeholder:text-gray-400 focus:ring-2  p-2 focus:outline-none focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
 
@@ -145,7 +109,7 @@ const Login = () => {
 
             </div>
             <div className="mt-2">
-              <input id="password" name="password" type="password" onChange={(e) => setPassword(e.target.value)} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              <input id="password" name="password" type="password" onChange={(e) => setPassword(e.target.value)} className="block w-full rounded-md border-0 p-2 focus:outline-none text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
 
@@ -156,7 +120,7 @@ const Login = () => {
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member?
-          <a href="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500 ml-3">Register</a>
+          <Link href="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500 ml-3">Register</Link>
         </p>
       </div>
     </div>
