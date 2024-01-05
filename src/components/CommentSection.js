@@ -15,7 +15,13 @@ const CommentSection = ({ commentsLength, postId }) => {
     const { data: session } = useSession();
 
     const handelSubmit = async (e) => {
+        
         e.preventDefault()
+
+        if (!session) {
+            toast.error("Please Login First")
+            return
+        }
 
         if (comment.length === 0) {
             toast.error("Comment can not be empty")
@@ -124,7 +130,7 @@ const CommentSection = ({ commentsLength, postId }) => {
                                     <div className="flex items-center justify-center ">
                                         {
                                             // this is wrong way don't do this in production (use id instead of name)
-                                            comment.author === session.user.name ? <span className="bg-red-600 py-1 px-2 rounded-lg text-white cursor-pointer" onClick={() => deleteComment(comment._id
+                                            comment.author === session?.user.name ? <span className="bg-red-600 py-1 px-2 rounded-lg text-white cursor-pointer" onClick={() => deleteComment(comment._id
                                             )}>
                                                 Delete
                                             </span> : ""

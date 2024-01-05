@@ -23,9 +23,7 @@ const Post = () => {
   const { status } = useSession();
   const [isClickFeaturedPost, setIsClickFeaturedPost] = useState(false)
   const [clickFeaturedPost, setClickFeaturedPost] = useState(null)
-  if (status === "unauthenticated") {
-    redirect("/login")
-  }
+  
 
   const [commentsLength, setCommentsLength] = useState(0)
   const [clickedPostId, setClickedPostId] = useState(null)

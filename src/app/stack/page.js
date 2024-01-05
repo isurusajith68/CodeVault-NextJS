@@ -7,7 +7,7 @@ import axios from "axios";
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import toast from 'react-hot-toast';
 import PostList from "../../components/PostList"
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 
@@ -29,9 +29,12 @@ const Stack = () => {
 
 
   const { data: session } = useSession();
-  console.log(session?.user?.role)
+
+
+  if (!session || !session.user) redirect("/")
+
   useEffect(() => {
-    
+
     if (session?.user?.role === false) {
       router.push("/")
     }

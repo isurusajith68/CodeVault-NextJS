@@ -6,7 +6,7 @@ import { formatDistanceToNow } from 'date-fns';
 import Link from "next/link";
 import { Allcategory } from "@/util/category";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { BiSolidLike } from "react-icons/bi";
 import { BiLike } from "react-icons/bi";
@@ -22,9 +22,6 @@ const Home = () => {
 
   const { data: session, status } = useSession();
 
-  if (status === "unauthenticated") {
-    redirect("/login")
-  }
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -42,6 +39,12 @@ const Home = () => {
   };
 
   const handleLikeClick = async (postId) => {
+
+    if (!session) {
+      toast.error("Please Login First")
+      return
+    }
+
     if (session) {
       const userId = session?.user?.id
       try {
