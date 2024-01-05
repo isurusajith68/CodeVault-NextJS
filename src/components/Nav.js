@@ -98,7 +98,7 @@ const Nav = () => {
 
                         {
                             profileClick &&
-                            <div className={!session ? "absolute border border-b-3 shadow-lg px-5 py-2 mt-36 bg-white " : "absolute border border-b-3 shadow-lg px-5 py-2 mt-36 bg-white "}>
+                            <div className={!session?.user?.role === true ? "absolute border border-b-3 shadow-lg px-5 py-2 mt-28 bg-white " : "absolute border border-b-3 shadow-lg px-5 py-2 mt-36 bg-white "}>
                                 {session ? <ul className="flex flex-col gap-2">
 
                                     {
@@ -113,11 +113,17 @@ const Nav = () => {
                                         SignOut
                                     </li>
                                 </ul> :
-                                    <div className="text-white cursor-pointer bg-blue-700  px-3 py-1 rounded-lg">
-                                        <Link href="/login" >
-                                            Login
-                                        </Link>
-                                    </div>}
+                                    <>
+                                        <div className="text-white cursor-pointer bg-blue-700  px-3 py-1 rounded-lg">
+                                            <Link href="/login" >
+                                                Login
+                                            </Link>
+                                        </div><div className="text-white cursor-pointer mt-1  bg-blue-700  px-3 py-1 rounded-lg">
+                                            <Link href="/register" >
+                                              Register
+                                            </Link>
+                                        </div>
+                                    </>}
 
                             </div>
                         }
