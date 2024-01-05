@@ -13,7 +13,7 @@ export async function POST(request) {
 
 export async function GET() {
 
-    const posts = await Post.find()
+    const posts = await Post.find().sort({ createdAt: -1 })
 
     return Response.json({ data: posts })
 }
