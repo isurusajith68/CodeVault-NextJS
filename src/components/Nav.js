@@ -118,11 +118,12 @@ const Nav = () => {
                                             <Link href="/login" >
                                                 Login
                                             </Link>
-                                        </div><div className="text-white cursor-pointer mt-1  bg-blue-700  px-3 py-1 rounded-lg">
+                                        </div>
+                                        {/* <div className="text-white cursor-pointer mt-1  bg-blue-700  px-3 py-1 rounded-lg">
                                             <Link href="/register" >
                                               Register
                                             </Link>
-                                        </div>
+                                        </div> */}
                                     </>}
 
                             </div>
