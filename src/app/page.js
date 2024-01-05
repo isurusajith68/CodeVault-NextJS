@@ -58,6 +58,7 @@ const Home = () => {
           }
         })
         setPosts([...posts]);
+        
 
         const response = await fetch('/api/post/like', {
           method: 'POST',
