@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import ProfileImageGenerator from "./ProfileImage"
 import { useSession } from "next-auth/react"
 import axios from "axios";
-  import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const CommentSection = ({ commentsLength, postId }) => {
 
@@ -15,7 +15,7 @@ const CommentSection = ({ commentsLength, postId }) => {
     const { data: session } = useSession();
 
     const handelSubmit = async (e) => {
-        
+
         e.preventDefault()
 
         if (!session) {
@@ -38,12 +38,13 @@ const CommentSection = ({ commentsLength, postId }) => {
 
         if (response.status === 200) {
             toast.success("Comment Added")
-            loadComments(postId)
+            comments.push(response.data.data)
             setComment('')
         }
 
 
     }
+
 
 
     useEffect(() => {
@@ -64,7 +65,6 @@ const CommentSection = ({ commentsLength, postId }) => {
     const loadComments = async (postId) => {
         try {
             const response = await axios.get(`/api/post/${postId}/comments`);
-
             setComments(response.data);
 
         } catch (error) {
@@ -84,7 +84,12 @@ const CommentSection = ({ commentsLength, postId }) => {
             toast.warning("Comment Deleted")
             setIsLoading(false);
             setDeleteOpenId("");
-            loadComments(postId)
+            // loadComments(postId);
+            comments.map((item, index) => {
+                if (item._id === deleteOpenId) {
+                    comments.splice(index, 1)
+                }
+            })
         }
         setDeleteModalOpen(false);
     };

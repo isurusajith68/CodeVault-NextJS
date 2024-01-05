@@ -59,8 +59,16 @@ const Home = () => {
         const data = await response.json();
 
         if (data.success) {
-          console.log('Product liked successfully');
-          fetchData()
+          posts.map((item) => {
+            if (item._id === postId) {
+              if (item.likedBy.includes(userId)) {
+                item.likedBy = item.likedBy.filter((id) => id !== userId);
+              } else {
+                item.likedBy.push(userId);
+              }
+            }
+          })
+          setPosts([...posts]);
         } else {
           console.error('Failed to like product:', data.message);
         }
@@ -178,7 +186,7 @@ const Home = () => {
                       <div className="flex">
                         post by <h1 className="ml-2 text-red-400 ">{item?.author}</h1>
                       </div>
-                     
+
                     </div>
                   </div>
 
@@ -191,13 +199,13 @@ const Home = () => {
                           {item.likedBy.includes(session?.user?.id) ? (
                             <BiSolidLike
                               color="blue"
-                              className=""
+                              className="hover:scale-125"
                               onClick={() => handleLikeClick(item._id)}
                             />
                           ) : (
                             <BiLike
                               color="blue"
-                              className=""
+                              className="hover:scale-125"
                               onClick={() => handleLikeClick(item._id)}
                             />
                           )}

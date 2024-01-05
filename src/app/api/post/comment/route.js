@@ -8,7 +8,7 @@ export async function POST(request) {
     try {
 
         const post = await Post.findById(postId);
-       
+
         if (!post) {
             return Response.json({ success: false, message: 'post not found' }, { status: 404 });
         }
@@ -22,7 +22,7 @@ export async function POST(request) {
         post.comments.push(savedComment._id);
         await post.save();
 
-        return Response.json({ success: true, message: 'comment add successfully' }, { status: 200 });
+        return Response.json({ success: true, message: 'comment add successfully', data: savedComment }, { status: 200 });
 
     } catch (error) {
         if (error.name === 'MongoError' && error.code === 50) {

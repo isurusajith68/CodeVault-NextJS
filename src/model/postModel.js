@@ -31,10 +31,10 @@ const postSchema = mongoose.Schema({
         ref: 'PostComments',
     }],
     views: { type: Number, default: 0 },
-
+    isFeatured: { type: Boolean, default: false },
 }, {
     timestamps: true
 })
 
-const Post = mongoose.models.PostAll || mongoose.model('PostAll', postSchema)
+const Post = mongoose.models.PostAll ?? mongoose.model('PostAll', postSchema);
 export default Post;

@@ -1,7 +1,7 @@
 import Image from "next/image"
-import logo from "../assets/stacklogo.png"
+import logo from "../../public/assets/stacklogo.png"
 import Loading from "../components/Loading"
-import { Delete, Edit } from "@mui/icons-material";
+import { Delete, Edit, Favorite, FavoriteBorder } from "@mui/icons-material";
 import React, { useState } from 'react'
 import axios from "axios"
 import { toast } from 'react-toastify';
@@ -23,7 +23,6 @@ const PostList = ({ data, fetchData, updatePost }) => {
         if (response.status == 200) {
             setIsLoading(false);
             setDeleteOpenId("");
-            fetchData()
             toast.warning("Post Deleted Successfully")
         }
         setDeleteModalOpen(false);
@@ -36,6 +35,15 @@ const PostList = ({ data, fetchData, updatePost }) => {
 
     const handleEditClick = (item) => {
         updatePost(item)
+    }
+
+    const handleFeaturedClick = async (id, data) => {
+        const response = await axios.put(`/api/post/${id}`, { isFeatured: `${data}` })
+        if (response.status == 200) {
+            if (data === true) return toast.success("Post Featured Successfully")
+            if (data === false) return toast.success("Post Featured Removed Successfully")
+            fetchData()
+        }
     }
 
 
@@ -74,6 +82,21 @@ const PostList = ({ data, fetchData, updatePost }) => {
                                         onClick={() => handleDeleteClick(item._id)}
                                         className="text-red-500 cursor-pointer transition-transform transform hover:scale-110"
                                     />
+                                </div>
+                                <div>
+                                    {
+                                        item.isFeatured ? <Favorite
+                                            fontSize="small"
+                                            onClick={() => handleFeaturedClick(item._id, false)}
+                                            className="text-green-500 cursor-pointer transition-transform transform hover:scale-110"
+                                        /> :
+                                            <FavoriteBorder
+                                                fontSize="small"
+                                                onClick={() => handleFeaturedClick(item._id, true)}
+                                                className="text-green-500 cursor-pointer transition-transform transform hover:scale-110"
+                                            />
+                                    }
+
                                 </div>
                             </div>
 

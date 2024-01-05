@@ -32,9 +32,10 @@ const Post = () => {
 
     const fetchPostFeatured = async () => {
       try {
-        const post = await axios.get(`/api/post`)
-        const slicePost = post.data.data.slice(1, 4)
-        setFeaturedPost(slicePost)
+        const post = await axios.get(`/api/post/featured`)
+        // const postFilter = post.data.data.filter((item) => item.isFeatured === true)
+        setFeaturedPost(post.data.data)
+
       } catch (error) {
         console.log(error)
       }
@@ -173,7 +174,7 @@ const Post = () => {
                     </div>
 
                     <div className="mt-2 w-full">
-                      <Image height={100} width={100} className="w-full" loading="lazy" src={post?.image} />
+                      <Image height={100} width={100} className="w-full" loading="lazy" src={post?.image} alt="featured-image" />
                     </div>
                     <p className="mt-2 text-slate-500 text-base p-1">
                       {post?.description}
