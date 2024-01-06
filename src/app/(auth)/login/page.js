@@ -4,16 +4,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import Link from "next/link";
+ 
 
-const parseCallbackUrl = (callbackUrl) => {
-  if (callbackUrl) {
-    const url = new URL(callbackUrl);
-    if (url.origin === window.location.origin) {
-      return url.pathname;
-    }
-  }
-  return "/"
-}
 
 
 const Login = () => {
@@ -42,7 +34,8 @@ const Login = () => {
         const res = await signIn("credentials", {
           email,
           password,
-          callbackUrl: callbackUrl ? parseCallbackUrl(callbackUrl) : "/",
+          // callbackUrl: callbackUrl ? parseCallbackUrl(callbackUrl) : "/",
+          callbackUrl: callbackUrl
         });
 
         if (res.error) {
