@@ -23,19 +23,6 @@ const Post = () => {
   const [commentsLength, setCommentsLength] = useState(0)
 
 
-  useEffect(() => {
-    fetchPostFeatured();
-  }, [])
-
-  const fetchPostFeatured = async () => {
-    try {
-      const post = await axios.get("/api/post/featured")
-      setFeaturedPost(post.data.data)
-    } catch (error) {
-      console.log(error)
-    }
-
-  }
 
   useEffect(() => {
     const fetchPost = async () => {
