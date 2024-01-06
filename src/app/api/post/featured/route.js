@@ -1,7 +1,10 @@
 import Post from "@/model/postModel"
 
 export async function GET() {
-    const posts = await Post.find().find({ isFeatured: true })
-
-    return Response.json({ data: posts })
+    try {
+        const posts = await Post.find({ isFeatured: true })
+        return Response.json({ data: posts }, 200)
+    } catch (error) {
+        console.log(error)
+    }
 }
