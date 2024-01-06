@@ -17,31 +17,25 @@ const Post = () => {
   const [postIdPa, setPostId] = useState(null)
   const [featuredPost, setFeaturedPost] = useState(null)
   const { id } = useParams()
-
   const [isLoading, setIsLoading] = useState(false)
-  const { status } = useSession();
   const [isClickFeaturedPost, setIsClickFeaturedPost] = useState(false)
   const [clickFeaturedPost, setClickFeaturedPost] = useState(null)
-
-
   const [commentsLength, setCommentsLength] = useState(0)
-  const [clickedPostId, setClickedPostId] = useState(null)
 
 
   useEffect(() => {
-
-    const fetchPostFeatured = async () => {
-      try {
-        const post = await axios.get("/api/post/featured")
-        setFeaturedPost(post.data.data)
-      } catch (error) {
-        console.log(error)
-      }
-
-    }
     fetchPostFeatured();
   }, [])
 
+  const fetchPostFeatured = async () => {
+    try {
+      const post = await axios.get("/api/post/featured")
+      setFeaturedPost(post.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -62,7 +56,7 @@ const Post = () => {
       fetchPost();
     }
 
-  }, [post])
+  }, [id, post])
 
 
   const clickLatestPost = (e) => {
@@ -71,7 +65,6 @@ const Post = () => {
     handleIncrementViews(e._id)
     //push post id to url
     window.history.pushState({}, "", `/post/${e._id}`)
-    setClickedPostId(e._id)
     setPostId(e._id)
   }
 
