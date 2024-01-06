@@ -31,14 +31,14 @@ const Stack = () => {
   const { data: session } = useSession();
 
 
-  if (!session || !session.user) redirect("/")
+  if (!session || !session.user || !!session.user.role) redirect("/")
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (session?.user?.role === false) {
-      router.push("/")
-    }
-  }, [session])
+  //   if (session?.user?.role === false) {
+  //     router.push("/")
+  //   }
+  // }, [session])
 
 
   useEffect(() => {
