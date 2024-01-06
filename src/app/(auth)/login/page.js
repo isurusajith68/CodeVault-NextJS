@@ -4,15 +4,23 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import Link from "next/link";
-// import { redirect } from "next/navigation";
-// import { getServerSession } from "next-auth";
-// import authOptions from "@/app/api/auth/[...nextauth]/route";
+
+const parseCallbackUrl = (callbackUrl) => {
+  if (callbackUrl) {
+    const url = new URL(callbackUrl);
+    if (url.origin === window.location.origin) {
+      return url.pathname;
+    }
+  }
+  return "/"
+}
 
 
 const Login = () => {
 
   const router = useRouter();
   const { data: session } = useSession();
+  const callbackUrl = useSearchParams().get("callbackUrl");
 
 
   useEffect(() => {
@@ -34,7 +42,7 @@ const Login = () => {
         const res = await signIn("credentials", {
           email,
           password,
-          redirect: false,
+          callbackUrl: callbackUrl ? parseCallbackUrl(callbackUrl) : "/",
         });
 
         if (res.error) {
@@ -42,7 +50,6 @@ const Login = () => {
           toast.error(error)
           return;
         }
-        console.log(res)
 
         toast.success("Login successful")
         // router.push("/");
@@ -121,3 +128,4 @@ const Login = () => {
   )
 }
 export default Login
+
