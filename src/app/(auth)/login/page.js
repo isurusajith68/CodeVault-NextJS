@@ -1,8 +1,8 @@
 "use client"
 import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-  import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Link from "next/link";
 // import { redirect } from "next/navigation";
 // import { getServerSession } from "next-auth";
@@ -14,6 +14,7 @@ const Login = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
+
   useEffect(() => {
     if (session) {
       router.push("/");
@@ -23,13 +24,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("")
-
-
-
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
-
 
 
   const handleSubmit = async (e) => {
@@ -51,7 +45,7 @@ const Login = () => {
         console.log(res)
 
         toast.success("Login successful")
-        router.replace("");
+        // router.push("/");
       } catch (error) {
         console.log(error);
       }

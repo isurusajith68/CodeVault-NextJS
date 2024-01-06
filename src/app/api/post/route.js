@@ -15,15 +15,15 @@ export async function POST(request) {
 export async function GET(request) {
 
     const { searchParams } = new URL(request.url);
-    const siteCategory = searchParams.get("featured");
+    const isFeatured = searchParams.get("featured");
 
     try {
-        if (!siteCategory) {
+        if (!isFeatured) {
             const posts = await Post.find().sort({ createdAt: -1 })
             return Response.json({ data: posts }, { status: 200 })
         }
 
-        const posts = await Post.find({ isFeatured: siteCategory }).sort({ createdAt: -1 })
+        const posts = await Post.find({ isFeatured: isFeatured }).sort({ createdAt: -1 })
 
         return Response.json({ data: posts }, { status: 200 })
     } catch (error) {

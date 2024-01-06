@@ -30,7 +30,7 @@ const Stack = () => {
 
   const { data: session } = useSession();
 
-  if (!session || !session.user || !!session.user.role) redirect("/")
+  // if (!session || !session.user || !!session.user.role) redirect("/")
 
   useEffect(() => {
     const categoryNames = Allcategory.map((categoryItem) => categoryItem.name);

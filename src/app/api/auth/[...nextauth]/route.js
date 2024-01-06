@@ -27,8 +27,6 @@ export const authOptions = {
                         return null;
                     }
 
-
-
                     return user
                 } catch (error) {
                     console.log("Error: ", error);
@@ -41,10 +39,9 @@ export const authOptions = {
     },
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
-        signIn: "/",
+        signIn: "/login",
     },
     callbacks: {
-
         async jwt({ token, user }) {
             if (user) token.id = user._id;
             if (user) token.role = user.isAdmin;
@@ -57,6 +54,12 @@ export const authOptions = {
             if (session?.user) session.user.name = token.name;
             return session;
         },
+        async redirect({ url, baseUrl }) {
+            if (url.startsWith("/")) return `${baseUrl}${url}`
+
+            else if (new URL(url).origin === baseUrl) return url
+            return baseUrl
+        }
     },
 };
 
