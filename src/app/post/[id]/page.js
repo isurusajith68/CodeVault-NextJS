@@ -5,7 +5,6 @@ import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import ReactQuill from "react-quill"
 import Loading from "@/components/Loading"
-import { useSession } from "next-auth/react";
 import React from 'react';
 import moment from "moment"
 import CommentSection from "@/components/CommentSection"
@@ -23,6 +22,16 @@ const Post = () => {
   const [commentsLength, setCommentsLength] = useState(0)
 
 
+  const fetchFeaturedPost = async () => {
+    try {
+      const post = await axios.get(`/api/post?featured=true`)
+      setFeaturedPost(post.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  fetchFeaturedPost()
 
   useEffect(() => {
     const fetchPost = async () => {
