@@ -1,5 +1,6 @@
 import connectDB from "../../../util/db/db"
 import Post from "../../../model/postModel"
+
 connectDB();
 
 export async function POST(request) {
@@ -13,14 +14,20 @@ export async function POST(request) {
 
 export async function GET(request) {
 
-    const { featured } = request.query;
-    const query = featured ? { featured: true } : {};
-    
+    const { searchParams } = new URL(request.url);
+    const siteCategory = searchParams.get("featured");
+
     try {
-        const posts = await Post.find(query).sort({ createdAt: -1 });
-        return Response.json({ data: posts });
+        if (!siteCategory) {
+            const posts = await Post.find().sort({ createdAt: -1 })
+            return Response.json({ data: posts }, { status: 200 })
+        }
+
+        const posts = await Post.find({ isFeatured: siteCategory }).sort({ createdAt: -1 })
+
+        return Response.json({ data: posts }, { status: 200 })
     } catch (error) {
-        console.error(error);
-        return Response.json({ error: 'An error occurred while fetching posts' }, { status: 500 });
+        console.log(error)
     }
+
 }

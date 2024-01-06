@@ -31,7 +31,13 @@ const Post = () => {
     }
   }
 
-  fetchFeaturedPost()
+  useEffect(() => {
+
+    if (!featuredPost) {
+      fetchFeaturedPost()
+
+    }
+  }, [featuredPost])
 
   useEffect(() => {
     const fetchPost = async () => {

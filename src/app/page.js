@@ -13,7 +13,6 @@ import { BiLike } from "react-icons/bi";
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [category, setCategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categoryvalue, setCategoryValues] = useState([]);
@@ -21,19 +20,18 @@ const Home = () => {
 
   const { data: session, status } = useSession();
 
-
   const fetchData = async () => {
-    setIsLoading(true);
+   
 
     try {
-      const response = await axios.get("/api/post");
+      const response = await axios.get("/api/post")
       if (response.status === 200) {
         setPosts(response.data.data);
-        setIsLoading(false);
+
       }
     } catch (error) {
       console.error("Error fetching data:", error);
-      setIsLoading(false);
+
     }
   };
 
@@ -58,7 +56,7 @@ const Home = () => {
           }
         })
         setPosts([...posts]);
-        
+
 
         const response = await fetch('/api/post/like', {
           method: 'POST',
