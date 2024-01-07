@@ -4,16 +4,17 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import Link from "next/link";
- 
 
-
+const parseCallbackUrl = (callbackUrl) => {
+  const url = callbackUrl.replace(/%2F/g, "/").replace(/%3A/g, ":");
+  return url;
+}
 
 const Login = () => {
 
   const router = useRouter();
   const { data: session } = useSession();
   const callbackUrl = useSearchParams().get("callbackUrl");
-
 
   useEffect(() => {
     if (session) {
@@ -25,7 +26,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("")
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -34,8 +34,7 @@ const Login = () => {
         const res = await signIn("credentials", {
           email,
           password,
-          // callbackUrl: callbackUrl ? parseCallbackUrl(callbackUrl) : "/",
-          callbackUrl: callbackUrl
+          redirect: false,
         });
 
         if (res.error) {
@@ -45,15 +44,14 @@ const Login = () => {
         }
 
         toast.success("Login successful")
-        // router.push("/");
+        router.push(callbackUrl ? parseCallbackUrl(callbackUrl) : "/" );
+
       } catch (error) {
         console.log(error);
       }
 
     }
   };
-
-  //validation
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -8,7 +8,9 @@ export const authOptions = {
     providers: [
         CredentialsProvider({
             name: "credentials",
-            credentials: {},
+            credentials: {
+                
+            },
 
             async authorize(credentials) {
                 const { email, password } = credentials;
@@ -54,15 +56,13 @@ export const authOptions = {
             if (session?.user) session.user.name = token.name;
             return session;
         },
-        callbacks: {
-            async redirect({ url, baseUrl }) {
-                // Allows relative callback URLs
-                if (url.startsWith("/")) return `${baseUrl}${url}`
-                // Allows callback URLs on the same origin
-                else if (new URL(url).origin === baseUrl) return url
-                return baseUrl
-            }
-        }
+
+        // async redirect({ url, baseUrl }) {
+        //     if (url === null) return baseUrl
+        //     if (url.startsWith("/")) return `${baseUrl}${url}`
+        //     else if (new URL(url).origin === baseUrl) return url
+        //     return baseUrl
+        // }
     },
 };
 
