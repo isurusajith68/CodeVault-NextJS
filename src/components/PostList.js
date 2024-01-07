@@ -40,9 +40,14 @@ const PostList = ({ data, fetchData, updatePost }) => {
     const handleFeaturedClick = async (id, data) => {
         const response = await axios.put(`/api/post/${id}`, { isFeatured: `${data}` })
         if (response.status == 200) {
-            if (data === true) return toast.success("Post Featured Successfully")
-            if (data === false) return toast.success("Post Featured Removed Successfully")
-            fetchData()
+            if (data === true) {
+                fetchData()
+                return toast.success("Post Featured Successfully")
+            }
+            if (data === false) {
+                fetchData()
+                return toast.success("Post Featured Removed Successfully")
+            }
         }
     }
 
