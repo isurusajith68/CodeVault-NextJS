@@ -4,7 +4,7 @@ import axios from "axios";
 import Loading from "../components/Loading";
 import { formatDistanceToNow } from 'date-fns';
 import Link from "next/link";
-import { Allcategory } from "@/util/category";
+import { Allcategory } from "../util/category";
 import Image from "next/image";
 import { toast } from 'react-toastify';
 import { useSession } from "next-auth/react";

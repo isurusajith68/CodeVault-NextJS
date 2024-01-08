@@ -1,5 +1,5 @@
-import Comment from "@/model/Comment";
-import Post from "@/model/postModel";
+import Comment from "../../../../../model/Comment";
+import Post from "../../../../../model/postModel";
 
 export async function GET(request, { params }) {
     const id = await params.id;

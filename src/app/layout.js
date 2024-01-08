@@ -3,9 +3,9 @@ import Nav from "../components/Nav"
 import './globals.css'
 import Footter from "../components/Footter"
 import { usePathname } from 'next/navigation'
-import { GoogleAnalyticsTracking } from "@/components/GoogleAnalyticsTracking "
+import { GoogleAnalyticsTracking } from "../components/GoogleAnalyticsTracking "
 import { AuthProvider } from "./Provider"
-import ScrollBtn from "@/components/ScrollBtn"
+import ScrollBtn from "../components/ScrollBtn"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

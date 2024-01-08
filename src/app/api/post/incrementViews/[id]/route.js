@@ -1,4 +1,4 @@
-import Post from "@/model/postModel";
+import Post from "../../../../../model/postModel";
 
 export async function POST(request, { params }) {
     const postId  = await params.id
