@@ -3,7 +3,7 @@ const MetaTag = () => {
         <>
             <meta name="description" content="" />
 
-            <meta property="og:url" content="https://codevault68.netlify.app/" />
+            <meta property="og:url" content="https://codevault68.netlify.app/:path*" />
             <meta property="og:type" content="website" />
             <meta property="og:title" content="" />
             <meta property="og:description" content="" />
