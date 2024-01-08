@@ -21,8 +21,8 @@ const Home = () => {
   const { data: session, status } = useSession();
 
   const fetchData = async () => {
-   
 
+    
     try {
       const response = await axios.get("/api/post")
       if (response.status === 200) {

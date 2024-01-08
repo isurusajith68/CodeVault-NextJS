@@ -8,6 +8,7 @@ import { AuthProvider } from "./Provider"
 import ScrollBtn from "@/components/ScrollBtn"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from "@/components/Head"
 
 
 export default function RootLayout({ children }) {
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <GoogleAnalyticsTracking />
+      <Head />
       <body className="">
         <AuthProvider>
 
