@@ -60,7 +60,7 @@ const CommentSection = ({ commentsLength, postId }) => {
         if (comments) {
             commentsLength(comments.length)
         }
-    }, [comments])
+    }, [comments, commentsLength])
 
     const loadComments = async (postId) => {
         try {

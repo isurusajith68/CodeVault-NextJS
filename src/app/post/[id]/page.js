@@ -110,12 +110,12 @@ const Post = () => {
                     {clickFeaturedPost?.views}
                   </span>
                 </span>
-                {/* <FacebookShareButton
+                <FacebookShareButton
                   url={`https://codevault68.netlify.app/post/${clickFeaturedPost?._id}`}
                   quote={clickFeaturedPost?.title}
                   hashtag="#codevault68">
                   <MdOutlineIosShare size={16} />
-                </FacebookShareButton> */}
+                </FacebookShareButton>
               </div>
               <div className="mt-2 w-full">
                 <Image height={100} width={100} className="w-full" loading="lazy" src={clickFeaturedPost?.image} alt="featured-image" />
@@ -166,13 +166,13 @@ const Post = () => {
                           {post?.views}
                         </span>
                       </span>
-                      {/* <FacebookShareButton
+                      <FacebookShareButton
                         url={`https://codevault68.netlify.app/post/${post?._id}`}
                         quote={post?.title}
                         hashtag="#codevault68"
                         className="bg-blue-600"                  >
                         <MdOutlineIosShare size={16} />
-                      </FacebookShareButton> */}
+                      </FacebookShareButton>
                     </div>
 
                     <div className="mt-2 w-full">

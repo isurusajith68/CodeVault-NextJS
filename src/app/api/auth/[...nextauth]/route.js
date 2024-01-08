@@ -4,12 +4,12 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt"
 import connectDB from "../../../../util/db/db";
 
-export const authOptions = {
+const authOptions = {
     providers: [
         CredentialsProvider({
             name: "credentials",
             credentials: {
-                
+
             },
 
             async authorize(credentials) {
@@ -65,7 +65,6 @@ export const authOptions = {
         // }
     },
 };
-
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }
