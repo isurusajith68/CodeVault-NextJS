@@ -8,7 +8,7 @@ import { AuthProvider } from "./Provider"
 import ScrollBtn from "../components/ScrollBtn"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import MetaTag from "../components/MetaTag"
 
 export default function RootLayout({ children }) {
   const navigation = usePathname();
@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <MetaTag />
       <GoogleAnalyticsTracking />
       <body className="">
         <AuthProvider>
