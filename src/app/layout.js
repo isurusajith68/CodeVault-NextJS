@@ -1,7 +1,7 @@
 "use client"
 import Nav from "../components/Nav"
 import './globals.css'
-import Footter from "../components/Footter"
+import Footer from "../components/Footer"
 import { usePathname } from 'next/navigation'
 import { GoogleAnalyticsTracking } from "../components/GoogleAnalyticsTracking "
 import { AuthProvider } from "./Provider"
@@ -10,7 +10,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MetaTag from "../components/MetaTag"
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}) {
+
+
   const navigation = usePathname();
 
   const showHeaderLogin = navigation === '/login' ? false : true;
@@ -24,9 +28,9 @@ export default function RootLayout({ children }) {
         <AuthProvider>
 
           {showHeaderLogin && showHeaderRegister && (
-            <header className="">
-              <Nav />
-            </header>
+          <header className="">
+            <Nav />
+          </header>
           )}
 
           <div className="md:px-32 px-10 py-1 min-h-screen bg-slate-100 ">
@@ -36,9 +40,9 @@ export default function RootLayout({ children }) {
           </div>
 
           {showHeaderLogin && showHeaderRegister && (
-            <div>
-              <Footter />
-            </div>
+          <div>
+            <Footer />
+          </div>
           )}
         </AuthProvider>
 

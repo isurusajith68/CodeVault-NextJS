@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect } from 'react';
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
 const ScrollToTopButton = () => {

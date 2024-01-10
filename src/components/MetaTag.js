@@ -1,8 +1,7 @@
 const MetaTag = () => {
     return (
         <>
-            <meta name="description" content="" />
-
+            <title>Code Vault</title>
             <meta property="og:url" content="https://codevault68.netlify.app/:path*" />
             <meta property="og:type" content="website" />
             <meta property="og:title" content="" />
