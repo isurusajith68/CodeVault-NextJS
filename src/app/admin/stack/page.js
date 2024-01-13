@@ -1,12 +1,12 @@
 "use client"
 import { useState, useEffect } from "react";
-import { Allcategory } from "../../util/category"
+import { Allcategory } from "../../../util/category"
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import axios from "axios";
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import { toast } from 'react-toastify';
-import PostList from "../../components/PostList"
+import PostList from "../../../components/PostList"
 import { redirect, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
@@ -150,7 +150,7 @@ const Stack = () => {
   }
 
   return (
-    <div className="mt-[80px]">{
+    <div className="mt-[0px]">{
 
       userdata?.isAdmin === false ? "" : <div className="flex w-full max-lg:flex-col md:space-x-10 mt-5 mb-3 gap-10">
         <div className="flex-1">

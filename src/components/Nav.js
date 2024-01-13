@@ -19,6 +19,7 @@ const Nav = () => {
 
     const { data: session } = useSession();
 
+    
     const handleClick = () => {
         setIsClick(!isClick);
     };
@@ -100,7 +101,7 @@ const Nav = () => {
 
                         {
                             profileClick &&
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, x: 100 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5 }}
@@ -109,9 +110,9 @@ const Nav = () => {
 
                                     {
                                         session?.user?.role == true &&
-                                        <li className={navigation === '/stack' ? "text-red-700 cursor-pointer bg-blue-500 px-3 py-1 rounded-lg" : "text-gray-900 cursor-pointer bg-blue-500  px-3 py-1 rounded-lg"}>
-                                            <Link href="/stack" >
-                                                Add post
+                                        <li className={navigation === '/admin' ? "text-red-700 cursor-pointer bg-blue-500 px-3 py-1 rounded-lg" : "text-gray-900 cursor-pointer bg-blue-500  px-3 py-1 rounded-lg"}>
+                                            <Link href="/admin" >
+                                                Dashboard
                                             </Link>
                                         </li>
                                     }
@@ -186,9 +187,9 @@ const Nav = () => {
 
                                     {
                                         session?.user?.role == true &&
-                                        <li className={navigation === '/stack' ? "text-red-700 " : "text-gray-900 "}>
-                                            <Link href="/stack" >
-                                                Add post
+                                        <li className={navigation === '/admin' ? "text-red-700 " : "text-gray-900 "}>
+                                            <Link href="/admin" >
+                                                Dashboard
                                             </Link>
                                         </li>
                                     }

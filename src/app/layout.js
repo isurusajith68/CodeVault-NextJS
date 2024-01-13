@@ -19,6 +19,7 @@ export default function RootLayout({
 
   const showHeaderLogin = navigation === '/login' ? false : true;
   const showHeaderRegister = navigation === '/register' ? false : true;
+  const Dashboard = navigation.startsWith('/admin') ? false : true;
 
   return (
     <html lang="en">
@@ -27,7 +28,7 @@ export default function RootLayout({
       <body className="">
         <AuthProvider>
 
-          {showHeaderLogin && showHeaderRegister && (
+          {showHeaderLogin && showHeaderRegister && Dashboard && (
           <header className="">
             <Nav />
           </header>
@@ -39,7 +40,7 @@ export default function RootLayout({
             <ScrollBtn />
           </div>
 
-          {showHeaderLogin && showHeaderRegister && (
+          {showHeaderLogin && showHeaderRegister && Dashboard &&(
           <div>
             <Footer />
           </div>
