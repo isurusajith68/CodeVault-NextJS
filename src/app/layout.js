@@ -34,7 +34,7 @@ export default function RootLayout({
           </header>
           )}
 
-          <div className="md:px-32 px-10 py-1 min-h-screen bg-slate-100 ">
+          <div className="md:px-32 px-2 py-1 min-h-screen bg-slate-100 ">
             <ToastContainer />
             {children}
             <ScrollBtn />
