@@ -38,6 +38,7 @@ const ScrollToTopButton = () => {
                     onClick={scrollToTop}
                     size={35}
                     style={{ display: isVisible ? "inline" : "none", color: "red" }}
+                    className='animate-bounce'
                 />
             </div>
         </div>

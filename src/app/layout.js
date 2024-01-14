@@ -1,5 +1,5 @@
 "use client"
-import Nav from "../components/Nav"
+import Nav from "../components/Nav/Nav"
 import './globals.css'
 import Footer from "../components/Footer"
 import { usePathname } from 'next/navigation'

@@ -6,20 +6,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Close } from "@mui/icons-material";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { usePathname } from 'next/navigation'
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import stackLogo from "../../public/assets/logo.jpg"
 import { motion } from "framer-motion";
 
-const Nav = () => {
+const NavBarLink = () => {
     const [isClick, setIsClick] = useState(false);
     const [profileClick, setProfileClick] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const navigation = usePathname();
 
 
-    const { data: session } = useSession();
-
-    
     const handleClick = () => {
         setIsClick(!isClick);
     };
@@ -46,24 +43,13 @@ const Nav = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [scrolled]);
-
     return (
-        <nav className="bg-white">
+        <div>
             <div className="fixed w-full top-0 left-0 z-50">
-                {/* <div className="max-md:hidden w-full z-50 h-[64px] flex items-center justify-center bg-white border-b border-gray-200">
-                    <Link loading={"lazy"} href="/" className="flex items-center justify-center   md:ml-20 w-auto h-auto">
-                        <h1 className="font-serif font-bold text-2xl  text-slate-500">
-                            Code Vault™️
-                        </h1>
-                    </Link>
-                </div> */}
                 <div className={scrolled ? `w-full flex h-[60px] bg-white  justify-start  ${isClick ? "md:shadow-lg" : "shadow-lg"}` : ` w-full flex h-[60px] bg-white  justify-start  ${isClick ? "md:shadow-lg" : ""}`}>
 
                     <div className="flex flex-auto w-[25%] items-center justify-center   gap-5 max-md:hidden ">
                         <Link loading={"lazy"} href="/" className="  ">
-                            {/* <h1 className="flex items-center  h-[60px] px-3 justify-start  font-serif font-bold text-xl  text-slate-500">
-                                Code Vault™️
-                            </h1> */}
                             <Image src={stackLogo} width={100} height={90} alt="stack-logo" />
                         </Link>
                     </div>
@@ -209,8 +195,7 @@ const Nav = () => {
                     </div>
                 )}
             </div>
-        </nav >
-    );
-};
-
-export default Nav;
+        </div>
+    )
+}
+export default NavBarLink
