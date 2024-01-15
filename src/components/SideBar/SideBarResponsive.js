@@ -14,7 +14,7 @@ const SideBarResponsive = () => {
     const navigation = usePathname()
   return (
     <div>
-          <div className="md:hidden w-12  max-h-[500px] sticky top-5 left-0 bg-white rounded-md p-1 ">
+          <div className="xl:hidden w-12  max-h-[500px] sticky top-5 left-0 bg-white rounded-md p-1 ">
               <div className="">
                   <div className="flex items-center justify-center  ">
                       <Image src={admin} alt="profile" width={30} height={30} className="border border-black rounded-full" />

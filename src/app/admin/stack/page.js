@@ -2,9 +2,9 @@
 import { useState, useEffect } from "react";
 import { Allcategory } from "../../../util/category"
 import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css';
 import axios from "axios";
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify';
 import PostList from "../../../components/PostList"
 import { redirect, useRouter } from "next/navigation";
@@ -152,13 +152,13 @@ const Stack = () => {
   return (
     <div className="mt-[0px]">{
 
-      userdata?.isAdmin === false ? "" : <div className="flex w-full max-lg:flex-col md:space-x-10 mt-5 mb-3 gap-10">
+      userdata?.isAdmin === false ? "" : <div className="flex w-full max-xl:flex-col  mt-5 mb-3 gap-10">
         <div className="flex-1">
           {
             id == null ?
-              <h1 className="font-semibold text-xl mb-5 text-center">Add Code Snippet Details</h1>
+              <h1 className="font-bold text-2xl mb-5 ">Add Code Snippet Details</h1>
               :
-              <h1 className="font-semibold text-xl mb-5 text-center">Update Code Snippet Details</h1>
+              <h1 className="font-bold text-2xl mb-5 ">Update Code Snippet Details</h1>
           }
           <form onSubmit={handleSubmit}  >
             <div>

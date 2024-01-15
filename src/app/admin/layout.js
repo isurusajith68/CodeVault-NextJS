@@ -5,8 +5,6 @@ export default async function RootLayout({
     children,
 }) {
 
-
-
     return (
         <div className="flex py-5 gap-2">
             <AdminSideBar />

@@ -54,7 +54,7 @@ const PostList = ({ data, fetchData, updatePost }) => {
 
     return (
         <div>
-            <h1 className="font-semibold text-xl mb-8 text-center">CodeVault List</h1>
+            <h1 className="font-bold text-2xl mb-8 ">CodeVault List</h1>
             {data ?
                 data.map((item, index) => {
                     return (

@@ -6,8 +6,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Close } from "@mui/icons-material";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { usePathname } from 'next/navigation'
-import { signOut } from "next-auth/react";
-import stackLogo from "../../public/assets/logo.jpg"
+import { signOut, useSession } from "next-auth/react";
+import stackLogo from "../../../public/assets/logo.jpg"
 import { motion } from "framer-motion";
 
 const NavBarLink = () => {
@@ -16,6 +16,7 @@ const NavBarLink = () => {
     const [scrolled, setScrolled] = useState(false);
     const navigation = usePathname();
 
+    const { data: session } = useSession();
 
     const handleClick = () => {
         setIsClick(!isClick);

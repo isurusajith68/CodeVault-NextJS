@@ -12,7 +12,7 @@ const AdminSideBar = async () => {
 
     return (
         <aside>
-            <div className="max-md:hidden w-64 max-h-[500px] sticky top-5 left-0 bg-white rounded-md p-5 ">
+            <div className="max-xl:hidden w-64 max-h-[500px] sticky top-5 left-0 bg-white rounded-md p-5 ">
                 <div className="">
 
                     <div className="flex items-center justify-center  ">
