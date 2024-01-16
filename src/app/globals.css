@@ -12,7 +12,6 @@
   scrollbar-color: var(--secondary) var(--primary);
 }
 
-
 *::-webkit-scrollbar {
   width: 15px;
 }
@@ -33,20 +32,18 @@
   --secondary: rgb(212, 206, 206);
 }
 
-.IMG{
-
-  max-height:200px;
+.IMG {
+  max-height: 200px;
   min-height: 200px;
   min-width: 250px;
   max-width: 100%;
- 
 }
 
 html {
   font-family: var(--font-inter);
 }
 
-.ql-tooltip-editor{
+.ql-tooltip-editor {
   display: none;
 }
 
@@ -62,23 +59,26 @@ html {
   color: white;
 }
 
-
 @media screen and (max-width: 718px) {
-
-   .scroll-btn {
- 
-  left: 90%;
-  
-}
-
+  .scroll-btn {
+    left: 90%;
+  }
 }
 
 @media screen and (max-width: 500px) {
-
-   .scroll-btn {
- 
-  left: 86%;
-  
+  .scroll-btn {
+    left: 86%;
+  }
 }
 
+@media (max-width: 1000px) {
+  .table-page {
+    height: 1000px;
+  }
+  .rotate-table {
+    transform: rotate(-270deg);
+    margin-top: 300px;
+    margin-left: -250px;
+    height: 400px;
+  }
 }

@@ -103,13 +103,15 @@ const User = () => {
   }
 
   return (
-    <>
+    <div className='table-page '>
       <label htmlFor="search" >
         Search by Task:
         <input id="search" autoComplete="off" value={search} onChange={handleSearch} />
       </label>
       <br />
-      <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
+      <Table className="rotate-table" data={data} theme={theme} layout={{ custom: true, horizontalScroll: true,
+        verticalScroll: true
+      }}>
         {(tableList) => (
           <>
             <Header>
@@ -193,7 +195,7 @@ const User = () => {
           </>
         )}
       </Table>
-    </>
+    </div>
   )
 }
 export default User
