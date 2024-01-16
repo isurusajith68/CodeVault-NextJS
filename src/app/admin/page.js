@@ -35,7 +35,7 @@ const Dashboard = () => {
             <div className="lg:flex  gap-3 mt-3">
                 <div className="flex flex-col w-full bg-red-500 rounded-md p-2">
                     <h1 className="text-white text-center mt-1 ">Total User</h1>
-                    <h1 className="text-white text-center mt-1 ">
+                    <h1 className="text-white text-center mt-1 justify-center items-center flex">
                         {
                             !totalUser ? <TailSpin
                                 visible={true}
@@ -71,7 +71,7 @@ const Dashboard = () => {
                 </div>
                 <div className="flex flex-col w-full max-lg:mt-2 bg-red-500 rounded-md p-2">
                     <h1 className="text-white text-center mt-1 ">Total Doc</h1>
-                    <h1 className="text-white text-center mt-1 ">{
+                    <h1 className="text-white text-center mt-1 justify-center items-center flex">{
                         !totalDoc ? <TailSpin
                             visible={true}
                             height="20"
