@@ -200,7 +200,10 @@ const Post = () => {
                 }
               </>
           }
-          <CommentSection commentsLength={setCommentsLength} postId={postIdPa} />
+          {
+            !isLoading &&
+            <CommentSection commentsLength={setCommentsLength} postId={postIdPa} />
+          }
         </div>
         <div className="sticky  flex-auto  w-[30%] p-5 max-lg:hidden">
           <div className="bg-white text-center font-bold p-5 border-b mb-2 drop-shadow-lg">

@@ -1,6 +1,6 @@
 [
     {
-        "origin": ["http://localhost:3000"],
+        "origin": ["http://localhost:3000","https://codevault68.netlify.app"],
         "method": ["GET"],
         "maxAgeSeconds": 3600
     }
