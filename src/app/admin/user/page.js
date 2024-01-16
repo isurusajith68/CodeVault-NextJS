@@ -129,7 +129,7 @@ const User = () => {
                         editClick && editDataId === item._id ?
                           <>
                             <Cell className='bg-red-200 border-white border-2'>
-                              <input onChange={(e) => setUserName(e.target.value)} className='bg-red-200 border-none focus:outline-none' type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
+                              <input onChange={(e) => setUserName(e.target.value)} className='bg-red-200 border-none focus:outline-none' type="text" value={userName}  />
 
                             </Cell>
                             {/* <Cell className='bg-red-200 border-white border-2'>
