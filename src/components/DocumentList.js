@@ -16,9 +16,16 @@ import { storage } from '../lib/firebase/firebase.js';
 
 const DocumentList = ({ editData, doc, fetchDocumentList }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [url, setUrl] = useState(null);
 
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+    const handlePdfViewClick = (e) => {
+        setIsModalOpen(true);
+        setUrl(e)
+    }
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setUrl(null)
+    }
 
     const handleEditClick = (data) => {
         editData(data);
@@ -67,15 +74,16 @@ const DocumentList = ({ editData, doc, fetchDocumentList }) => {
                             </div>
                             <div className="flex flex-col gap-5 p-5 items-center justify-center">
 
-                                <div onClick={openModal}>
+                                <div onClick={
+                                    () => handlePdfViewClick(data.url)
+                                }
+                                >
                                     <LuView
                                         size={16}
                                         className="text-blue-700 cursor-pointer transition-transform transform hover:scale-110"
                                     />
                                 </div>
-                                <CustomModal isOpen={isModalOpen} onClose={closeModal} >
-                                    <PDFViewer pdfUrl={data.url} />
-                                </CustomModal>
+
                                 <PDFDownloader pdfUrl={data.url} fileName={data.filename} />
                                 <div>
                                     <Edit
@@ -97,7 +105,11 @@ const DocumentList = ({ editData, doc, fetchDocumentList }) => {
                     )
                 }) : <Loading />
             }
-
+            <div>
+                <CustomModal isOpen={isModalOpen} onClose={closeModal} >
+                    <PDFViewer pdfUrl={url} />
+                </CustomModal>
+            </div>
 
         </div >
     )

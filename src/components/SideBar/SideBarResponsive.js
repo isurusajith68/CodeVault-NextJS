@@ -54,12 +54,17 @@ const SideBarResponsive = () => {
               <div>
                   <div className="flex flex-col mt-5 gap-6 items-center">
                       <div>
-                          <div className="flex items-center  gap-3 font-semibold">
+                          <div className="flex items-center  gap-3 font-semibold cursor-pointer">
+                            <Link href="/"><IoHome size={20} /></Link>
+                          </div>
+                      </div>
+                      <div>
+                          <div className="flex items-center  gap-3 font-semibold cursor-pointer">
                               <IoIosSettings size={20} />
                           </div>
                       </div>
                       <div>
-                          <div onClick={() => signOut()} className="flex items-center  gap-3 font-semibold">
+                          <div onClick={() => signOut()} className="flex items-center  gap-3 font-semibold cursor-pointer">
                               <FaSignOutAlt size={20} />
                           </div>
                       </div>

@@ -5,16 +5,14 @@ import Modal from 'react-modal';
 const CustomModal = ({ isOpen, onClose, children }) => {
     const modalStyle = {
         content: {
-            width: '50%',
-            height: '80%',
+            width: '80%',
+            height: '95%',
             margin: 'auto',
         },
     };
 
-
-
     return (
-        <Modal ariaHideApp={false} isOpen={isOpen} onRequestClose={onClose} contentLabel="PDF Modal" style={modalStyle}>
+        <Modal ariaHideApp={false} isOpen={isOpen} onRequestClose={onClose} contentLabel="PDF Modal" className="pdf-viewer">
             <div onClick={onClose}>
                 <Close />
             </div>

@@ -127,8 +127,9 @@ const MyForm = () => {
                     toast.error(response.data.message);
                 }
 
-                toast.success('File updated successfully');
+                toast.success('File upload successfully');
                 fetchDocumentList();
+                reset();
             } catch (error) {
                 console.log(error)
                 toast.error('Something went wrong');

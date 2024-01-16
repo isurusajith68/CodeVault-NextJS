@@ -104,12 +104,16 @@ const User = () => {
 
   return (
     <div className='table-page '>
-      <label htmlFor="search" >
-        Search by Task:
-        <input id="search" autoComplete="off" value={search} onChange={handleSearch} />
+      <label htmlFor="search" className='ml-4'>
+        Search
+        <input id="search"
+          className='border-2 border-gray-300 focus:outline-none focus:border-red-500 rounded-md ml-2'
+          placeholder='Search by user name'
+          autoComplete="off" value={search} onChange={handleSearch} />
       </label>
       <br />
-      <Table className="rotate-table" data={data} theme={theme} layout={{ custom: true, horizontalScroll: true,
+      <Table className="rotate-table" data={data} theme={theme} layout={{
+        custom: true, horizontalScroll: true,
         verticalScroll: true
       }}>
         {(tableList) => (
@@ -168,15 +172,15 @@ const User = () => {
                         {
                           editClick && editDataId === item._id ?
                             <div className='flex justify-around'>
-                              <button className='text-green-500' type="button" onClick={() => handleUpdate(item._id)}>
-                                Update
-                              </button>
                               <button className='text-blue-500' type="button" onClick={() => {
                                 setEditClick(false);
                                 setEditDataId(null);
 
                               }}>
                                 Cancel
+                              </button>
+                              <button className='text-green-500' type="button" onClick={() => handleUpdate(item._id)}>
+                                Update
                               </button>
                             </div>
                             :
