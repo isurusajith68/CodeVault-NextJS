@@ -57,7 +57,9 @@ const User = () => {
         }
       `,
     Table: `
-        --data-table-library_grid-template-columns:  20% 30% 20% 20% minmax(150px, 1fr);
+        min-width:800px;
+        --data-table-library_grid-template-columns:  200px 200px 200px 200px 200px;
+
       `,
   });
 
@@ -112,11 +114,11 @@ const User = () => {
           <>
             <Header>
               <HeaderRow className='bg-slate-100 '>
-                <HeaderCell resize>User Name</HeaderCell>
-                <HeaderCell resize>Email</HeaderCell>
-                <HeaderCell resize>isAdmin</HeaderCell>
-                <HeaderCell resize>Actions</HeaderCell>
-                <HeaderCell resize>Actions</HeaderCell>
+                <HeaderCell >User Name</HeaderCell>
+                <HeaderCell >Email</HeaderCell>
+                <HeaderCell >isAdmin</HeaderCell>
+                <HeaderCell >Actions</HeaderCell>
+                <HeaderCell >Actions</HeaderCell>
 
 
               </HeaderRow>
