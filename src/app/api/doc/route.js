@@ -5,11 +5,18 @@ import File from "../../../model/File"
 
 MongoDb();
 
-export async function GET() {
+export async function GET(request) {
+    const { searchParams } = new URL(request.url);
+    const fileLength = searchParams.get("lengthCheck");
     try {
 
-        const data = await File.find().sort({ createdAt: -1 })
-        return Response.json({ data, status: true, message: "Get file successfully" }, { status: 200 })
+       if(fileLength === "true"){
+        const files = await File.find().sort({ createdAt: -1 })
+        return Response.json({ data: files.length }, { status: 200 })
+        }
+
+        const files = await File.find().sort({ createdAt: -1 })
+        return Response.json({ data: files }, { status: 200 })
 
     } catch (error) {
         console.log(error)
