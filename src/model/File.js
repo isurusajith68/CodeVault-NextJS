@@ -13,4 +13,6 @@ const fileSchema = new mongoose.Schema({
     tags: [String],
 });
 
-export default mongoose.models.File || mongoose.model('File', fileSchema);
+const File = mongoose.models.Files ?? mongoose.model('Files', fileSchema);
+export default File;
+

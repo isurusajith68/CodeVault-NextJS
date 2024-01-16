@@ -253,11 +253,11 @@ const Stack = () => {
                 )}
               </div>
             </div>
-            <div className="flex gap-5">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 w-[50%]  rounded-full" type="submit">
+            <div className="flex flex-col mt-2 gap-2">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
                 {id == null ? "Submit " : "Update"}
               </button>
-              <button className="bg-blue-700 hover:bg-blue-950 text-white font-bold py-2 px-4 mt-5  w-[50%]   rounded-full" onClick={resetForm}>
+              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={resetForm}>
                 Reset
               </button>
             </div>

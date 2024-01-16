@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyBf5hKJhQzOpqwwN0o3uet0CG3dhUxXU0Q",
     authDomain: "code-vault-doc.firebaseapp.com",
@@ -14,3 +15,4 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
+

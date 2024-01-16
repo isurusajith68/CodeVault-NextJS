@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { saveAs } from 'file-saver';
 import axios from 'axios';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
+import { MdOutlineDownloadForOffline } from "react-icons/md";
 
 const PDFDownloader = ({ pdfUrl, fileName }) => {
     const [loading, setLoading] = useState(false);
@@ -33,12 +34,23 @@ const PDFDownloader = ({ pdfUrl, fileName }) => {
 
     return (
         <div>
-            <button onClick={handleDownload} disabled={loading}>
-                {loading ? 'Downloading...' : 'Download PDF'}
-            </button>
+            <div onClick={handleDownload} disabled={loading}>
+                {
+                    loading ? <MdOutlineDownloadForOffline
+                        size={20}
+                        className="text-green-500 cursor-pointer transition-transform transform hover:scale-110 animate-bounce"
+                    />
+                        :
+                        <MdOutlineDownloadForOffline
+                            size={20}
+                            className="text-green-500 cursor-pointer transition-transform transform hover:scale-110"
+                        />
+
+                }
+            </div>
             {loading && <div>
-                
-                </div>}
+
+            </div>}
         </div>
     );
 };
