@@ -16,7 +16,7 @@ const schema = yup.object().shape({
         .string()
         .required('Please enter a file name')
         .min(3, 'File name must be at least 3 characters')
-        .max(20, 'File name must be at most 20 characters'),
+        .max(100, 'File name must be at most 100 characters'),
     file: yup
         .mixed()
         // .required('Please upload a file')
@@ -29,7 +29,8 @@ const schema = yup.object().shape({
         })
         .test('fileSize', 'File too large', (value) => {
             if (!value || !value[0]) return true;
-            return value[0].size <= 2000000;
+            // 20mb
+            return value[0].size <= 20000000;
         }),
     fileUrl: yup.string(),
 });
