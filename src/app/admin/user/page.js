@@ -104,7 +104,7 @@ const User = () => {
     <>
       <label htmlFor="search" >
         Search by Task:
-        <input id="search" autocomplete="off" value={search} onChange={handleSearch} />
+        <input id="search" autoComplete="off" value={search} onChange={handleSearch} />
       </label>
       <br />
       <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
