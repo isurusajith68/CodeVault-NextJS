@@ -56,6 +56,9 @@ const User = () => {
           border-right: 1px solid #a0a8ae;
         }
       `,
+    Table: `
+        --data-table-library_grid-template-columns:  20% 30% 20% 20% minmax(150px, 1fr);
+      `,
   });
 
   const [search, setSearch] = React.useState("");
@@ -104,16 +107,16 @@ const User = () => {
         <input id="search" autocomplete="off" value={search} onChange={handleSearch} />
       </label>
       <br />
-      <Table data={data} theme={theme}>
+      <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
         {(tableList) => (
           <>
             <Header>
               <HeaderRow className='bg-slate-100 '>
-                <HeaderCell>User Name</HeaderCell>
-                <HeaderCell>Email</HeaderCell>
-                <HeaderCell>isAdmin</HeaderCell>
-                <HeaderCell>Actions</HeaderCell>
-                <HeaderCell>Actions</HeaderCell>
+                <HeaderCell resize>User Name</HeaderCell>
+                <HeaderCell resize>Email</HeaderCell>
+                <HeaderCell resize>isAdmin</HeaderCell>
+                <HeaderCell resize>Actions</HeaderCell>
+                <HeaderCell resize>Actions</HeaderCell>
 
 
               </HeaderRow>
@@ -129,7 +132,7 @@ const User = () => {
                         editClick && editDataId === item._id ?
                           <>
                             <Cell className='bg-red-200 border-white border-2'>
-                              <input onChange={(e) => setUserName(e.target.value)} className='bg-red-200 border-none focus:outline-none' type="text" value={userName}  />
+                              <input onChange={(e) => setUserName(e.target.value)} className='bg-red-200 border-none focus:outline-none' type="text" value={userName} />
 
                             </Cell>
                             {/* <Cell className='bg-red-200 border-white border-2'>
@@ -167,7 +170,7 @@ const User = () => {
                               <button className='text-blue-500' type="button" onClick={() => {
                                 setEditClick(false);
                                 setEditDataId(null);
-                  
+
                               }}>
                                 Cancel
                               </button>
