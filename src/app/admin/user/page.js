@@ -78,9 +78,12 @@ const User = () => {
     doGet();
   }
 
-  const handleEditClick = async (id) => {
+  const handleEditClick = async (item) => {
     setEditClick(true);
-    setEditDataId(id);
+    setEditDataId(item._id);
+    setUserName(item.username);
+    setEmail(item.email);
+    setIsAdmin(item.isAdmin);
   }
 
 
@@ -96,9 +99,9 @@ const User = () => {
 
   return (
     <>
-      <label htmlFor="search">
+      <label htmlFor="search" >
         Search by Task:
-        <input id="search" autoComplete='off' value={search} onChange={handleSearch} />
+        <input id="search" autocomplete="off" value={search} onChange={handleSearch} />
       </label>
       <br />
       <Table data={data} theme={theme}>
@@ -111,8 +114,7 @@ const User = () => {
                 <HeaderCell>isAdmin</HeaderCell>
                 <HeaderCell>Actions</HeaderCell>
                 <HeaderCell>Actions</HeaderCell>
-                <HeaderCell>Actions</HeaderCell>
-                <HeaderCell>Actions</HeaderCell>
+
 
               </HeaderRow>
             </Header>
@@ -127,15 +129,15 @@ const User = () => {
                         editClick && editDataId === item._id ?
                           <>
                             <Cell className='bg-red-200 border-white border-2'>
-                              <input className='bg-red-200 border-none focus:outline-none' type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
+                              <input onChange={(e) => setUserName(e.target.value)} className='bg-red-200 border-none focus:outline-none' type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
 
                             </Cell>
+                            {/* <Cell className='bg-red-200 border-white border-2'>
+                              <input className='bg-red-200 border-none focus:outline-none' type="text" value={email} onChange={(e) => setEmail(e.target.value)} /> */}
+                            <Cell>{item.email}</Cell>
+                            {/* </Cell> */}
                             <Cell className='bg-red-200 border-white border-2'>
-                              <input className='bg-red-200 border-none focus:outline-none' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-
-                            </Cell>
-                            <Cell className='bg-red-200 border-white border-2'>
-                              <select className='bg-red-200 border-none focus:outline-none ' value={item.isAdmin.toString()} onChange={(e) => setIsAdmin(e.target.value === 'true')}>
+                              <select className='bg-red-200 border-none focus:outline-none ' value={isAdmin} onChange={(e) => setIsAdmin(e.target.value === "true")}>
                                 <option value='true'>true</option>
                                 <option value='false'>false</option>
                               </select>
@@ -156,23 +158,28 @@ const User = () => {
                         </button>
                       </Cell>
                       <Cell>
-                        <button className='text-blue-500' type="button" onClick={() => handleEditClick(item._id)}>
-                          Edit
-                        </button>
+                        {
+                          editClick && editDataId === item._id ?
+                            <div className='flex justify-around'>
+                              <button className='text-green-500' type="button" onClick={() => handleUpdate(item._id)}>
+                                Update
+                              </button>
+                              <button className='text-blue-500' type="button" onClick={() => {
+                                setEditClick(false);
+                                setEditDataId(null);
+                  
+                              }}>
+                                Cancel
+                              </button>
+                            </div>
+                            :
+                            <button className='text-green-500' type="button" onClick={() => handleEditClick(item)}>
+                              Edit
+                            </button>
+                        }
                       </Cell>
-                      <Cell>
-                        <button className='text-blue-500' type="button" onClick={() => handleUpdate(item._id)}>
-                          Update
-                        </button>
-                      </Cell>
-                      <Cell>
-                        <button className='text-blue-500' type="button" onClick={() => {
-                          setEditClick(false);
-                          setEditDataId(null);
-                        }}>
-                          Reset
-                        </button>
-                      </Cell>
+
+
                     </Row>
                   </React.Fragment>
                 );
