@@ -22,7 +22,7 @@ const Home = () => {
 
   const fetchData = async () => {
 
-    
+
     try {
       const response = await axios.get("/api/post")
       if (response.status === 200) {
@@ -133,6 +133,15 @@ const Home = () => {
 
   }
 
+  if (!posts) {
+    return (
+      <div className="flex justify-center items-center mt-[80px]">
+        <Loading />
+      </div>
+    )
+  }
+
+
   return (
     <div className=" mt-[80px]">
 
@@ -232,7 +241,7 @@ const Home = () => {
           }
         </div>
       }
-
+     
     </div >
 
   )

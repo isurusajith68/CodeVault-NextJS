@@ -85,28 +85,31 @@ html {
 
 .pdf-viewer {
   width: "80%";
-  height: "95vh";
+  height: "85vh";
   margin: "auto";
+  border: none;
+  background-color: white;
+  outline: none;
 }
 
 @media (max-width: 768px) {
   .pdf-viewer {
     width: "100%";
-    height: "95vh";
+    height: "85vh";
     margin: "auto";
   }
 }
 
 .pdf-viewer-container {
   width: 70%;
-  height: 95vh;
+  height: 85vh;
   margin: auto;
 }
 
 @media (max-width: 768px) {
   .pdf-viewer-container {
     width: 100%;
-    height: 95vh;
+    height: 85vh;
     margin: auto;
   }
 }

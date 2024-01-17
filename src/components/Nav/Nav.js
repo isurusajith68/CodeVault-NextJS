@@ -19,8 +19,7 @@ const Nav = () => {
 
     const { data: session } = useSession();
 
-    console.log(session)
-    
+
     const handleClick = () => {
         setIsClick(!isClick);
     };
@@ -74,6 +73,11 @@ const Nav = () => {
                                 Home
                             </Link>
                         </li>
+                        <li className={navigation === '/doc' ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
+                            <Link href="/doc" >
+                                Document
+                            </Link>
+                        </li>
                         <li className={navigation === '/about' ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
                             <Link href="/about" >
                                 About
@@ -84,11 +88,7 @@ const Nav = () => {
                                 Privacy
                             </Link>
                         </li>
-                        <li className={navigation === '/terms' ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
-                            <Link href="/terms" >
-                                Terms & Conditions
-                            </Link>
-                        </li>
+
                     </ul>
                     <div className="flex flex-auto w-[25%] items-center justify-center   gap-5 max-md:hidden ">
                         <div className="font-semibold text-red-500 text-sm">{session ? <span className="text-sm text-black">Hello </span> : ""}
@@ -168,6 +168,11 @@ const Nav = () => {
                             <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>
                                 <Link href="/" >
                                     Home
+                                </Link>
+                            </li>
+                            <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>
+                                <Link href="/doc" >
+                                    Document
                                 </Link>
                             </li>
                             <li className={navigation === '/about' ? "text-red-700" : "text-gray-900"}>

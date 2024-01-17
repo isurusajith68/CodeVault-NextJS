@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { MdOutlineDownloadForOffline } from "react-icons/md";
 
-const PDFDownloader = ({ pdfUrl, fileName }) => {
+const PDFDownloader = ({ pdfUrl, fileName, side }) => {
     const [loading, setLoading] = useState(false);
 
     const handleDownload = async () => {
@@ -25,6 +25,7 @@ const PDFDownloader = ({ pdfUrl, fileName }) => {
             );
             setLoading(false);
             const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
+
             saveAs(pdfBlob, fileName);
         } catch (error) {
             setLoading(false);
@@ -32,19 +33,38 @@ const PDFDownloader = ({ pdfUrl, fileName }) => {
         }
     };
 
+
     return (
         <div>
             <div onClick={handleDownload} disabled={loading}>
                 {
-                    loading ? <MdOutlineDownloadForOffline
-                        size={20}
-                        className="text-green-500 cursor-pointer transition-transform transform hover:scale-110 animate-bounce"
-                    />
+                    loading ? side === "frontend" ?
+                        <div className='flex justify-center items-center gap-1'>
+                            <div> Download</div>
+                            <MdOutlineDownloadForOffline
+                                size={20}
+                                className="text-white cursor-pointer transition-transform transform hover:scale-110 animate-bounce"
+                            />
+                        </div>
                         :
                         <MdOutlineDownloadForOffline
                             size={20}
-                            className="text-green-500 cursor-pointer transition-transform transform hover:scale-110"
+                            className="text-white cursor-pointer transition-transform transform hover:scale-110 animate-bounce"
                         />
+
+                        : side === "frontend" ?
+                            <div className='flex justify-center items-center gap-1'>
+                                <div> Download</div>
+                                <MdOutlineDownloadForOffline
+                                    size={20}
+                                    className="text-white cursor-pointer transition-transform transform hover:scale-110"
+                                />
+                            </div>
+                            :
+                            <MdOutlineDownloadForOffline
+                                size={20}
+                                className="text-white cursor-pointer transition-transform transform hover:scale-110"
+                            />
 
                 }
             </div>
