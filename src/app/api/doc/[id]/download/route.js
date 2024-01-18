@@ -4,7 +4,7 @@ export async function POST(request, { params }) {
     const fileId = await params.id
 
     try {
-        const file = await File.findById(fileId).maxTimeMS(5000);
+        const file = await File.findById(fileId)
 
         if (!file) {
             return Response.json({ success: false, message: 'file not found' }, { status: 404 });

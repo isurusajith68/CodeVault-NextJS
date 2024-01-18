@@ -11,7 +11,7 @@ const ProfileImageGenerator = ({ username, width, height,color }) => {
 
         return 'NA';
     };
-    console.log(username)
+ 
     // Generate random color
     // const randomColor = () => {
     //     var letters = '0123456789ABCDEF';

@@ -29,15 +29,17 @@ const AdminSideBar = async () => {
                 <hr className="my-3 " />
                 <SideBarNavLink />
             </div>
-            <div className="xl:hidden">
-                <div className="flex items-center justify-center  ">
-                    {/* <Image src={admin} alt="profile" width={30} height={30} className="border border-black rounded-full" /> */}
-                    <ProfileImageGenerator username={session?.user?.name} width={"30px"} height={"30px"} color={"red"} />
+         
+            <SideBarResponsive >
+                <div className="xl:hidden">
+                    <div className="flex items-center justify-center  ">
+                        {/* <Image src={admin} alt="profile" width={30} height={30} className="border border-black rounded-full" /> */}
+                        <ProfileImageGenerator username={session?.user?.name} width={"30px"} height={"30px"} color={"red"} />
+
+                    </div>
 
                 </div>
-
-            </div>
-            <SideBarResponsive />
+            </SideBarResponsive>
         </aside>
     )
 }
