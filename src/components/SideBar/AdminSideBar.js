@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth"
 import SideBarNavLink from "./SideBarNavLink"
 import SideBarResponsive from "./SideBarResponsive"
 import { authOption } from "../../app/api/auth/[...nextauth]/route"
+import ProfileImageGenerator from "../ProfileImage"
 const AdminSideBar = async () => {
 
     const session = await getServerSession(authOption)
@@ -16,7 +17,9 @@ const AdminSideBar = async () => {
                 <div className="">
 
                     <div className="flex items-center justify-center  ">
-                        <Image src={admin} alt="profile" width={50} height={50} className="border border-black rounded-full" />
+                        {/* <Image src={admin} alt="profile"  className="border border-black rounded-full" /> */}
+                        <ProfileImageGenerator username={session?.user?.name} width={"50px"} height={"50px"} color={"red"}/>
+
                     </div>
                     <div className="text-center mt-2">
                         <p className="text-lg font-semibold">{session?.user?.name}</p>

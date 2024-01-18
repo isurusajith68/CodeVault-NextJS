@@ -117,7 +117,7 @@ const CommentSection = ({ commentsLength, postId }) => {
                         return (
                             <div key={index} className=" bg-white flex p-2  mt-2 gap-2">
                                 <div className="flex w-[20%] justify-center items-center ">
-                                    <ProfileImageGenerator />
+                                    <ProfileImageGenerator username={comment.author} />
                                 </div>
                                 <div className="flex justify-between flex-auto w-[80%]">
                                     <div>

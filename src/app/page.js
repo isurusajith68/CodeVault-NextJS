@@ -58,10 +58,6 @@ const Home = () => {
     if (session) {
       const userId = session?.user?.id
       try {
-
-
-
-
         const response = await fetch('/api/post/like', {
           method: 'POST',
           headers: {

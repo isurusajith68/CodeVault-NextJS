@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation'
 import { signOut, useSession } from "next-auth/react";
 import stackLogo from "../../../public/assets/logo.jpg"
 import { motion } from "framer-motion";
+import ProfileImageGenerator from "../ProfileImage";
 
 const Nav = () => {
     const [isClick, setIsClick] = useState(false);
@@ -96,8 +97,17 @@ const Nav = () => {
 
                             {session?.user?.name}</div>
 
+                        {
 
-                        <AccountCircleOutlinedIcon onClick={handleProfileClick} className="text-black" />
+                            session?.user?.name ?
+                                <div onClick={handleProfileClick} className="cursor-pointer">
+                                    <ProfileImageGenerator username={session?.user?.name} width={"30px"} height={"30px"} color={"red"} />
+                                </div>
+                                : <AccountCircleOutlinedIcon onClick={handleProfileClick} className="text-black" />
+                        }
+                        {/* <ProfileImageGenerator username={} width={"30px"} height={"30px"} color={"red"} /> */}
+
+
 
 
                         {
