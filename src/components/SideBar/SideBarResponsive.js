@@ -16,14 +16,7 @@ const SideBarResponsive = () => {
   return (
     <div>
           <div className="xl:hidden w-12  max-h-[500px] sticky top-5 left-0 bg-white rounded-md p-1 ">
-              <div className="">
-                  <div className="flex items-center justify-center  ">
-                      {/* <Image src={admin} alt="profile" width={30} height={30} className="border border-black rounded-full" /> */}
-                      <ProfileImageGenerator username={session?.user?.name} width={"30px"} height={"30px"} color={"red"} />
-
-                  </div>
-
-              </div>
+             
               <hr className="my-3" />
               <div>
                   <div className="flex flex-col items-center mt-5 gap-6">
