@@ -21,13 +21,11 @@ export async function GET(request) {
     const pageSize = 4;
 
     try {
-        if (!isFeatured && !postLength) {
-
+        if (page) {
             const posts = await Post.find().sort({ createdAt: -1 }).skip((page - 1) * pageSize).limit(pageSize)
             return Response.json({ data: posts  }, { status: 200 })
         }
 
-        //check all post length
         if (postLength === "true") {
             const posts = await Post.find().sort({ createdAt: -1 })
             return Response.json({ data: posts.length }, { status: 200 })
@@ -38,7 +36,9 @@ export async function GET(request) {
             return Response.json({ data: posts }, { status: 200 })
         }
 
+        const posts = await Post.find().sort({ createdAt: -1 }) 
         return Response.json({ data: posts }, { status: 200 })
+        
     } catch (error) {
         console.log(error)
     }
