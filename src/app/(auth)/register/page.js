@@ -98,12 +98,12 @@ const Register = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={handleSubmit} noValidate autoComplete="off">
+        <form className="space-y-6" onSubmit={handleSubmit} noValidate autoComplete="off" >
           
           <div>
-            <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Username</label>
+            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Username</label>
             <div className="mt-2">
-              <input id="username" name="username" type="username" onChange={handleChange} required className="block w-full rounded-md border-0 p-2 focus:outline-none text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              <input id="username" name="username" type="text" onChange={handleChange} required className="block w-full rounded-md border-0 p-2 focus:outline-none text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
 
@@ -130,7 +130,7 @@ const Register = () => {
 
             </div>
             <div className="mt-2">
-              <input id="cpassword" name="cpassword" type="cpassword" onChange={handleChange} required className="block w-full rounded-md border-0 p-2 focus:outline-none text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              <input id="cpassword" name="cpassword" type="password" onChange={handleChange} required className="block w-full rounded-md border-0 p-2 focus:outline-none text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
 

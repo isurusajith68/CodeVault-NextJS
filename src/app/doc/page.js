@@ -8,22 +8,33 @@ import { LuView } from "react-icons/lu";
 import CustomModal from '../../components/Modal';
 import PDFDownloader from '../../components/Pdf/PDFDownloader';
 import PDFViewer from '../../components/Pdf/PdfViewr';
+import _debounce from 'lodash/debounce';
 
 const Terms = () => {
 
   const [data, setData] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("/api/doc")
+    debouncedSearch("")
+  }, []);
+
+  const debouncedSearch = _debounce(async (query) => {
+    try {
+      const response = await axios.get(`/api/doc?q=${query}`);
       if (response.status === 200) {
         setData(response.data.data);
       }
-    };
-    fetchData();
-  }, []);
+    } catch (error) {
+      console.log(error);
+    }
+  }, 500);
+
+  const onChangeSearch = (e) => {
+    const searchText = e.target.value;
+    console.log(searchText);
+    debouncedSearch(searchText);
+  };
 
 
   const [url, setUrl] = useState(null);
@@ -62,6 +73,10 @@ const Terms = () => {
     )
   }
 
+
+
+
+
   return (
     <div className=" mt-[80px]">
       <div className="w-full bg-white rounded-full mt-3 mb-3">
@@ -69,9 +84,13 @@ const Terms = () => {
           <h1 className="text-lg font-semibold text-slate-500">Document</h1>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-10 mt-2 max-xl:grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1">
+      <div className="flex justify-start items-center">
+        <input type="text" className=" p-3 border-none flex bg-white w-160 w-[300px] justify-end rounded-md  py-1.5 shadow-sm h-10 text-slate-500  placeholder:text-slate-500   focus:outline-none" placeholder="Search ..." onChange={onChangeSearch} />
+        {/* <button className="bg-blue-500 text-white rounded-md px-2 py-1 ml-2" onClick={Search}>Search</button> */}
+      </div>
+      <div className="grid grid-cols-4 gap-10 mt-10 max-xl:grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1">
         {
-         data.map((data, index) => {
+          data.map((data, index) => {
             return (
               <>
                 <div className="bg-white rounded-md shadow-sm" key={index}>
@@ -114,9 +133,16 @@ const Terms = () => {
                 </div>
               </>
             )
-          }) 
+          })
         }
       </div>
+      {
+        data.length === 0 && (
+          <div className="flex justify-start items-center mt-2 ml-2">
+            <p className="text-sm text-slate-500 font-semibold">No data found</p>
+          </div>
+        )
+      }
       <div>
         <CustomModal isOpen={isModalOpen} onClose={closeModal} >
           <PDFViewer pdfUrl={url} />

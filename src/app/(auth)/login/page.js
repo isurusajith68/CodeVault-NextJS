@@ -26,7 +26,6 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,8 +39,7 @@ const Login = () => {
         });
 
         if (res.error) {
-          setError("Invalid Credentials");
-          toast.error(error)
+          toast.error("Invalid Credentials")
           return;
         }
 

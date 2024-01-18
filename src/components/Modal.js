@@ -12,7 +12,7 @@ const CustomModal = ({ isOpen, onClose, children }) => {
     };
 
     return (
-        <Modal ariaHideApp={false} isOpen={isOpen} onRequestClose={onClose} contentLabel="PDF Modal" className="pdf-viewer mt-[65px]">
+        <Modal ariaHideApp={false} isOpen={isOpen} onRequestClose={onClose} contentLabel="PDF Modal" className="pdf-viewer mt-[60px]">
             <div onClick={onClose}>
                 <Close />
             </div>

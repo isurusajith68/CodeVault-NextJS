@@ -162,7 +162,7 @@ const Nav = () => {
             </div>
             <div>
                 {isClick && (
-                    <div className={scrolled ? `fixed w-full mt-[60px]  z-50 h-60 flex justify-center items-center bg-white shadow-lg  md:hidden ` : "fixed  mt-[60px] w-full z-50 h-60 flex justify-center items-center bg-white shadow-lg  md:hidden"} >
+                    <div className={scrolled ? `fixed w-full mt-[60px]  z-50 h-72 flex justify-center items-center bg-white shadow-lg  md:hidden ` : "fixed  mt-[60px] w-full z-50 h-72 flex justify-center items-center bg-white shadow-lg  md:hidden"} >
 
                         <ul className="uppercase flex gap-6 flex-col items-center text-sm font-semibold leading-6 text-gray-900 ">
                             <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>
@@ -170,7 +170,7 @@ const Nav = () => {
                                     Home
                                 </Link>
                             </li>
-                            <li className={navigation === '/' ? "text-red-700" : "text-gray-900"}>
+                            <li className={navigation === '/doc' ? "text-red-700" : "text-gray-900"}>
                                 <Link href="/doc" >
                                     Document
                                 </Link>

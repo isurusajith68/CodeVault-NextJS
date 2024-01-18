@@ -17,10 +17,14 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const isFeatured = searchParams.get("featured");
     const postLength = searchParams.get("lengthCheck");
+    const page = searchParams.get("page");
+    const pageSize = 4;
+
     try {
         if (!isFeatured && !postLength) {
-            const posts = await Post.find().sort({ createdAt: -1 })
-            return Response.json({ data: posts }, { status: 200 })
+
+            const posts = await Post.find().sort({ createdAt: -1 }).skip((page - 1) * pageSize).limit(pageSize)
+            return Response.json({ data: posts  }, { status: 200 })
         }
 
         //check all post length

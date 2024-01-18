@@ -16,22 +16,35 @@ const Home = () => {
   const [category, setCategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categoryvalue, setCategoryValues] = useState([]);
-  const [selectdCategoryValue, setSelectCategoryValue] = useState("");
+  const [selectedCategoryValue, setSelectCategoryValue] = useState("");
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [allDataLoad, setAllDataLoad] = useState(false);
 
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const fetchData = async () => {
-
-
+    setLoading(true);
     try {
-      const response = await axios.get("/api/post")
+      const response = await axios.get(`/api/post?page=${page}`)
       if (response.status === 200) {
-        setPosts(response.data.data);
+
+        if (response.data.data.length < 4) {
+          setAllDataLoad(true);
+        }
+
+        if (posts) {
+          setPosts([...posts, ...response.data.data])
+        } else {
+          setPosts(response.data.data)
+        }
+
+        setLoading(false);
 
       }
     } catch (error) {
       console.error("Error fetching data:", error);
-
+      setLoading(false);
     }
   };
 
@@ -81,29 +94,30 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (!posts) {
-      fetchData();
-    }
-  }, [posts]);
+
+    fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   useEffect(() => {
     const categoryNames = Allcategory.map((categoryItem) => categoryItem.name);
     setCategory(["Select Category....", ...categoryNames]);
   }, []);
 
-  const fillterData = posts?.filter((item) => {
+  const filleterData = posts?.filter((item) => {
     if (selectedCategory === "Select Category...." || selectedCategory === "") {
       return true;
     }
 
     if (
       selectedCategory === item.category &&
-      (selectdCategoryValue === "Select ...." || selectdCategoryValue === "")
+      (selectedCategoryValue === "Select ...." || selectedCategoryValue === "")
     ) {
       return true;
     }
 
-    if (selectedCategory === item.category && selectdCategoryValue === item.value) {
+    if (selectedCategory === item.category && selectedCategoryValue === item.value) {
       return true;
     }
 
@@ -161,7 +175,7 @@ const Home = () => {
         {
           selectedCategory ?
 
-            <select value={selectdCategoryValue} className=" mt-3 border-none flex bg-white w-160 w-[300px] justify-end rounded-md  py-1.5 shadow-sm h-10 text-slate-500  placeholder:text-slate-500   focus:outline-none" onChange={(e) => setSelectCategoryValue(e.target.value)}>
+            <select value={selectedCategoryValue} className=" mt-3 border-none flex bg-white w-160 w-[300px] justify-end rounded-md  py-1.5 shadow-sm h-10 text-slate-500  placeholder:text-slate-500   focus:outline-none" onChange={(e) => setSelectCategoryValue(e.target.value)}>
               <option value="Select ....">Select ....</option>
               {categoryvalue.map((value, index) => (
                 <option key={index} value={value}>{value}</option>
@@ -172,11 +186,18 @@ const Home = () => {
         }
       </div>
       {
+        filleterData.length === 0 && (
+          <div className="flex justify-start items-center mt-2 ml-2">
+            <p className="text-sm text-slate-500 font-semibold">No data found</p>
+          </div>
+        )
+      }
+      {
         !posts ? <div className=" w-full items-center text-center mt-10 justify-center">
           <Loading />
 
         </div> : <div className="mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center mt-10">
-          {fillterData?.map((item, index) => {
+          {filleterData?.map((item, index) => {
             const createdAt = item.createdAt
 
 
@@ -240,8 +261,23 @@ const Home = () => {
           })
           }
         </div>
+
       }
-     
+      {
+        loading && (
+          <div className=" w-full items-center text-center mt-10 justify-center">
+            <Loading />
+
+          </div>
+        )
+      }
+      {
+        !allDataLoad && (
+          <div className="flex justify-center items-center mt-5 mb-5">
+            <button className="bg-blue-500 text-white rounded-md px-2 py-1" onClick={() => setPage(page + 1)}>Load More</button>
+          </div>
+        )
+      }
     </div >
 
   )

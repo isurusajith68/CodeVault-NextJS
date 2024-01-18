@@ -8,11 +8,22 @@ MongoDb();
 export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const fileLength = searchParams.get("lengthCheck");
+    const searchText = searchParams.get("q");
     try {
 
        if(fileLength === "true"){
         const files = await File.find().sort({ createdAt: -1 })
         return Response.json({ data: files.length }, { status: 200 })
+        }
+
+        if (searchText) {
+            const files = await File.find({
+                filename: {
+                    $regex: searchText,
+                    $options: "i"
+                }
+            }).sort({ createdAt: -1 })
+            return Response.json({ data: files }, { status: 200 })
         }
 
         const files = await File.find().sort({ createdAt: -1 })
