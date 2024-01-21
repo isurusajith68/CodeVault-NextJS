@@ -44,6 +44,8 @@ const NavBarLink = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [scrolled]);
+
+    
     return (
         <div>
             <div className="fixed w-full top-0 left-0 z-50">

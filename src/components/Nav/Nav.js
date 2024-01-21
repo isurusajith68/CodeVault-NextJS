@@ -17,9 +17,7 @@ const Nav = () => {
     const [scrolled, setScrolled] = useState(false);
     const navigation = usePathname();
 
-
     const { data: session } = useSession();
-
 
     const handleClick = () => {
         setIsClick(!isClick);
@@ -200,7 +198,6 @@ const Nav = () => {
                                     <li onClick={() => signOut()} className="cursor-pointer">
                                         SignOut
                                     </li>
-
                                     {
                                         session?.user?.role == true &&
                                         <li className={navigation === '/admin' ? "text-red-700 " : "text-gray-900 "}>
@@ -211,14 +208,11 @@ const Nav = () => {
                                     }
                                 </div> :
                                 <div className="flex flex-col">
-
                                     <li className={navigation === '/login' ? "text-red-700" : "text-gray-900"}>
                                         <Link href="/login" >
                                             Login
                                         </Link>
                                     </li>
-
-
                                 </div>}
 
                         </ul>
