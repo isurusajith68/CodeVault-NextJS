@@ -72,6 +72,10 @@ const Stack = () => {
   //uploa
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if(!imageBase64){
+      toast.error("Please Select Image")
+      return
+    }
     const data = {
       title,
       category: selectedCategory,
