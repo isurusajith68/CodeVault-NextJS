@@ -10,7 +10,6 @@ import PostList from "../../../components/PostList"
 import { redirect, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-// import addNotification from 'react-push-notification';
 
 const Stack = () => {
 
@@ -94,12 +93,7 @@ const Stack = () => {
         toast.success(response.data.message)
         fetchData()
         resetForm()
-        // addNotification({
-        //   title: 'Code Vault Notification',
-        //   message: 'Post Added Successfully',
-        //   theme: 'darkblue',
-        //   native: true 
-        // });
+  
       }
 
     } else {
