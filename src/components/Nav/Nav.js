@@ -120,8 +120,8 @@ const Nav = () => {
                         {
                             profileClick &&
                             <motion.div
-                                initial={{ opacity: 0, x: 100 }}
-                                animate={{ opacity: 1, x: 0 }}
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5 }}
                                 className={!session?.user?.role === true ? "absolute border border-b-3 shadow-lg px-5 py-2 mt-28 bg-white " : "absolute border border-b-3 shadow-lg px-5 py-2 mt-36 bg-white "}>
                                 {session ? <ul className="flex flex-col gap-2">
