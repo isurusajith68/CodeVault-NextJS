@@ -46,6 +46,15 @@ const Nav = () => {
         };
     }, [scrolled]);
 
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    }
+
+
     return (
         <nav className="bg-white">
             <div className="fixed w-full top-0 left-0 z-50">
@@ -67,22 +76,22 @@ const Nav = () => {
                         </Link>
                     </div>
                     <ul className="flex-auto w-[55%] flex items-center justify-center gap-16 max-md:hidden text-sm font-semibold leading-6 text-gray-400">
-                        <li className={navigation === '/' || navigation.startsWith('/post/') ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
+                        <li onClick={scrollToTop} className={navigation === '/' || navigation.startsWith('/post/') ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
                             <Link href="/" >
                                 Home
                             </Link>
                         </li>
-                        <li className={navigation === '/doc' ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
+                        <li onClick={scrollToTop} className={navigation === '/doc' ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
                             <Link href="/doc" >
                                 Document
                             </Link>
                         </li>
-                        <li className={navigation === '/about' ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
+                        <li onClick={scrollToTop} className={navigation === '/about' ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
                             <Link href="/about" >
                                 About
                             </Link>
                         </li>
-                        <li className={navigation === '/privacy' ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
+                        <li onClick={scrollToTop} className={navigation === '/privacy' ? "text-white px-2 py-1 rounded-md  bg-red-500" : "text-black"}>
                             <Link href="/privacy" >
                                 Privacy
                             </Link>

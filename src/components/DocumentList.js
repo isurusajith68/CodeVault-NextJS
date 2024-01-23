@@ -13,6 +13,7 @@ import { Delete, Edit } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 import { deleteObject, ref } from 'firebase/storage';
 import { storage } from '../lib/firebase/firebase.js';
+import { scrollToTop } from './Scrolltop.js';
 
 const DocumentList = ({ editData, doc, fetchDocumentList }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,6 +30,7 @@ const DocumentList = ({ editData, doc, fetchDocumentList }) => {
 
     const handleEditClick = (data) => {
         editData(data);
+        scrollToTop();
     }
 
 

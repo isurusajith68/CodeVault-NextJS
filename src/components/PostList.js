@@ -5,6 +5,7 @@ import { Delete, Edit, Favorite, FavoriteBorder } from "@mui/icons-material";
 import React, { useState } from 'react'
 import axios from "axios"
 import { toast } from 'react-toastify';
+import { scrollToTop } from "./Scrolltop";
 
 const PostList = ({ data, fetchData, updatePost }) => {
 
@@ -35,6 +36,7 @@ const PostList = ({ data, fetchData, updatePost }) => {
 
     const handleEditClick = (item) => {
         updatePost(item)
+        scrollToTop()
     }
 
     const handleFeaturedClick = async (id, data) => {

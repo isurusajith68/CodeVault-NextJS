@@ -10,6 +10,7 @@ import moment from "moment"
 import CommentSection from "../../..//components/CommentSection"
 import { FacebookShareButton } from "react-share"
 import { MdOutlineIosShare } from "react-icons/md"
+import { scrollToTop } from "../../../components/Scrolltop"
 
 
 
@@ -70,13 +71,14 @@ const Post = () => {
     //push post id to url
     window.history.pushState({}, "", `/post/${e._id}`)
     setPostId(e._id)
+    scrollToTop()
   }
 
   const handleIncrementViews = async (id) => {
     const response = await axios.post(`/api/post/incrementViews/${id}`);
 
   }
-
+ 
 
 
   return (
